@@ -13,7 +13,7 @@ package view;
 import java.awt.Dimension;
 import java.net.URL;
 import javax.swing.DefaultListModel;
-import videoplayer.PlayList;
+import videoplayer.ManipList;
 import videoplayer.videoJMF;
 
 /**
@@ -283,7 +283,7 @@ public class jfPlayer extends javax.swing.JFrame {
         if (playList.getSelectedIndex() != -1) {
             listaVideos.removeVideo(playList.getSelectedValue().toString());
             listModel.removeElementAt(playList.getSelectedIndex());
-            
+
             url = null;
         }
     }//GEN-LAST:event_jButton4ActionPerformed
@@ -311,7 +311,7 @@ public class jfPlayer extends javax.swing.JFrame {
     videoJMF video;
     Dimension d;
     DefaultListModel listModel;
-    PlayList listaVideos = new PlayList();
+    ManipList listaVideos = new ManipList();
     URL url = null;
     boolean isplay = false;
 
