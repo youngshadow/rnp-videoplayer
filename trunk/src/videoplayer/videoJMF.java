@@ -30,7 +30,7 @@ public class videoJMF extends javax.swing.JPanel {
     private TimerTask task;
     private int frame = 0;
     private Timer tempo;
-    private int speed = 1000;
+    private int speed = 10;
 
     public videoJMF(URL url, Dimension d) {
         Manager.setHint(Manager.LIGHTWEIGHT_RENDERER, true);

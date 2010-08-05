@@ -333,12 +333,15 @@ public class jfPrincipal extends javax.swing.JFrame {
     private void btnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStopActionPerformed
         if (isPlay == false) {
             video.pause(isPlay);
+            btnPlay.setEnabled(true);
             isPlay = true;
-           
+
+
         } else {
             video.pause(isPlay);
+            btnPlay.setEnabled(false);
             isPlay = false;
-           
+
         }
     }//GEN-LAST:event_btnStopActionPerformed
 
