@@ -11,29 +11,35 @@
 package view;
 
 import java.awt.Dimension;
+import java.awt.FileDialog;
+import java.io.FileFilter;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+
+
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import videoplayer.ManipList;
+import videoplayer.VideoController;
 import videoplayer.videoJMF;
 
 /**
  *
  * @author bisaggio
  */
-public class jfPrincipal extends javax.swing.JFrame {
-
+public abstract  class jfPrincipal extends javax.swing.JFrame {
+public  abstract void abrirArquivo(String arquivo);
     Dimension dimension;
     videoJMF video;
     boolean isPlay = false;
-    URL url;
+    public static URL url = null;
     ManipList slideList = new ManipList();
     DefaultListModel listModel;
+    FileDialog file = null;
 
     /** Creates new form jfPrincipal */
     public jfPrincipal() {
@@ -88,7 +94,7 @@ public class jfPrincipal extends javax.swing.JFrame {
         jpContainerVideo.setLayout(jpContainerVideoLayout);
         jpContainerVideoLayout.setHorizontalGroup(
             jpContainerVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 401, Short.MAX_VALUE)
+            .addGap(0, 405, Short.MAX_VALUE)
         );
         jpContainerVideoLayout.setVerticalGroup(
             jpContainerVideoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -157,7 +163,7 @@ public class jfPrincipal extends javax.swing.JFrame {
 
         jButton5.setText("Finalizar Aula");
 
-        btnPlay.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btnPlay.setFont(new java.awt.Font("Tahoma", 0, 10));
         btnPlay.setText("Play");
         btnPlay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -165,7 +171,7 @@ public class jfPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnStop.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        btnStop.setFont(new java.awt.Font("Tahoma", 0, 10));
         btnStop.setText("Pause");
         btnStop.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,13 +250,13 @@ public class jfPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnSelecionar, javax.swing.GroupLayout.DEFAULT_SIZE, 34, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCapturar, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
+                        .addComponent(btnCapturar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnCapturarTempos, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnRemover, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnAddAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 33, Short.MAX_VALUE)
+                        .addComponent(btnAddAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
                         .addGap(55, 55, 55)
                         .addComponent(btnVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -346,22 +352,33 @@ public class jfPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnStopActionPerformed
 
     private void btnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVideoActionPerformed
-        JFileChooser fileChooser = new JFileChooser();
-        FileNameExtensionFilter extencoes = new FileNameExtensionFilter("Arquivo de Vídeo", "mpeg", "mpg");
-        fileChooser.setFileFilter(extencoes);
-        int result = fileChooser.showOpenDialog(null);
-        if (result == JFileChooser.APPROVE_OPTION) {
-            try {
-                URI uri = fileChooser.getSelectedFile().toURI();
-                url = uri.toURL();
 
-                String nomeFile = fileChooser.getSelectedFile().getName();
+        file = new FileDialog(this, "Abrir Vídeo", FileDialog.LOAD);
+        file.setVisible(true);
 
-
-            } catch (MalformedURLException ex) {
-                Logger.getLogger(jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        if (file.getFile() != null) {
+            String fileName = file.getDirectory() + file.getFile();
+            System.out.println("file: " + fileName);
+            VideoController video1 = new VideoController(fileName,jpContainerVideo);
+           
         }
+
+//        JFileChooser fileChooser = new JFileChooser();
+//        FileNameExtensionFilter extencoes = new FileNameExtensionFilter("Arquivo de Vídeo", "mpeg", "mpg");
+//        fileChooser.setFileFilter(extencoes);
+//        int result = fileChooser.showOpenDialog(null);
+//        if (result == JFileChooser.APPROVE_OPTION) {
+//            try {
+//                URI uri = fileChooser.getSelectedFile().toURI();
+//                url = uri.toURL();
+//
+//                String nomeFile = fileChooser.getSelectedFile().getName();
+//
+//
+//            } catch (MalformedURLException ex) {
+//                Logger.getLogger(jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
 
 
     }//GEN-LAST:event_btnVideoActionPerformed
@@ -379,7 +396,13 @@ public class jfPrincipal extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new jfPrincipal().setVisible(true);
+                new jfPrincipal() {
+
+                    @Override
+                    public void abrirArquivo(String arquivo) {
+                        throw new UnsupportedOperationException("Not supported yet.");
+                    }
+                }.setVisible(true);
             }
         });
     }
@@ -406,4 +429,8 @@ public class jfPrincipal extends javax.swing.JFrame {
     private javax.swing.JTree jTree1;
     private javax.swing.JPanel jpContainerVideo;
     // End of variables declaration//GEN-END:variables
+
+
 }
+
+
