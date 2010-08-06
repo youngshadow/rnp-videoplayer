@@ -89,13 +89,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnSelecionar" pref="34" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCapturar" pref="32" max="32767" attributes="0"/>
+                      <Component id="btnCapturar" pref="36" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnCapturarTempos" pref="32" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnRemover" pref="32" max="32767" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAddAcoes" pref="33" max="32767" attributes="0"/>
+                      <Component id="btnAddAcoes" pref="37" max="32767" attributes="0"/>
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
                       <Component id="btnVideo" min="-2" pref="33" max="-2" attributes="0"/>
                   </Group>
@@ -153,7 +153,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="401" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="405" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
