@@ -32,7 +32,10 @@ public class ManipList {
 
     public void setVideo(URL urlAbsoluta, String nomeArqivo) {
         this.urlAbsoluta.addElement(urlAbsoluta);
+        
+
         this.nomeArqivo.addElement(nomeArqivo);
+
     }
 
     //remove do vector urlAbsoluta a ocorrencia do nome selecionado
@@ -80,7 +83,9 @@ public class ManipList {
                 String nomeFile = fileChooser.getSelectedFile().getName();
 
                 setVideo(url, nomeFile);
-                model.addElement(nomeFile);
+
+//                VideoController vd = new VideoController();
+                model.addElement(nomeFile+" - "+VideoController.getTimeVideo());
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(ManipList.class.getName()).log(Level.SEVERE, null, ex);
