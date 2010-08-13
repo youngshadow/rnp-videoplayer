@@ -10,6 +10,12 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.EndOfMediaEvent;
@@ -35,11 +41,15 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     private Component control = null;
     private JPanel container;
     private static double timeVideo;
+    private static String timeFormatado;
     int videoWidth = 0;
     int videoHeight = 0;
     int controlHeight = 30;
     int insetWidth = 10;
     int insetHeight = 15;
+    int segundos;
+    int minutos;
+    int horas;
     boolean firstTime = true;
 
     //ALerta
@@ -81,14 +91,23 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     public void controllerUpdate(ControllerEvent ce) {
         if (ce instanceof ControllerEvent) {
 
+
             if (ce instanceof StopByRequestEvent || ce instanceof MediaTimeSetEvent) {
+
 
                 timeVideo = ce.getSourceController().getMediaTime().getSeconds();
 
 
+                segundos = (int) TimeUnit.SECONDS.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
+                minutos = (int) TimeUnit.MINUTES.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
+                horas = (int) TimeUnit.HOURS.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
 
 
-                System.out.println("Tempo: " +  formatarTempo(timeVideo));
+                if (segundos > 60){
+                segundos = segundos % 60;
+                }
+                timeFormatado = horas+":"+""+minutos+":"+segundos;
+                System.out.println("timeFormatado: "+timeFormatado);
             }
 
         }
@@ -106,6 +125,9 @@ public class VideoController extends java.awt.Frame implements ControllerListene
                 videoHeight = size.height;
                 visual.setBounds(5, 5, videoWidth, videoHeight);
                 container.add("Center", visual);
+
+
+
             } else {
                 videoWidth = 320;
             }
@@ -130,8 +152,9 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     /**
      * @return the timeVideo
      */
-    public static double getTimeVideo() {
-        return timeVideo;
+    public static String getTimeVideo() {
+
+        return timeFormatado;
     }
 
     /**
@@ -144,7 +167,8 @@ public class VideoController extends java.awt.Frame implements ControllerListene
 
     // Método para formatar um valor
     public static String formatarTempo(double vlr) {
-        java.text.DecimalFormat df = new java.text.DecimalFormat("###,###,##0.00");
-        return df.format(vlr);
+        SimpleDateFormat sd = new SimpleDateFormat("hh:mm:ss");
+        //java.text.DecimalFormat df = new java.text.DecimalFormat("###,###,##0.00");
+        return sd.format(vlr);
     }
 }
