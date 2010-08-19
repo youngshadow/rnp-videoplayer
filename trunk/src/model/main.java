@@ -4,7 +4,10 @@
  */
 package model;
 
+import util.GravarArquivo;
 import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
+import com.thoughtworks.xstream.io.xml.XppDomDriver;
 
 /**
  *
@@ -41,29 +44,23 @@ public class main {
         subitem2.setTime(22);
         subitem2.setText("subitem2");
 
-
-
-
         Ind_item iten1 = new Ind_item();
         iten1.setTime(1);
         iten1.setText("iten1");
-        iten1.setInd_item(subitem1);
-        
+        iten1.setInd_item(subitem1);        
 
         Ind_item iten2 = new Ind_item();
         iten2.setTime(2);
         iten2.setText("iten2");
         iten2.setInd_item(subitem2);
 
-
-
         index.setMain(main);
         index.setInd_item(iten1);
         index.setInd_item(iten2);
         index.setMain_title("Algoritmos");
 
-        //criando o XML
-        XStream xstream = new XStream();
+        //criando o XML e formatando underline simples
+        XStream xstream = new XStream(new XppDomDriver(new XmlFriendlyReplacer("_-", "_")));
        // setando o nome da tag principal
         xstream.alias("index", IndexXML.class);
         xstream.alias("ind_item", Ind_item.class);
@@ -75,11 +72,11 @@ public class main {
         xstream.addImplicitCollection(IndexXML.class, "ind_item");
         xstream.addImplicitCollection(Ind_item.class, "ind_item");
 
-        String xml = xstream.toXML(index);
+        String xml ="<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">" + xstream.toXML(index);
 
-        System.out.println("gravar"+ GravarArquivo.salvarArquivo(xml, "teste.xml"));
+        System.out.println("gravar: "+ GravarArquivo.salvarArquivo(xml, "teste.xml"));
 
-        System.out.println("Result");
+        System.out.println("Result: ");
         System.out.println(xml);
 
     }
