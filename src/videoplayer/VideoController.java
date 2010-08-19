@@ -10,12 +10,8 @@ import java.awt.Dimension;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.EndOfMediaEvent;
@@ -28,7 +24,6 @@ import javax.media.RealizeCompleteEvent;
 import javax.media.StopByRequestEvent;
 import javax.media.Time;
 import javax.swing.JPanel;
-
 /**
  *
  * @author alexandre
@@ -40,7 +35,7 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     private Component visual;
     private Component control = null;
     private JPanel container;
-    private static double timeVideo;
+//    private static double timeVideo;
     private static String timeFormatado;
     int videoWidth = 0;
     int videoHeight = 0;
@@ -66,13 +61,10 @@ public class VideoController extends java.awt.Frame implements ControllerListene
             }
             this.container = null;
             this.container = container;
-            visual = null;
+            // visual.repaint();
             try {
-                player = null;
-
                 player = Manager.createPlayer(url);
                 if (player != null) {
-
                     player.addControllerListener((ControllerListener) this);
                     player.realize();
                 }
@@ -90,26 +82,19 @@ public class VideoController extends java.awt.Frame implements ControllerListene
 
     public void controllerUpdate(ControllerEvent ce) {
         if (ce instanceof ControllerEvent) {
-
-
             if (ce instanceof StopByRequestEvent || ce instanceof MediaTimeSetEvent) {
-
-
-                timeVideo = ce.getSourceController().getMediaTime().getSeconds();
-
-
+                //timeVideo = ce.getSourceController().getMediaTime().getSeconds();
                 segundos = (int) TimeUnit.SECONDS.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
                 minutos = (int) TimeUnit.MINUTES.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
                 horas = (int) TimeUnit.HOURS.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
 
-
-                if (segundos > 60){
-                segundos = segundos % 60;
+                if (segundos > 60) {
+                    segundos = segundos % 60;
                 }
-                timeFormatado = horas+":"+""+minutos+":"+segundos;
-                System.out.println("timeFormatado: "+timeFormatado);
-            }
 
+                timeFormatado = horas + ":" + "" + minutos + ":" + segundos;
+                System.out.println("timeFormatado: " + timeFormatado);
+            }
         }
         if (ce instanceof RealizeCompleteEvent) {
             System.out.println("PrefetchCompleteEvent 1 ");
@@ -121,12 +106,12 @@ public class VideoController extends java.awt.Frame implements ControllerListene
             if ((visual = player.getVisualComponent()) != null) {
                 System.out.println("PrefetchCompleteEvent 2 ");
                 Dimension size = visual.getPreferredSize();
+
                 videoWidth = size.width;
                 videoHeight = size.height;
                 visual.setBounds(5, 5, videoWidth, videoHeight);
+                container.removeAll();
                 container.add("Center", visual);
-
-
 
             } else {
                 videoWidth = 320;
@@ -160,10 +145,10 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     /**
      * @param timeVideo the timeVideo to set
      */
-    @SuppressWarnings("static-access")
-    public void setTimeVideo(double timeVideo) {
-        this.timeVideo = timeVideo;
-    }
+//    @SuppressWarnings("static-access")
+//    public void setTimeVideo(double timeVideo) {
+//       //this.timeVideo = timeVideo;
+//    }
 
     // Método para formatar um valor
     public static String formatarTempo(double vlr) {

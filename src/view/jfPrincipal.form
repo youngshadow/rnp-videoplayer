@@ -26,55 +26,48 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="1" attributes="1">
+                  <Group type="102" attributes="0">
                       <Component id="jScrollPane2" min="-2" pref="254" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <EmptySpace pref="396" max="32767" attributes="0"/>
-                              <Component id="jButton5" min="-2" pref="130" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                  <Component id="btnEditar" alignment="1" max="32767" attributes="1"/>
-                                  <Component id="btnNovo" alignment="1" max="32767" attributes="1"/>
-                                  <Component id="btnCapturarArvore" alignment="1" max="32767" attributes="1"/>
-                                  <Component id="jButton4" alignment="1" min="-2" max="-2" attributes="1"/>
-                              </Group>
-                          </Group>
+                      <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="btnEditar" alignment="1" max="32767" attributes="1"/>
+                          <Component id="btnNovo" alignment="1" max="32767" attributes="1"/>
+                          <Component id="btnCapturarArvore" alignment="1" max="32767" attributes="1"/>
+                          <Component id="jButton4" alignment="1" min="-2" max="-2" attributes="1"/>
                       </Group>
                   </Group>
+                  <Component id="jpContainerVideo" min="-2" pref="330" max="-2" attributes="1"/>
+              </Group>
+              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" min="-2" pref="205" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
+                  <Group type="102" attributes="0">
+                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                      <Component id="btnSelecionar" linkSize="1" pref="109" max="32767" attributes="1"/>
+                  </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnPlay" min="-2" pref="53" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnStop" min="-2" pref="59" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jProgressBar1" pref="225" max="32767" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel1" min="-2" pref="52" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="jpContainerVideo" alignment="1" max="32767" attributes="1"/>
-                      </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jScrollPane1" min="-2" pref="205" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="btnVideo" pref="120" max="32767" attributes="1"/>
-                                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btnSelecionar" alignment="1" pref="120" max="32767" attributes="1"/>
-                                      <Component id="btnCapturar" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="btnCapturarTempos" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="btnRemover" alignment="1" max="32767" attributes="1"/>
-                                      <Component id="btnAddAcoes" alignment="1" max="32767" attributes="1"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                          <Component id="jSlider1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="btnCapturar" linkSize="1" pref="109" max="32767" attributes="1"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnCapturarTempos" linkSize="1" pref="109" max="32767" attributes="1"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnRemover" linkSize="1" pref="109" max="32767" attributes="1"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnAddAcoes" linkSize="1" pref="109" max="32767" attributes="1"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="btnVideo" linkSize="1" pref="109" max="32767" attributes="1"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jButton5" linkSize="1" pref="109" max="32767" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -85,47 +78,28 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="btnSelecionar" pref="34" max="32767" attributes="0"/>
+                      <Component id="btnSelecionar" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCapturar" pref="36" max="32767" attributes="0"/>
+                      <Component id="btnCapturar" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnCapturarTempos" pref="32" max="32767" attributes="0"/>
+                      <Component id="btnCapturarTempos" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnRemover" pref="32" max="32767" attributes="0"/>
+                      <Component id="btnRemover" linkSize="2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnAddAcoes" pref="37" max="32767" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                      <Component id="btnVideo" min="-2" pref="33" max="-2" attributes="0"/>
+                      <Component id="btnAddAcoes" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="btnVideo" linkSize="2" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jButton5" linkSize="2" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="jScrollPane1" alignment="1" max="32767" attributes="1"/>
-                      <Component id="jpContainerVideo" alignment="1" max="32767" attributes="1"/>
-                  </Group>
+                  <Component id="jpContainerVideo" alignment="0" pref="296" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                      <Component id="btnPlay" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnStop" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <Component id="jSlider1" min="-2" max="-2" attributes="0"/>
-                  <Group type="103" alignment="0" groupAlignment="1" attributes="0">
-                      <Component id="jProgressBar1" alignment="1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="1" min="-2" pref="21" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jButton5" min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="jScrollPane2" alignment="1" min="-2" pref="223" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
                       <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="btnEditar" min="-2" max="-2" attributes="0"/>
@@ -133,9 +107,13 @@
                       <Component id="btnCapturarArvore" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jButton4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="105" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <Component id="jScrollPane2" min="-2" pref="253" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -143,22 +121,29 @@
   <SubComponents>
     <Container class="javax.swing.JPanel" name="jpContainerVideo">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="0" green="0" red="0" type="rgb"/>
+        </Property>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
           </Border>
+        </Property>
+        <Property name="name" type="java.lang.String" value="teste" noResource="true"/>
+        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+          <Dimension value="[320, 240]"/>
         </Property>
       </Properties>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="405" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="326" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <EmptySpace min="0" pref="316" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="292" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -276,43 +261,6 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Finalizar Aula"/>
       </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnPlay">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="10" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Play"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnPlayActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnStop">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Tahoma" size="10" style="0"/>
-        </Property>
-        <Property name="text" type="java.lang.String" value="Pause"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnStopActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JProgressBar" name="jProgressBar1">
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="10:22:06"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JSlider" name="jSlider1">
-      <Properties>
-        <Property name="value" type="int" value="100"/>
-      </Properties>
-      <Events>
-        <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="jSlider1StateChanged"/>
-      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVideo">
       <Properties>
