@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE index SYSTEM "index.dtd">
+<index>
+    <main_title>Algoritmos</main_title>
+    <class>
+        <number>7</number>
+        <sub_title>Matrizes</sub_title>
+    </class>
+    <ind_item>
+        <time>0</time>
+        <text>Apresentação</text>
+    </ind_item>
+    <ind_item>
+        <time>46.68</time>
+        <text>Definição</text>
+    </ind_item> 
+    <ind_item>
+        <time>68.24</time>
+        <text>Declaração de Variáveis</text>
+   
+     <ind_item>
+            <time>127.28</time>
+            <text>Exemplo</text>
+    </ind_item>
+    </ind_item>
+    <ind_item>
+          <time>169.96</time>
+          <text>Atribuição</text>
+    </ind_item>
+    <ind_item>
+          <time>222.04</time>
+          <text>Referência</text>
+          
+             <ind_item>
+             <time>247.24</time>
+             <text>Exemplo 1</text>
+             </ind_item>  
+    
+             <ind_item>
+             <time>345.16</time>
+             <text>Exemplo em C</text>
+             </ind_item>  
+	  <ind_item>
+             <time>370.12</time>
+             <text>Exemplo 2</text>
+          </ind_item>          
+            <ind_item>
+             <time>420.24</time>
+             <text>Exemplo em C</text>
+          </ind_item>  
+    </ind_item>  
+             
+            <ind_item>
+             <time>449.64</time>
+             <text>Matrizes e Subrotinas</text>
+          </ind_item>  
+         <ind_item>
+             <time>500.68</time>
+             <text>Exercício Resolvido</text>
+              <ind_item>
+             <time>514.64</time>
+             <text>Solução em Pseudolinguagem</text>
+          </ind_item> 
+         
+         <ind_item>
+             <time>537.16</time>
+             <text>Teste de Mesa</text>
+          </ind_item> 
+         <ind_item>
+             <time>683.16</time>
+             <text>Solução em C</text>
+          </ind_item> 
+        </ind_item>
+
+        <ind_item>
+             <time>704.2</time>
+             <text>Recomendações</text>
+          </ind_item>
+
+
+
+          
+</index>
+

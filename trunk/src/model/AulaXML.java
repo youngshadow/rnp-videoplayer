@@ -26,6 +26,13 @@ public class AulaXML {
     private Resolution resolution;
     private ArrayList<Rm_item> related_media = new ArrayList<Rm_item>();
 
+   
+    public AulaXML() {
+
+    }
+
+
+
     public String getObj_filename() {
         return obj_filename;
     }
