@@ -605,12 +605,13 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        DAOxml  dao =new DAOxml();
+        
         if (jtreeModel.getRoot() == null){
              System.out.println("vazio");
             return;
         }
-        dao.gravarTopicos((TreeNode)jtTopicos.getModel().getRoot());
+
+
         
 
 

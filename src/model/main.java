@@ -102,21 +102,20 @@ public class main {
 //        xstream.useAttributeFor(Slide.class, "time");
 //
 //        System.out.println(xstream.toXML(slides));
-//
+
 
 
         //          ********************************************** //
 
 
         AulaXML aulas = new AulaXML();
-        Resolution resolution = new Resolution();
-       // Related_media related = new Related_media();
+        Resolution resolution = new Resolution();       
         Rm_item rm_item = new Rm_item();
 
         rm_item.setRm_filename("rm name");
         rm_item.setRm_type("rm type");
 
-        
+
 
         aulas.setBitrate(123);
         aulas.setCourse("curso");
@@ -136,8 +135,8 @@ public class main {
         xstream.alias("rio_object", AulaXML.class);
         xstream.alias("rm_item", Rm_item.class);
         System.out.println(xstream.toXML(aulas));
-
-
-
+//
+//
+//
     }
 }
