@@ -5,7 +5,6 @@
 package model;
 
 import java.util.ArrayList;
-import javax.media.Time;
 
 /**
  *
@@ -30,8 +29,6 @@ public class AulaXML {
     public AulaXML() {
 
     }
-
-
 
     public String getObj_filename() {
         return obj_filename;
@@ -121,13 +118,7 @@ public class AulaXML {
         this.duration = duration;
     }
 
-    public Resolution getResolution() {
-        return resolution;
-    }
-
-    public void setResolution(Resolution resolution) {
-        this.resolution = resolution;
-    }
+   
 
     public ArrayList<Rm_item> getRm_item() {
         return related_media;
@@ -136,13 +127,48 @@ public class AulaXML {
     public void setRm_item(Rm_item rm_item) {
         this.related_media .add(rm_item);
     }
+
+    /**
+     * @return the resolution
+     */
+    public Resolution getResolution() {
+        return resolution;
+    }
+
+    /**
+     * @param resolution the resolution to set
+     */
+    public void setResolution(int x, int y) {
+        this.resolution = new Resolution(x,y);
+    }
  
 
 }
 
+
+//class Related_media {
+//
+//    private ArrayList<Rm_item> rm_item = new ArrayList<Rm_item>();
+//
+//    public ArrayList<Rm_item> getRm_item() {
+//        return rm_item;
+//    }
+//
+//    public void setRm_item(Rm_item rm_item) {
+//        this.rm_item.add(rm_item);
+//    }
+//}
 class Resolution {
+
     private int r_x;
     private int r_y;
+
+    public Resolution(int r_x, int r_y) {
+        this.r_x = r_x;
+        this.r_y = r_y;
+    }
+
+    
 
     public int getR_x() {
         return r_x;

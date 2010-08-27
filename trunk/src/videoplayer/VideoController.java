@@ -12,6 +12,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.concurrent.TimeUnit;
+import javax.media.CachingControl;
+import javax.media.CachingControlEvent;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.EndOfMediaEvent;
@@ -24,6 +26,7 @@ import javax.media.RealizeCompleteEvent;
 import javax.media.StopByRequestEvent;
 import javax.media.Time;
 import javax.swing.JPanel;
+
 /**
  *
  * @author alexandre
@@ -35,7 +38,7 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     private Component visual;
     private Component control = null;
     private JPanel container;
-//    private static double timeVideo;
+    //private static double timeVideo;
     private static String timeFormatado;
     int videoWidth = 0;
     int videoHeight = 0;
@@ -50,6 +53,9 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     //ALerta
     public void alerta(String msg) {
         MessageBox MsgBox = new MessageBox("Erro!", msg);
+    }
+
+    public VideoController() {
     }
 
     public VideoController(String fileName, JPanel container) {
@@ -81,22 +87,18 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     }
 
     public void controllerUpdate(ControllerEvent ce) {
+
+
         if (ce instanceof ControllerEvent) {
             if (ce instanceof StopByRequestEvent || ce instanceof MediaTimeSetEvent) {
-                //timeVideo = ce.getSourceController().getMediaTime().getSeconds();
-                segundos = (int) TimeUnit.SECONDS.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
-                minutos = (int) TimeUnit.MINUTES.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
-                horas = (int) TimeUnit.HOURS.convert((long) ce.getSourceController().getMediaTime().getSeconds(), TimeUnit.SECONDS);
-
-                if (segundos > 60) {
-                    segundos = segundos % 60;
-                }
-
-                timeFormatado = horas + ":" + "" + minutos + ":" + segundos;
-                System.out.println("timeFormatado: " + timeFormatado);
+                timeFormatado = timeFormat(ce.getSourceController().getMediaTime());
             }
         }
+
+
+
         if (ce instanceof RealizeCompleteEvent) {
+
             System.out.println("PrefetchCompleteEvent 1 ");
             player.prefetch();
         } else if (ce instanceof PrefetchCompleteEvent) {
@@ -116,6 +118,7 @@ public class VideoController extends java.awt.Frame implements ControllerListene
             } else {
                 videoWidth = 320;
             }
+
             if ((control = player.getControlPanelComponent()) != null) {
                 System.out.println("PrefetchCompleteEvent 3 ");
                 controlHeight = control.getPreferredSize().height;
@@ -126,12 +129,28 @@ public class VideoController extends java.awt.Frame implements ControllerListene
                 container.setSize(videoWidth + insetWidth, videoHeight + controlHeight + insetHeight);
                 validate();
                 player.start();
+
+                timeFormatado = timeFormat(ce.getSourceController().getMediaTime());
+                timeFormat(player.getDuration());
+
             } else if (ce instanceof EndOfMediaEvent) {
                 System.out.println("PrefetchCompleteEvent 5 ");
                 player.setMediaTime(new Time(0));
                 player.start();
             }
         }
+    }
+
+    public String timeFormat(Time ce) {
+        //timeVideo = ce.getSourceController().getMediaTime().getSeconds();
+        segundos = (int) TimeUnit.SECONDS.convert((long) ce.getSeconds(), TimeUnit.SECONDS);
+        minutos = (int) TimeUnit.MINUTES.convert((long) ce.getSeconds(), TimeUnit.SECONDS);
+        horas = (int) TimeUnit.HOURS.convert((long) ce.getSeconds(), TimeUnit.SECONDS);
+        if (segundos > 60) {
+            segundos = segundos % 60;
+        }
+        System.out.println("timeTotalFormat: " + horas + ":" + "" + minutos + ":" + segundos);
+        return horas + ":" + "" + minutos + ":" + segundos;
     }
 
     /**
@@ -142,6 +161,10 @@ public class VideoController extends java.awt.Frame implements ControllerListene
         return timeFormatado;
     }
 
+    public void tempo() {
+        timeFormatado = timeFormat(player.getMediaTime());
+    }
+
     /**
      * @param timeVideo the timeVideo to set
      */
@@ -149,7 +172,6 @@ public class VideoController extends java.awt.Frame implements ControllerListene
 //    public void setTimeVideo(double timeVideo) {
 //       //this.timeVideo = timeVideo;
 //    }
-
     // Método para formatar um valor
     public static String formatarTempo(double vlr) {
         SimpleDateFormat sd = new SimpleDateFormat("hh:mm:ss");

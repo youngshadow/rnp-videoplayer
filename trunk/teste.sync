@@ -1,2 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<slides/>
+<slides>
+  <slide time="build.xml - null" relative_path="build.xml - null"/>
+  <slide time="RELEASE-NOTES - null" relative_path="RELEASE-NOTES - null"/>
+  <slide time="LICENSE - null" relative_path="LICENSE - null"/>
+  <slide time="NOTICE - 0:0:30" relative_path="NOTICE - 0:0:30"/>
+</slides>
