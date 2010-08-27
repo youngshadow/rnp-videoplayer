@@ -16,10 +16,12 @@ import java.net.URL;
 import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.print.attribute.ResolutionSyntax;
 
 
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.text.MaskFormatter;
@@ -28,6 +30,8 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import model.DAOIndex;
+import model.DAOSync;
 import model.DAOxml;
 import videoplayer.ManipList;
 import videoplayer.VideoController;
@@ -41,13 +45,14 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
 
     public abstract void abrirArquivo(String arquivo);
     Dimension dimension;
-    videoJMF video;
+    //videoJMF video;
     boolean isPlay = false;
     public static URL url = null;
     ManipList slideList = new ManipList();
     DefaultListModel listModel;
     FileDialog file = null;
     private final DefaultTreeModel jtreeModel;
+    VideoController video;
 
     /** Creates new form jfPrincipal */
     public jfPrincipal() {
@@ -507,6 +512,8 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         // TODO add your handling code here:
+        
+        video.tempo();
         DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getLastSelectedPathComponent();
         System.out.println("nodeSelect: " + nodeSelect);
         if (nodeSelect != null) {
@@ -539,10 +546,9 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
 
         if (file.getFile() != null) {
             String fileName = file.getDirectory() + file.getFile();
-            System.out.println("file: " + fileName);
-
-            //VideoController video1 = null;
-            new VideoController(fileName, jpContainerVideo);
+            System.out.println("file: " + fileName);            
+            
+           video =  new VideoController(fileName, jpContainerVideo);
 
         }
 
@@ -605,13 +611,35 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        
+        DAOIndex  topicos =new DAOIndex();
+        DAOSync   slides  =new DAOSync();
+        DAOxml    configuracoes = new DAOxml();
         if (jtreeModel.getRoot() == null){
              System.out.println("vazio");
             return;
         }
+        //topicos.gravarTopicos((TreeNode)jtTopicos.getModel().getRoot());
+       // slides.gravarSlides(listModel);
+       configuracoes.getAulas().setBitrate(12345);
+       configuracoes.getAulas().setCourse("Curso");
+       configuracoes.getAulas().setCoursecode("123");
+       configuracoes.getAulas().setDuration("22:22:22");
+       configuracoes.getAulas().setGrad_program("grade");
+       configuracoes.getAulas().setObj_filename("123");
+       configuracoes.getAulas().setObj_filesize(123);
+       configuracoes.getAulas().setObj_title("");
+       configuracoes.getAulas().setObj_type("h.264 FLV");
+       configuracoes.getAulas().setProfessor(null);
+       configuracoes.getAulas().setResolution(320,440);
+       configuracoes.setAulas(configuracoes.getAulas());
+
+       configuracoes.setRm_item_index("arquivo.index");
+       configuracoes.setRm_item_video("video.flv");
+       configuracoes.setRm_itemsync("arquico.sync");
 
 
+
+       configuracoes.gravarXML();
         
 
 

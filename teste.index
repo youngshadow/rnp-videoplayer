@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE index SYSTEM "index.dtd">
 <index>
-  <main_title> </main_title>
   <class>
     <number>0</number>
-    <sub_title> </sub_title>
   </class>
   <ind_item>
     <time>1</time>
@@ -14,7 +12,59 @@
       <text>null - novo tópico</text>
       <ind_item>
         <time>0</time>
-        <text>0:0:7 - novo tópico</text>
+        <text>0:0:10 - novo tópico</text>
+        <ind_item>
+          <time>0</time>
+          <text>0:0:10 - novo tópico</text>
+          <ind_item>
+            <time>0</time>
+            <text>0:0:10 - novo tópico</text>
+            <ind_item>
+              <time>0</time>
+              <text>0:0:10 - novo tópico</text>
+            </ind_item>
+          </ind_item>
+          <ind_item>
+            <time>1</time>
+            <text>0:0:18 - novo tópico</text>
+            <ind_item>
+              <time>0</time>
+              <text>0:0:18 - novo tópico</text>
+            </ind_item>
+          </ind_item>
+          <ind_item>
+            <time>2</time>
+            <text>0:0:18 - novo tópico</text>
+          </ind_item>
+          <ind_item>
+            <time>3</time>
+            <text>0:0:18 - novo tópico</text>
+            <ind_item>
+              <time>0</time>
+              <text>0:0:18 - novo tópico</text>
+            </ind_item>
+          </ind_item>
+          <ind_item>
+            <time>4</time>
+            <text>0:0:18 - novo tópico</text>
+            <ind_item>
+              <time>0</time>
+              <text>0:0:18 - novo tópico</text>
+            </ind_item>
+            <ind_item>
+              <time>1</time>
+              <text>0:0:18 - novo tópico</text>
+              <ind_item>
+                <time>0</time>
+                <text>0:0:18 - novo tópico</text>
+              </ind_item>
+            </ind_item>
+          </ind_item>
+        </ind_item>
+        <ind_item>
+          <time>1</time>
+          <text>0:0:18 - novo tópico</text>
+        </ind_item>
       </ind_item>
     </ind_item>
   </ind_item>

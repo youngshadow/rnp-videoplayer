@@ -109,11 +109,19 @@ public class main {
 
 
         AulaXML aulas = new AulaXML();
-        Resolution resolution = new Resolution();       
+       
         Rm_item rm_item = new Rm_item();
+        Rm_item rm_item2= new Rm_item();
+        Rm_item rm_item3= new Rm_item();
 
         rm_item.setRm_filename("rm name");
         rm_item.setRm_type("rm type");
+
+        rm_item2.setRm_filename("rm name222");
+        rm_item2.setRm_type("rm type222");
+
+        rm_item3.setRm_filename("rm name333");
+        rm_item3.setRm_type("rm type333");
 
 
 
@@ -126,9 +134,13 @@ public class main {
         aulas.setObj_title("title");
         aulas.setObj_type("tipo");
         aulas.setProfessor("professor");
-        aulas.setResolution(resolution);
+        aulas.setResolution(320, 440);
         aulas.setSource("source");
         aulas.setRm_item(rm_item);
+        aulas.setRm_item(rm_item2);
+        aulas.setRm_item(rm_item3);
+
+        
 
         XStream xstream = new XStream(new XppDomDriver(new XmlFriendlyReplacer("_-", "_")));
 
