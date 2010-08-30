@@ -18,7 +18,7 @@ public class DAOSync {
 
     SlidesXML slides = new SlidesXML();
 
-    public void gravarSlides(DefaultListModel listModel) {
+    public void gravarSlides(DefaultListModel listModel, String destino) {
         System.out.println("List" + listModel.getSize());
 
         for (int i = 0; i < listModel.getSize(); i++) {
@@ -40,6 +40,6 @@ public class DAOSync {
 
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xstream.toXML(slides);
 
-        System.out.println("gravar: " + GravarArquivo.salvarArquivo(xml, "teste.sync"));
+        System.out.println("gravar: " + GravarArquivo.salvarArquivo(xml, destino+".sync"));
     }
 }

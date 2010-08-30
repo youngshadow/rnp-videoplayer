@@ -22,35 +22,36 @@ public class DAOIndex {
     TreeNode treeNode;
     private String titulo;
     private String subTitulo;
+    private String destino;
 
-
-    public void gravarTopicos(TreeNode treeNode1) {
+    public void gravarTopicos(TreeNode treeNode1, String titulo, String subTitulo, String destino, String textoRoot) {
         this.treeNode = treeNode1;
+        this.destino = destino;
 
-        if (!treeNode.toString().equals("root")) {
+        if (!treeNode.toString().equals(textoRoot)) {
             Ind_item item = new Ind_item();
-            item.setText(treeNode.toString());
-            item.setTime(01);
+            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-")+1));
+            item.setTime(treeNode.toString().substring(0, treeNode.toString().indexOf("-")));
 
             if (treeNode.getChildCount() > 0) {
                 buscarFilho(treeNode, item);
-                  if (!this.treeNode.isLeaf()){
-                Enumeration filho = treeNode.children();
-                treeNode = (TreeNode) filho.nextElement();
-                  }
+                if (!this.treeNode.isLeaf()) {
+                    Enumeration filho = treeNode.children();
+                    treeNode = (TreeNode) filho.nextElement();
+                }
             }
-           
+
             index.setInd_item(item);
         }
 
         //recursividade
         for (Enumeration filho = treeNode.children(); filho.hasMoreElements();) {
 
-            gravarTopicos((TreeNode) filho.nextElement());
+            gravarTopicos((TreeNode) filho.nextElement(), titulo, subTitulo, this.destino, textoRoot);
 
 // ################## gerando o xml
             if (filho.hasMoreElements() == false) {
-                
+
 
                 index.setMain(main);
                 index.setMain_title(titulo);
@@ -71,7 +72,7 @@ public class DAOIndex {
 
                 String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
 
-                System.out.println("gravar: " + GravarArquivo.salvarArquivo(xml, "teste.index"));
+                System.out.println("gravar: " + GravarArquivo.salvarArquivo(xml, this.destino + ".index"));
                 System.out.println("Result: ");
                 System.out.println(xml);
             }
@@ -83,16 +84,16 @@ public class DAOIndex {
         for (int i = 0; i < treeNode.getChildCount(); i++) {
             TreeNode filho = treeNode.getChildAt(i);
             Ind_item item1 = new Ind_item();
-            item1.setText(filho.toString());
-            item1.setTime(i);
+            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-")));
+            item.setTime(treeNode.toString().substring(0, treeNode.toString().indexOf("-")));
             item.setInd_item(item1);
 
             if (filho.getChildCount() > 0) {
                 buscarFilho(filho, item1);
-                  if (!this.treeNode.isLeaf()){
-                Enumeration filho1 = this.treeNode.children();
-                this.treeNode = (TreeNode) filho1.nextElement();
-                  }
+                if (!this.treeNode.isLeaf()) {
+                    Enumeration filho1 = this.treeNode.children();
+                    this.treeNode = (TreeNode) filho1.nextElement();
+                }
             }
         }
 //        Enumeration filho1 = treeNode.children();
