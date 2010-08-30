@@ -65,15 +65,15 @@ class main_class {
 
 class Ind_item {
 
-    private int time;
+    private String time;
     private String text;
     private ArrayList<Ind_item> ind_item = new ArrayList<Ind_item>();
 
-    public int getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(int time) {
+    public void setTime(String time) {
         this.time = time;
     }
 
