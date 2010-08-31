@@ -4,16 +4,15 @@
  */
 package videoplayer;
 
-import com.sun.media.ui.MessageBox;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import javax.media.CachingControl;
-import javax.media.CachingControlEvent;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.EndOfMediaEvent;
@@ -25,6 +24,7 @@ import javax.media.PrefetchCompleteEvent;
 import javax.media.RealizeCompleteEvent;
 import javax.media.StopByRequestEvent;
 import javax.media.Time;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
@@ -52,7 +52,8 @@ public class VideoController extends java.awt.Frame implements ControllerListene
 
     //ALerta
     public void alerta(String msg) {
-        MessageBox MsgBox = new MessageBox("Erro!", msg);
+          JOptionPane.showMessageDialog(this, msg, "Erro!", JOptionPane.ERROR_MESSAGE);
+            return;
     }
 
     public VideoController() {
@@ -149,33 +150,38 @@ public class VideoController extends java.awt.Frame implements ControllerListene
         if (segundos > 60) {
             segundos = segundos % 60;
         }
-        System.out.println("timeTotalFormat: " + horas + ":" + "" + minutos + ":" + segundos);
-        return horas + ":" + "" + minutos + ":" + segundos;
+
+        SimpleDateFormat format = new SimpleDateFormat("hh:mm:ss");
+        try {
+            Date d = format.parse(horas + ":" + "" + minutos + ":" + segundos);
+            SimpleDateFormat format2 = new SimpleDateFormat("HH:mm:ss");
+            System.out.println("----> " + format2.format(d));
+            return format2.format(d);
+
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
-    /**
-     * @return the timeVideo
-     */
     public static String getTimeVideo() {
 
         return timeFormatado;
     }
 
-    public void tempo() {
-        timeFormatado = timeFormat(player.getMediaTime());
+    public int[] getDimensao() {
+        int[] valores = new int[2];
+        valores[0] = videoWidth;
+        valores[1] = videoHeight;
+
+        return valores;
     }
 
-    /**
-     * @param timeVideo the timeVideo to set
-     */
-//    @SuppressWarnings("static-access")
-//    public void setTimeVideo(double timeVideo) {
-//       //this.timeVideo = timeVideo;
-//    }
-    // Método para formatar um valor
-    public static String formatarTempo(double vlr) {
-        SimpleDateFormat sd = new SimpleDateFormat("hh:mm:ss");
-        //java.text.DecimalFormat df = new java.text.DecimalFormat("###,###,##0.00");
-        return sd.format(vlr);
+    public String tempoTotal() {
+        return timeFormat(player.getDuration());
+    }
+
+    public void parar(){
+        player.stop();
     }
 }

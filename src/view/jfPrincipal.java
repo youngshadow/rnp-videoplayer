@@ -44,6 +44,11 @@ import videoplayer.videoJMF;
  */
 public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSelectionListener {
 
+     public void alerta(String titulo,String msg) {
+          JOptionPane.showMessageDialog(this, msg, titulo, JOptionPane.ERROR_MESSAGE);
+            return;
+    }
+
     public abstract void abrirArquivo(String arquivo);
     Dimension dimension;
     //videoJMF video;
@@ -60,7 +65,7 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
     /** Creates new form jfPrincipal */
     public jfPrincipal() {
         initComponents();
-        this.setTitle("Nome");
+        this.setTitle("SE-EDAD Vídeo Player");
         //define o tamanho do video
         dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
         listModel = new DefaultListModel();
@@ -68,12 +73,24 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
         jtreeModel = new DefaultTreeModel(null);
         jtTopicos.setEditable(true);
         jtTopicos.setSelectionRow(0);
+         gerarRoot();
 
 
         // jtTopicos.setModel(new javax.swing.tree.DefaultTreeModel(null));
 
 
 
+    }
+
+    protected void gerarRoot() {
+        DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Tópicos");
+        jtTopicos.setModel(jtreeModel);
+        jtreeModel.setRoot(rootTopic);
+        TreeNode[] nodes = jtreeModel.getPathToRoot(rootTopic);
+        TreePath treepath = new TreePath(nodes);
+        jtTopicos.scrollPathToVisible(treepath);
+        jtTopicos.setSelectionPath(treepath);
+        jtTopicos.startEditingAtPath(treepath);
     }
 
     /** This method is called from within the constructor to
@@ -117,7 +134,6 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
             jScrollPane2 = new javax.swing.JScrollPane();
             jtTopicos = new javax.swing.JTree();
             btnNovo = new javax.swing.JButton();
-            btnEditar = new javax.swing.JButton();
             btnCapturarArvore = new javax.swing.JButton();
             jButton4 = new javax.swing.JButton();
             jButton5 = new javax.swing.JButton();
@@ -401,21 +417,19 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
         jtTopicos.setModel(null);
         jScrollPane2.setViewportView(jtTopicos);
 
-        btnNovo.setText("Novo SubTópico");
+        btnNovo.setText("Novo Tópico");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNovoActionPerformed(evt);
             }
         });
 
-        btnEditar.setText("Novo Tópico");
-        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+        btnCapturarArvore.setText("Capturar");
+        btnCapturarArvore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEditarActionPerformed(evt);
+                btnCapturarArvoreActionPerformed(evt);
             }
         });
-
-        btnCapturarArvore.setText("Capturar");
 
         jButton4.setText("Remover");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -636,8 +650,7 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                            .addComponent(btnNovo, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                             .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
                             .addComponent(btnCapturarArvore, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)))
                     .addComponent(jpContainerVideo, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -677,23 +690,18 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jpContainerVideo, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)))
                 .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnEditar)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(34, 34, 34)
-                                    .addComponent(btnNovo)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(btnCapturarArvore)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(11, 11, 11))))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(34, 34, 34)
+                            .addComponent(btnNovo)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(btnCapturarArvore)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(11, 11, 11))
         );
 
         layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {btnCapturar, btnRemover, btnVideo, jButton5});
@@ -706,6 +714,10 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
     }//GEN-LAST:event_btnSelecionarActionPerformed
 
     private void btnCapturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarActionPerformed
+         if(video != null){
+              video.parar();
+        } 
+
         slideList.dialogo(listModel);
         if (listModel.getSize() > 0) {
             url = slideList.ultimaURL(listModel.getSize() - 1);
@@ -721,9 +733,21 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        // TODO add your handling code here:
+        if(video == null){
+            alerta("Erro!", "Nenhum vídeo em reprodução!");
+            return;
+        }
 
-        //   video.tempo();
+        //enquanto o tempo atual do getTimeVideo nao é atualizado
+              video.parar();
+        try {
+            Thread.sleep(300);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+              
+
+
         DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getLastSelectedPathComponent();
         System.out.println("nodeSelect: " + nodeSelect);
         if (nodeSelect != null) {
@@ -736,16 +760,14 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
             jtTopicos.setSelectionPath(treepath);
             jtTopicos.startEditingAtPath(treepath);
         } else {
-            DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode("root");
-            jtTopicos.setModel(jtreeModel);
-            jtreeModel.setRoot(newTopic);
-
-            TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic);
-            TreePath treepath = new TreePath(nodes);
-            jtTopicos.scrollPathToVisible(treepath);
-            jtTopicos.setSelectionPath(treepath);
-            jtTopicos.startEditingAtPath(treepath);
+                gerarRoot();
         }
+
+
+        
+
+         
+     
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnVideoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVideoActionPerformed
@@ -781,12 +803,6 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
 
 
     }//GEN-LAST:event_btnVideoActionPerformed
-
-    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
-        // TODO add your handling code here:
-//        jfAddTopico topico = new jfAddTopico();
-//        topico.setVisible(true);
-    }//GEN-LAST:event_btnEditarActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         DefaultMutableTreeNode nodeSelected = (DefaultMutableTreeNode) jtTopicos.getLastSelectedPathComponent();
@@ -824,8 +840,8 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
         DAOIndex topicos = new DAOIndex();
         DAOSync slides = new DAOSync();
         DAOxml configuracoes = new DAOxml();
-        if (jtreeModel.getRoot() == null) {
-            System.out.println("vazio");
+        if (video == null ||jtreeModel.getRoot() == null) {
+            alerta("Erro!", "não foi possível gravar a aula. \n Verifique as configurações.");
             return;
         }
 
@@ -833,10 +849,10 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
         slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.indexOf(".")));
 
 
-        configuracoes.getAulas().setBitrate(12345);
+        configuracoes.getAulas().setBitrate("1100.0");
         configuracoes.getAulas().setCourse(jlCurso.getText());
         configuracoes.getAulas().setCoursecode(jlCodCurso.getText());
-        configuracoes.getAulas().setDuration("22:22:22");
+        configuracoes.getAulas().setDuration(video.tempoTotal());
         configuracoes.getAulas().setGrad_program(jlDisciplina.getText());
         configuracoes.getAulas().setSource(jlIsntituição.getText());
         configuracoes.getAulas().setObj_filename(nomeFLV);
@@ -844,7 +860,7 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
         configuracoes.getAulas().setObj_title(jlAula.getText());
         configuracoes.getAulas().setObj_type("h.264 FLV");
         configuracoes.getAulas().setProfessor(jlProfessor.getText());
-        configuracoes.getAulas().setResolution(320, 440);
+        configuracoes.getAulas().setResolution(video.getDimensao()[0], video.getDimensao()[1]);
         configuracoes.setAulas(configuracoes.getAulas());
 
         configuracoes.setRm_item_index(nomeFLV.substring(0, nomeFLV.indexOf(".")) + ".index");
@@ -852,10 +868,7 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
         configuracoes.setRm_itemsync(nomeFLV.substring(0, nomeFLV.indexOf(".")) + ".sync");
         configuracoes.gravarXML(dirFinal + nomeFLV.substring(0, nomeFLV.indexOf(".")));
 
-
-
-
-
+        alerta("Sucesso!", "Arquivos gravados em: \n"+dirFinal);
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -919,6 +932,18 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
         jDialog1.setVisible(false);
     }//GEN-LAST:event_jButton2ActionPerformed
 
+    private void btnCapturarArvoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarArvoreActionPerformed
+        DefaultMutableTreeNode nodeSelected = (DefaultMutableTreeNode) jtTopicos.getLastSelectedPathComponent();
+        if (nodeSelected == null) {
+            JOptionPane.showMessageDialog(this, "Nenhum Tópico Selecionado", "Erro!", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        System.out.println("--> "+nodeSelected);
+        jtreeModel.removeNodeFromParent(nodeSelected);
+
+    }//GEN-LAST:event_btnCapturarArvoreActionPerformed
+
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
@@ -947,7 +972,6 @@ public abstract class jfPrincipal extends javax.swing.JFrame implements TreeSele
     private javax.swing.JButton btnCapturar;
     private javax.swing.JButton btnCapturarArvore;
     private javax.swing.JButton btnCapturarTempos;
-    private javax.swing.JButton btnEditar;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnRemover;
     private javax.swing.JButton btnSelecionar;

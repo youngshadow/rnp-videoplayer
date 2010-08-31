@@ -125,7 +125,7 @@ public class main {
 
 
 
-        aulas.setBitrate(123);
+        aulas.setBitrate("123");
         aulas.setCourse("curso");
         aulas.setCoursecode("cod123");
         aulas.setDuration("22:22");

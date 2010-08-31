@@ -33,7 +33,7 @@ public class DAOxml {
         xstream.alias("rm_item", Rm_item.class);
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE rio_object SYSTEM \"object.dtd\">\n" + xstream.toXML(aulas);
 
-        System.out.println("gravar: " + GravarArquivo.salvarArquivo(xml, destino + ".xml"));
+        GravarArquivo.salvarArquivo(xml, destino + ".xml");
     }
 
     public AulaXML getAulas() {

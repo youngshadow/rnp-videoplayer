@@ -20,7 +20,7 @@ public class AulaXML {
     private String coursecode;
     private String grad_program;
     private String source;
-    private long bitrate;
+    private String bitrate;
     private String duration;
     private Resolution resolution;
     private ArrayList<Rm_item> related_media = new ArrayList<Rm_item>();
@@ -102,11 +102,11 @@ public class AulaXML {
         this.source = source;
     }
 
-    public long getBitrate() {
+    public String getBitrate() {
         return bitrate;
     }
 
-    public void setBitrate(long bitrate) {
+    public void setBitrate(String bitrate) {
         this.bitrate = bitrate;
     }
 

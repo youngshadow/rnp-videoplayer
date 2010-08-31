@@ -30,8 +30,8 @@ public class DAOIndex {
 
         if (!treeNode.toString().equals(textoRoot)) {
             Ind_item item = new Ind_item();
-            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-")+1));
-            item.setTime(treeNode.toString().substring(0, treeNode.toString().indexOf("-")));
+            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-")+1).trim());
+            item.setTime(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim());
 
             if (treeNode.getChildCount() > 0) {
                 buscarFilho(treeNode, item);
@@ -51,8 +51,6 @@ public class DAOIndex {
 
 // ################## gerando o xml
             if (filho.hasMoreElements() == false) {
-
-
                 index.setMain(main);
                 index.setMain_title(titulo);
                 main.setSub_title(subTitulo);
@@ -72,9 +70,8 @@ public class DAOIndex {
 
                 String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
 
-                System.out.println("gravar: " + GravarArquivo.salvarArquivo(xml, this.destino + ".index"));
-                System.out.println("Result: ");
-                System.out.println(xml);
+                GravarArquivo.salvarArquivo(xml, this.destino + ".index");
+               
             }
         }
     }
