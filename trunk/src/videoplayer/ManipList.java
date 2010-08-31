@@ -85,7 +85,7 @@ public class ManipList {
                 setVideo(url, nomeFile);
                   String tempo =  VideoController.getTimeVideo();
 
-                model.addElement(nomeFile+" - "+tempo);
+                model.addElement(tempo +" - "+nomeFile);
 
             } catch (MalformedURLException ex) {
                 Logger.getLogger(ManipList.class.getName()).log(Level.SEVERE, null, ex);

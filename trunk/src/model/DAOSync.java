@@ -19,13 +19,11 @@ public class DAOSync {
     SlidesXML slides = new SlidesXML();
 
     public void gravarSlides(DefaultListModel listModel, String destino) {
-        System.out.println("List" + listModel.getSize());
-
-        for (int i = 0; i < listModel.getSize(); i++) {
-            System.out.println("Item -->" + listModel.getElementAt(i));
+      
+        for (int i = 0; i < listModel.getSize(); i++) {           
             Slide slide = new Slide();
-            slide.setRelative_path(listModel.getElementAt(i).toString());
-            slide.setTime(listModel.getElementAt(i).toString());
+            slide.setRelative_path(listModel.getElementAt(i).toString().substring(listModel.getElementAt(i).toString().indexOf("-")+1).trim());
+            slide.setTime(listModel.getElementAt(i).toString().substring(0,listModel.getElementAt(i).toString().indexOf("-")).trim());
             slides.setSlide(slide);
         }
 
