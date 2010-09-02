@@ -111,12 +111,9 @@
                                   <Component id="jtfDisciplina" alignment="1" pref="279" max="32767" attributes="0"/>
                                   <Component id="jtfCurso" alignment="0" pref="279" max="32767" attributes="0"/>
                                   <Component id="jtfProfessor" alignment="0" pref="279" max="32767" attributes="0"/>
-                                  <Component id="jtfCodCurso" alignment="0" pref="279" max="32767" attributes="0"/>
                                   <Component id="jtfInstituic" alignment="1" pref="279" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Component id="jtfNumAula" min="-2" pref="52" max="-2" attributes="0"/>
-                                      <EmptySpace pref="227" max="32767" attributes="0"/>
-                                  </Group>
+                                  <Component id="jtfNumAula" alignment="0" min="-2" pref="72" max="-2" attributes="0"/>
+                                  <Component id="jtfCodCurso" alignment="0" min="-2" pref="73" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -221,16 +218,13 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jtfNumAula">
               <Properties>
-                <Property name="text" type="java.lang.String" value=" "/>
+                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+                  <Format subtype="1" type="0"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfNumAulaActionPerformed"/>
               </Events>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(new MaskFormatter(&quot;###&quot;))"/>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="try{"/>
-                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="}catch(Exception e){&#xa;}"/>
-              </AuxValues>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel7">
               <Properties>
@@ -274,11 +268,6 @@
               </Properties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="jtfCodCurso">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format subtype="1" type="0"/>
-                </Property>
-              </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jtfCodCursoActionPerformed"/>
               </Events>
@@ -345,9 +334,8 @@
                       <Component id="jScrollPane2" min="-2" pref="254" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="btnNovo" alignment="0" pref="109" max="32767" attributes="1"/>
+                          <Component id="btnNovo" pref="109" max="32767" attributes="1"/>
                           <Component id="jButton4" alignment="0" pref="109" max="32767" attributes="1"/>
-                          <Component id="btnCapturarArvore" alignment="0" pref="109" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Component id="jpContainerVideo" min="-2" pref="330" max="-2" attributes="1"/>
@@ -358,11 +346,11 @@
                       <Component id="jScrollPane1" min="-2" pref="238" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="btnCapturar" linkSize="1" alignment="1" pref="109" max="32767" attributes="1"/>
-                          <Component id="btnRemover" linkSize="1" alignment="1" pref="109" max="32767" attributes="1"/>
-                          <Component id="btnVideo" linkSize="1" alignment="1" pref="109" max="32767" attributes="1"/>
-                          <Component id="jButton5" linkSize="1" alignment="1" pref="109" max="32767" attributes="1"/>
+                          <Component id="jButton5" alignment="1" pref="155" max="32767" attributes="1"/>
                           <Component id="jPanel1" min="-2" max="-2" attributes="1"/>
+                          <Component id="btnVideo" alignment="0" pref="155" max="32767" attributes="1"/>
+                          <Component id="btnRemover" alignment="0" pref="155" max="32767" attributes="1"/>
+                          <Component id="btnCapturar" alignment="0" pref="155" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -400,9 +388,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                           <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="btnCapturarArvore" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jButton4" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -510,14 +496,6 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNovoActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnCapturarArvore">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Capturar"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCapturarArvoreActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="jButton4">
