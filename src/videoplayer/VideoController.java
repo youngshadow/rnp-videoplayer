@@ -13,17 +13,22 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.EndOfMediaEvent;
+import javax.media.Format;
 import javax.media.Manager;
 import javax.media.MediaTimeSetEvent;
 import javax.media.NoPlayerException;
 import javax.media.Player;
+import javax.media.PlugInManager;
 import javax.media.PrefetchCompleteEvent;
 import javax.media.RealizeCompleteEvent;
 import javax.media.StopByRequestEvent;
 import javax.media.Time;
+import javax.media.format.VideoFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -52,14 +57,23 @@ public class VideoController extends java.awt.Frame implements ControllerListene
 
     //ALerta
     public void alerta(String msg) {
-          JOptionPane.showMessageDialog(this, msg, "Erro!", JOptionPane.ERROR_MESSAGE);
-            return;
+        JOptionPane.showMessageDialog(this, msg, "Erro!", JOptionPane.ERROR_MESSAGE);
+        return;
     }
 
     public VideoController() {
     }
 
     public VideoController(String fileName, JPanel container) {
+//        Format [ ] inFormats = { new VideoFormat ( "MPEG" ) } ;
+//        PlugInManager.addPlugIn("net.sourceforge.jffmpeg.VideoDecoder" , inFormats, null , PlugInManager.CODEC );
+//        PlugInManager.addPlugIn("net.sourceforge.jffmpeg.AudioDecoder" , inFormats, null , PlugInManager.CODEC );
+//        try {
+//            PlugInManager.commit();
+//        } catch (IOException ex) {
+//            System.out.println("Erro ao abrir codec");
+//            Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
 
         try {
             if ((url = new URL("file:" + fileName)) == null) {
@@ -181,7 +195,7 @@ public class VideoController extends java.awt.Frame implements ControllerListene
         return timeFormat(player.getDuration());
     }
 
-    public void parar(){
+    public void parar() {
         player.stop();
     }
 }

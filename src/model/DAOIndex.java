@@ -30,8 +30,9 @@ public class DAOIndex {
 
         if (!treeNode.toString().equals(textoRoot)) {
             Ind_item item = new Ind_item();
-            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-")+1).trim());
-            item.setTime(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim());
+            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
+
+            item.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
 
             if (treeNode.getChildCount() > 0) {
                 buscarFilho(treeNode, item);
@@ -71,7 +72,7 @@ public class DAOIndex {
                 String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
 
                 GravarArquivo.salvarArquivo(xml, this.destino + ".index");
-               
+
             }
         }
     }
@@ -81,8 +82,8 @@ public class DAOIndex {
         for (int i = 0; i < treeNode.getChildCount(); i++) {
             TreeNode filho = treeNode.getChildAt(i);
             Ind_item item1 = new Ind_item();
-            item1.setText(filho.toString().substring(filho.toString().indexOf("-")+1).trim());
-            item1.setTime(filho.toString().substring(0, filho.toString().indexOf("-")).trim());
+            item1.setText(filho.toString().substring(filho.toString().indexOf("-") + 1).trim());
+            item1.setTime(formatarTempo(filho.toString().substring(0, filho.toString().indexOf("-")).trim()));
             item.setInd_item(item1);
 
             if (filho.getChildCount() > 0) {
@@ -109,5 +110,12 @@ public class DAOIndex {
      */
     public void setSubTitulo(String subTitulo) {
         this.subTitulo = subTitulo;
+    }
+
+    public String formatarTempo(String tempo) {
+
+        int minutos = Integer.parseInt(tempo.substring(3, 5));
+        minutos = (minutos * 60) + Integer.parseInt(tempo.substring(6));
+        return minutos + "";
     }
 }
