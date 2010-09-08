@@ -81,8 +81,8 @@ public class DAOIndex {
         for (int i = 0; i < treeNode.getChildCount(); i++) {
             TreeNode filho = treeNode.getChildAt(i);
             Ind_item item1 = new Ind_item();
-            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-")));
-            item.setTime(treeNode.toString().substring(0, treeNode.toString().indexOf("-")));
+            item1.setText(filho.toString().substring(filho.toString().indexOf("-")+1).trim());
+            item1.setTime(filho.toString().substring(0, filho.toString().indexOf("-")).trim());
             item.setInd_item(item1);
 
             if (filho.getChildCount() > 0) {
