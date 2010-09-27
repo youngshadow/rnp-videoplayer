@@ -23,8 +23,9 @@ public class DAOIndex {
     private String titulo;
     private String subTitulo;
     private String destino;
+     boolean resp;
 
-    public void gravarTopicos(TreeNode treeNode1, String titulo, String subTitulo, String destino, String textoRoot) {
+    public boolean gravarTopicos(TreeNode treeNode1, String titulo, String subTitulo, String destino, String textoRoot, int NumeroAula) {
         this.treeNode = treeNode1;
         this.destino = destino;
 
@@ -48,13 +49,14 @@ public class DAOIndex {
         //recursividade
         for (Enumeration filho = treeNode.children(); filho.hasMoreElements();) {
 
-            gravarTopicos((TreeNode) filho.nextElement(), titulo, subTitulo, this.destino, textoRoot);
+            gravarTopicos((TreeNode) filho.nextElement(), titulo, subTitulo, this.destino, textoRoot, NumeroAula);
 
 // ################## gerando o xml
             if (filho.hasMoreElements() == false) {
                 index.setMain(main);
                 index.setMain_title(titulo);
                 main.setSub_title(subTitulo);
+                main.setNumber(NumeroAula);
 
                 //criando o XML e formatando underline simples
                 XStream xstream = new XStream(new XppDomDriver(new XmlFriendlyReplacer("_-", "_")));
@@ -71,10 +73,11 @@ public class DAOIndex {
 
                 String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
 
-                GravarArquivo.salvarArquivo(xml, this.destino + ".index");
+               resp = GravarArquivo.salvarArquivo(xml, this.destino + ".index");
 
             }
         }
+        return resp;
     }
 
 // método recursivo para tratar os filhos

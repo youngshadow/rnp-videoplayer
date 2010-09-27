@@ -21,7 +21,7 @@ public class DAOxml {
     private Rm_item rm_item_video = new Rm_item();
     private Rm_item rm_itemsync = new Rm_item();
 
-    public void gravarXML(String destino) {
+    public boolean gravarXML(String destino) {
 
         aulas.setRm_item(rm_item_index);
         aulas.setRm_item(rm_item_video);
@@ -33,7 +33,7 @@ public class DAOxml {
         xstream.alias("rm_item", Rm_item.class);
         String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE rio_object SYSTEM \"object.dtd\">\n" + xstream.toXML(aulas);
 
-        GravarArquivo.salvarArquivo(xml, destino + ".xml");
+       return  GravarArquivo.salvarArquivo(xml, destino + ".xml");
     }
 
     public AulaXML getAulas() {
