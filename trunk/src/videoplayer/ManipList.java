@@ -21,7 +21,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ManipList {
 
-    private Vector urlAbsoluta;
+       private Vector urlAbsoluta;
     private Vector nomeArqivo;
     private static FileNameExtensionFilter extencoes = new FileNameExtensionFilter("Arquivo de Vídeo", "mpeg", "mpg");
 
@@ -32,10 +32,7 @@ public class ManipList {
 
     public void setVideo(URL urlAbsoluta, String nomeArqivo) {
         this.urlAbsoluta.addElement(urlAbsoluta);
-        
-
         this.nomeArqivo.addElement(nomeArqivo);
-
     }
 
     //remove do vector urlAbsoluta a ocorrencia do nome selecionado
@@ -71,9 +68,9 @@ public class ManipList {
         return url;
     }
 
-    public void dialogo(DefaultListModel model) {
+    public void dialogo(DefaultListModel model, String tempo) {
         JFileChooser fileChooser = new JFileChooser();
-       // fileChooser.setFileFilter(extencoes);
+        fileChooser.setFileFilter(extencoes);
         int result = fileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -83,12 +80,10 @@ public class ManipList {
                 String nomeFile = fileChooser.getSelectedFile().getName();
 
                 setVideo(url, nomeFile);
-                  String tempo =  VideoController.getTimeVideo();
-
-                model.addElement(tempo +" - "+nomeFile);
+                model.addElement(tempo+" - "+nomeFile);
 
             } catch (MalformedURLException ex) {
-                Logger.getLogger(ManipList.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(PlayList.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }
