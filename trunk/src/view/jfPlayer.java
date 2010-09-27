@@ -290,11 +290,11 @@ public class jfPlayer extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        listaVideos.dialogo(listModel);
+        listaVideos.dialogo(listModel, "-");
         System.out.println("Tamanho: " + listModel.getSize());
 
         if (listModel.getSize() > 0) {
-            url = listaVideos.ultimaURL(listModel.getSize() - 1);
+         //   url = listaVideos.ultimaURL(listModel.getSize() - 1);
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -302,7 +302,7 @@ public class jfPlayer extends javax.swing.JFrame {
         // TODO add your handling code here:
         if (listModel.getSize() > 0) {
             System.out.println("Video Selecionado:" + playList.getSelectedValue().toString());
-            url = listaVideos.getURL(playList.getSelectedValue().toString());
+         //   url = listaVideos.getURL(playList.getSelectedValue().toString());
         }
     }//GEN-LAST:event_playListMouseClicked
     /**
