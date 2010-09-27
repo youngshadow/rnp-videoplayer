@@ -5,6 +5,7 @@
 package videoplayer;
 
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -13,22 +14,17 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.media.ControllerEvent;
 import javax.media.ControllerListener;
 import javax.media.EndOfMediaEvent;
-import javax.media.Format;
 import javax.media.Manager;
 import javax.media.MediaTimeSetEvent;
 import javax.media.NoPlayerException;
 import javax.media.Player;
-import javax.media.PlugInManager;
 import javax.media.PrefetchCompleteEvent;
 import javax.media.RealizeCompleteEvent;
 import javax.media.StopByRequestEvent;
 import javax.media.Time;
-import javax.media.format.VideoFormat;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -38,7 +34,7 @@ import javax.swing.JPanel;
  */
 public class VideoController extends java.awt.Frame implements ControllerListener {
 
-    private Player player;
+    private volatile Player player;
     private URL url;
     private Component visual;
     private Component control = null;
@@ -54,6 +50,7 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     int minutos;
     int horas;
     boolean firstTime = true;
+    private Container cont;
 
     //ALerta
     public void alerta(String msg) {
@@ -65,16 +62,18 @@ public class VideoController extends java.awt.Frame implements ControllerListene
     }
 
     public VideoController(String fileName, JPanel container) {
-//        Format [ ] inFormats = { new VideoFormat ( "MPEG" ) } ;
-//        PlugInManager.addPlugIn("net.sourceforge.jffmpeg.VideoDecoder" , inFormats, null , PlugInManager.CODEC );
-//        PlugInManager.addPlugIn("net.sourceforge.jffmpeg.AudioDecoder" , inFormats, null , PlugInManager.CODEC );
+//        Format[] inFormats = {new VideoFormat("MPEG")};
+//        PlugInManager.addPlugIn("net.sourceforge.jffmpeg.VideoDecoder", inFormats, null, PlugInManager.CODEC);
+//        Format[] inFormats1 = {new AudioFormat("MPEG")};
+//        PlugInManager.addPlugIn("net.sourceforge.jffmpeg.AudioDecoder", inFormats1, null, PlugInManager.CODEC);
+//
 //        try {
 //            PlugInManager.commit();
 //        } catch (IOException ex) {
 //            System.out.println("Erro ao abrir codec");
 //            Logger.getLogger(VideoController.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
+            
         try {
             if ((url = new URL("file:" + fileName)) == null) {
                 alerta("Impossível abrir o arquivo:" + fileName);
@@ -88,6 +87,7 @@ public class VideoController extends java.awt.Frame implements ControllerListene
                 if (player != null) {
                     player.addControllerListener((ControllerListener) this);
                     player.realize();
+
                 }
 
             } catch (MalformedURLException ex) {
@@ -126,9 +126,10 @@ public class VideoController extends java.awt.Frame implements ControllerListene
 
                 videoWidth = size.width;
                 videoHeight = size.height;
-                visual.setBounds(5, 5, videoWidth, videoHeight);
-                container.removeAll();
+//  causa erro no fmj              visual.setBounds(5, 5, videoWidth, videoHeight);
+               // container.removeAll();
                 container.add("Center", visual);
+               
 
             } else {
                 videoWidth = 320;
@@ -144,6 +145,7 @@ public class VideoController extends java.awt.Frame implements ControllerListene
                 container.setSize(videoWidth + insetWidth, videoHeight + controlHeight + insetHeight);
                 validate();
                 player.start();
+               // player.syncStart(new Time);
 
                 timeFormatado = timeFormat(ce.getSourceController().getMediaTime());
                 timeFormat(player.getDuration());
@@ -197,5 +199,19 @@ public class VideoController extends java.awt.Frame implements ControllerListene
 
     public void parar() {
         player.stop();
+    }
+
+    /**
+     * @return the cont
+     */
+    public Container getCont() {
+        return cont;
+    }
+
+    /**
+     * @param cont the cont to set
+     */
+    public void setCont(Container cont) {
+        this.cont = cont;
     }
 }
