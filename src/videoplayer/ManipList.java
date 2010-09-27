@@ -70,7 +70,7 @@ public class ManipList {
 
     public void dialogo(DefaultListModel model, String tempo) {
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(extencoes);
+       // fileChooser.setFileFilter(extencoes);
         int result = fileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
