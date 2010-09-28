@@ -6,7 +6,22 @@ Dúvidas sobre o sistema.
 
 ----
 
+===Instalação e Uso===
   # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Onde Funciona o SE-EDAD?*</a>
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Como instalar o SE-EDAD?*</a>
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Quais formatos de vídeo o SE-EDAD suporta?*</a>
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Como instalar os codecs necessários SE-EDAD?*</a>
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Como abrir arquivos flv no windows?*</a>
+===Linux===
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Onde Funciona o SE-EDAD?*</a>
+===Windows===
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Onde Funciona o SE-EDAD?*</a>
+===Help Desk===
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Não consigo usar o SE-EDAD, como obter ajuda?*</a>
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Como sugerir uma mudança ou melhoria no SE-EDAD?*</a>
+
+
+
 
 
 ----
