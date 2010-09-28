@@ -7,7 +7,7 @@ Dúvidas sobre o sistema.
 ----
 
 ===Instalação e Uso===
-  # <a href="#perg01"> *Onde Funciona o SE-EDAD?*</a>
+  # *[01#perg01  Onde Funciona o SE-EDAD?]*
   # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Como instalar o SE-EDAD?*</a>
   # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Quais formatos de vídeo o SE-EDAD suporta?*</a>
   # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Como instalar os codecs necessários SE-EDAD?*</a>
