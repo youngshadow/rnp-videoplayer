@@ -6,7 +6,7 @@ Dúvidas sobre o sistema.
 
 ----
 
-  #[https://code.google.com/p/rnp-videoplayer/wiki/01#perg01 *Onde Funciona o SE-EDAD?*]
+  # <a href="https://code.google.com/p/rnp-videoplayer/wiki/01#perg01"> *Onde Funciona o SE-EDAD?*</a>
 
 
 ----
