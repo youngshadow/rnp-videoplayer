@@ -3,3 +3,11 @@
 = Dúvidas=
 
 Dúvidas sobre o sistema.
+
+----
+
+  #Onde Funciona o SE-EDAD?
+
+
+----
+#perg01
