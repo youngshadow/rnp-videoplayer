@@ -1,6 +1,6 @@
-#Página de Dúvidas.
-
 = Dúvidas=
+
+*[https://code.google.com/p/rnp-videoplayer/wiki/01  << Voltar]*
 
 Dúvidas sobre o sistema.
 
@@ -20,3 +20,6 @@ Dúvidas sobre o sistema.
   # <a href="https://code.google.com/p/rnp-videoplayer/wiki/perg07"> *Não consigo usar o SE-EDAD, como obter ajuda?*</a>
   # <a href="https://code.google.com/p/rnp-videoplayer/wiki/perg08"> *Como sugerir uma mudança ou melhoria no SE-EDAD?*</a>
 
+
+----
+*[https://code.google.com/p/rnp-videoplayer/ Voltar]*
