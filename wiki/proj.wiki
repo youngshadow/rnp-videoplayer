@@ -1,4 +1,7 @@
 =O Projeto=
+
+*[https://code.google.com/p/rnp-videoplayer/ <<Voltar]*
+
 ==1. Introdução==
 Este é um subprojeto faz para do Projeto Serviço Experimental EDAD, desenvolvido pelo LAND/UFRJ e financiado pela RNP. Ele tem como objeto criar uma ferramenta multiplataforma que auxilie os usuários a gerar os elementos de sincronização que formam uma videoaula, sem que esses usuários necessitem de conhecimentos avançados sobre a estruturação dos arquivos a serem gerados no processo de sincronização.
 	
@@ -17,3 +20,6 @@ Além da implementação das funcionalidades, será criado um tutorial de uso da
   
 ==3. Equipe==
 A equipe envolvida no desenvolvimento deste subprojeto é Coordenada pelo Professor Eduardo Barrére (UFJF)(40h/mês) e pelos desenvolvedores Alexandre Bisaggio Ligorio (160h/mês) e Daves Marcio Silva Martins (40h/mês).
+
+----
+*[https://code.google.com/p/rnp-videoplayer/ <<Voltar]*
