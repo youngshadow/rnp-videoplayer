@@ -1,6 +1,6 @@
 = Dúvidas=
 
-*[https://code.google.com/p/rnp-videoplayer  << Voltar]*
+*[https://code.google.com/p/rnp-videoplayer/  << Voltar]*
 
 Dúvidas sobre o sistema.
 
@@ -22,4 +22,4 @@ Dúvidas sobre o sistema.
 
 
 ----
-*[https://code.google.com/p/rnp-videoplayer Voltar]*
+*[https://code.google.com/p/rnp-videoplayer/ Voltar]*
