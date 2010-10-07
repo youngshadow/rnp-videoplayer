@@ -245,6 +245,7 @@ public class PlayerPanel extends JPanel {
 
                         public void run() {
                             statusBar.setText(newStatus);
+                            containerPlayer.getTime();
                         }
                     });
 

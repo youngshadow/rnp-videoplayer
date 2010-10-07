@@ -12,6 +12,7 @@ public interface TransportControl {
 	void stop();
 	
 	void setPosition(double seconds);
+        
 	
 	/**
 	 * 1.0 is normal playback speed.
