@@ -455,16 +455,12 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
 
         public void stateChanged(ChangeEvent event) {
 
-            if (positionSlider.getValueIsAdjusting()) {
-             
+            if (positionSlider.getValueIsAdjusting()) {             
                 if(isplay){
-                    //player.stop();
-                   
+                                       
                 }
-
                 player.setPosition(TimeUnit.SECONDS.convert((long) positionSlider.getValue(), TimeUnit.MILLISECONDS));
-
-            }//player.start();
+            }
         }
 
     }
