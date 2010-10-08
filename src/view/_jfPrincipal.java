@@ -849,7 +849,7 @@ jtTopicos.addTreeSelectionListener(
         configuracoes.getAulas().setDuration(playerPanel.getTransportControlPanel().getLengthLabel().getText().trim());
         configuracoes.getAulas().setGrad_program(jTFCurso.getText().trim());
         configuracoes.getAulas().setSource(jTFIsntituição.getText().trim());
-        configuracoes.getAulas().setObj_filename(playerPanel.getFile());
+        configuracoes.getAulas().setObj_filename(nomeFLV);
         configuracoes.getAulas().setObj_filesize(Long.parseLong(sizeFlv));//(playerPanel.getFileSize());
         configuracoes.getAulas().setObj_title(jTFAula.getText().trim());
         configuracoes.getAulas().setObj_type("h.264 FLV");
@@ -955,13 +955,14 @@ jtTopicos.addTreeSelectionListener(
             try {
                 URL url = uri.toURL();
                  nomeFLV = fileChooser.getSelectedFile().getName();
-                 //jLNomeFlv.setText(nomeFLV);
-                 dirFinal = fileChooser.getCurrentDirectory().toString();
-                 
+                 jLNomeFlv.setText(nomeFLV);
+                
+                  dirFinal = fileChooser.getCurrentDirectory().toString()+File.separator;
                  System.out.println("url: "+ fileChooser.getCurrentDirectory());
                  System.out.println("dir final: " +dirFinal);
 
                  File flv = fileChooser.getSelectedFile();
+                 
                 
                  sizeFlv = ""+flv.length();
                  System.out.println("nome flv: "+nomeFLV+" - "+sizeFlv);
