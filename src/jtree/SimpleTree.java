@@ -16,7 +16,7 @@ public class SimpleTree extends JFrame {
 
     public SimpleTree() {
         super("Creating a Simple JTree");
-        WindowUtilities.setNativeLookAndFeel();
+        //WindowUtilities.setNativeLookAndFeel();
         addWindowListener(new ExitListener());
         Container content = getContentPane();
         Object[] hierarchy = {"javax.swing",
