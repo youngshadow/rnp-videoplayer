@@ -85,13 +85,15 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
         if (player != null) {
             player.start();
             isplay = true;
+            playButton.setIcon(Images.get(Images.MEDIA_PAUSE));
         }
     }
 
-    private void stop() {
+    public void stop() {
         if (player != null) {
             player.stop();
             isplay = false;
+            playButton.setIcon(Images.get(Images.MEDIA_PLAY));
             //player.setPosition(0);
         }
     }
@@ -125,12 +127,17 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
             playButton = new JButton();
             //playButton.setText("play");
             playButton.setOpaque(false);
-            playButton.setIcon(Images.get(Images.MEDIA_PLAY));
+            playButton.setIcon(Images.get(Images.MEDIA_PAUSE));
             playButton.addActionListener(new java.awt.event.ActionListener() {
 
                 public void actionPerformed(java.awt.event.ActionEvent e) {
                     setRate(1.0f);
-                    start();
+                    if(isplay){
+                    stop();
+                    }else{
+                   start();
+                    }
+                   
                 }
             });
             playButton.setEnabled(false);
@@ -156,6 +163,7 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
                 }
             });
             stopButton.setEnabled(false);
+
         }
         return stopButton;
     }
@@ -282,7 +290,7 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
             buttonPanel.setOpaque(false);
             //  buttonPanel.add(getPreviousButton(), new GridBagConstraints());
             //  buttonPanel.add(getBackButton(), new GridBagConstraints());
-            buttonPanel.add(getStopButton(), new GridBagConstraints());
+           // buttonPanel.add(getStopButton(), new GridBagConstraints());
             buttonPanel.add(getPlayButton(), new GridBagConstraints());
             // buttonPanel.add(getForwardButton(), new GridBagConstraints());
             //buttonPanel.add(getNextButton(), new GridBagConstraints());
@@ -389,7 +397,8 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
 //    }
 
     public void onStateChange(TransportControlState state) {
-        getStopButton().setEnabled(state.isAllowStop());
+
+       // getStopButton().setEnabled(state.isAllowStop());
         getPlayButton().setEnabled(state.isAllowPlay());
        // setAudioControlEnabled(state.isAllowVolume());
     }
