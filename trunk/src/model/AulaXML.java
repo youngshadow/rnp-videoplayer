@@ -4,12 +4,14 @@
  */
 package model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.util.ArrayList;
 
 /**
  *
  * @author alexandre
  */
+@XStreamAlias("rio_object")
 public class AulaXML {
     private String obj_filename;
     private long obj_filesize;

@@ -4,12 +4,14 @@
  */
 package model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.util.ArrayList;
 
 /**
  *
  * @author alexandre
  */
+@XStreamAlias("slides")
 public class SlidesXML {
 
     private ArrayList<Slide> slide = new ArrayList<Slide>();

@@ -4,12 +4,14 @@
  */
 package model;
 
+import com.thoughtworks.xstream.annotations.XStreamAlias;
 import java.util.ArrayList;
 
 /**
  *
  * @author alexandre
  */
+@XStreamAlias("index")
 public class IndexXML {
 
     private String main_title;
@@ -63,6 +65,7 @@ class main_class {
     }
 }
 
+@XStreamAlias("ind_item")
 class Ind_item {
 
     private String time;
