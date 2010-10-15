@@ -85,7 +85,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
 
-        this.setTitle("Ferramenta de Sincronização  - Sistema RIO - V 0.28");
+        this.setTitle("Ferramenta de Sincronização  - Sistema RIO - V 0.62");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
         listModel = new DefaultListModel();
@@ -93,7 +93,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jtreeModel = new DefaultTreeModel(null);
         jtTopicos.setEditable(true);
         jtTopicos.setSelectionRow(0);
-        //WindowUtilities.setNativeLookAndFeel();
+        WindowUtilities.setNativeLookAndFeel();
         gerarRoot();
 
 
