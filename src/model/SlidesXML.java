@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author alexandre
  */
-@XStreamAlias("slides")
+
 public class SlidesXML {
 
     private ArrayList<Slide> slide = new ArrayList<Slide>();
@@ -23,6 +23,13 @@ public class SlidesXML {
 
     public void setSlide(Slide slide) {
         this.slide.add(slide);
+    }
+
+    /**
+     * @param slide the slide to set
+     */
+    public void setSlide(ArrayList<Slide> slide) {
+        this.slide = slide;
     }
 
   

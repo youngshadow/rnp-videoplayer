@@ -18,10 +18,15 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.DataInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.Time;
@@ -43,6 +48,8 @@ import jtree.WindowUtilities;
 import model.DAOIndex;
 import model.DAOSync;
 import model.DAOxml;
+import model.Slides2Obj;
+import model.Xml2Obj;
 import videoplayer.ManipList;
 import videoplayer.VideoController;
 import net.sf.fmj.ui.application.PlayerPanel;
@@ -100,47 +107,47 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         // jtTopicos.setModel(new javax.swing.tree.DefaultTreeModel(null));
 
         MouseListener ml = new MouseAdapter() {
-     public void mousePressed(MouseEvent e) {
-    //     System.out.println("Mouse Evento "+ jtTopicos.getInvokesStopCellEditing());
-         if (jtTopicos.isEditing()){
-             System.out.println("sair");
-         }
-         int selRow = jtTopicos.getRowForLocation(e.getX(), e.getY());
-         TreePath selPath = jtTopicos.getPathForLocation(e.getX(), e.getY());
-         if(selRow != -1) {
-         }
-     }
- };
- jtTopicos.addMouseListener(ml);
 
- KeyListener key = new KeyListener(){
+            public void mousePressed(MouseEvent e) {
+                //     System.out.println("Mouse Evento "+ jtTopicos.getInvokesStopCellEditing());
+                if (jtTopicos.isEditing()) {
+                    System.out.println("sair");
+                }
+                int selRow = jtTopicos.getRowForLocation(e.getX(), e.getY());
+                TreePath selPath = jtTopicos.getPathForLocation(e.getX(), e.getY());
+                if (selRow != -1) {
+                }
+            }
+        };
+        jtTopicos.addMouseListener(ml);
+
+        KeyListener key = new KeyListener() {
 
             public void keyTyped(KeyEvent e) {
                 System.out.println("keyTyped " + e);
-                System.out.println("Mouse Evento "+ jtTopicos.getInvokesStopCellEditing());
+                System.out.println("Mouse Evento " + jtTopicos.getInvokesStopCellEditing());
             }
 
             public void keyPressed(KeyEvent e) {
-                System.out.println("keyPressed "+ e);
-                System.out.println("Mouse Evento "+ jtTopicos.getInvokesStopCellEditing());
+                System.out.println("keyPressed " + e);
+                System.out.println("Mouse Evento " + jtTopicos.getInvokesStopCellEditing());
             }
 
             public void keyReleased(KeyEvent e) {
-                System.out.println("KeyEvent "+e);
-                System.out.println("Mouse Evento "+ jtTopicos.getInvokesStopCellEditing());
+                System.out.println("KeyEvent " + e);
+                System.out.println("Mouse Evento " + jtTopicos.getInvokesStopCellEditing());
             }
+        };
 
- };
+        //jtTopicos.addKeyListener(key);
 
- //jtTopicos.addKeyListener(key);
+        jtTopicos.addTreeSelectionListener(
+                new javax.swing.event.TreeSelectionListener() {
 
-jtTopicos.addTreeSelectionListener(
-     new  javax.swing.event.TreeSelectionListener() {
-          public void valueChanged(TreeSelectionEvent e) {
-               System.out.println("no selecyt "+e);
-          }
-     }
-);
+                    public void valueChanged(TreeSelectionEvent e) {
+                        System.out.println("no selecyt " + e);
+                    }
+                });
 
 
 
@@ -160,7 +167,6 @@ jtTopicos.addTreeSelectionListener(
         jtTopicos.startEditingAtPath(treepath);
     }
 
-
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -170,29 +176,6 @@ jtTopicos.addTreeSelectionListener(
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jtfDisciplina = new javax.swing.JTextField();
-        jtfAula = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jtfCurso = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jtfProfessor = new javax.swing.JTextField();
-        jtfInstituic = new javax.swing.JTextField();
-        jLabel10 = new javax.swing.JLabel();
-        jtfCodCurso = new javax.swing.JFormattedTextField();
-        jtfNumAula = new javax.swing.JFormattedTextField();
-        jLabel13 = new javax.swing.JLabel();
-        jButton6 = new javax.swing.JButton();
-        jlNomeFlv1 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jlTamanhoFlv = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jListSlides = new javax.swing.JList();
@@ -219,201 +202,11 @@ jtTopicos.addTreeSelectionListener(
         jTFCurso = new javax.swing.JTextField();
         jTFAula = new javax.swing.JTextField();
         jTFProfessor = new javax.swing.JTextField();
-        jTFIsntituição = new javax.swing.JTextField();
+        jTFIsntituicao = new javax.swing.JTextField();
         jTFNumAula = new javax.swing.JTextField();
         jButton7 = new javax.swing.JButton();
         jLNomeFlv = new javax.swing.JLabel();
-
-        jDialog1.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jDialog1.setTitle("Propriedades");
-        jDialog1.setLocationByPlatform(true);
-        jDialog1.setMinimumSize(new java.awt.Dimension(550, 400));
-        jDialog1.setResizable(false);
-
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedades"));
-        jPanel3.setMinimumSize(new java.awt.Dimension(350, 450));
-
-        jLabel4.setText("Curso:");
-
-        jLabel5.setText("Aula:");
-
-        jLabel6.setText("Número da Aula");
-
-        jtfDisciplina.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfDisciplinaActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Cancelar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
-
-        jButton3.setText("Salvar");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
-        jLabel7.setText("Disciplina:");
-
-        jtfCurso.setText(" ");
-        jtfCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCursoActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("Código do Disciplina:");
-
-        jLabel9.setText("Professor:");
-
-        jtfProfessor.setText(" ");
-
-        jtfInstituic.setText(" ");
-        jtfInstituic.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfInstituicActionPerformed(evt);
-            }
-        });
-
-        jLabel10.setText("Instituição:");
-
-        jtfCodCurso.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfCodCursoActionPerformed(evt);
-            }
-        });
-
-        jtfNumAula.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getIntegerInstance())));
-        jtfNumAula.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtfNumAulaActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setText("Nome:");
-
-        jButton6.setText("Arquivo .flv");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
-            }
-        });
-
-        jlNomeFlv1.setText(" ");
-
-        jLabel17.setText("Tamanho:");
-
-        jlTamanhoFlv.setText(" ");
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 308, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7)
-                            .addComponent(jLabel8)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel13)
-                            .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfNumAula, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jlNomeFlv1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                .addComponent(jLabel17)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jlTamanhoFlv, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jtfInstituic, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfProfessor, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfAula, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfDisciplina, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfCodCurso, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jtfCurso, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)))))
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfCodCurso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfDisciplina, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfAula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfInstituic, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtfNumAula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addComponent(jButton6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jlNomeFlv1)
-                    .addComponent(jlTamanhoFlv)
-                    .addComponent(jLabel17))
-                .addGap(23, 23, 23)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton3)
-                    .addComponent(jButton2)))
-        );
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jButton1 = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -422,7 +215,7 @@ jtTopicos.addTreeSelectionListener(
 
         jListSlides.setBackground(new java.awt.Color(240, 240, 240));
         jListSlides.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jListSlides.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jListSlides.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jListSlides.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -430,7 +223,7 @@ jtTopicos.addTreeSelectionListener(
         });
         jScrollPane1.setViewportView(jListSlides);
 
-        btnCapturar.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnCapturar.setFont(new java.awt.Font("Times New Roman", 0, 11));
         btnCapturar.setText("Nova transparência");
         btnCapturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -438,7 +231,7 @@ jtTopicos.addTreeSelectionListener(
             }
         });
 
-        btnRemover.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnRemover.setFont(new java.awt.Font("Times New Roman", 0, 11));
         btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -446,12 +239,12 @@ jtTopicos.addTreeSelectionListener(
             }
         });
 
-        jtTopicos.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jtTopicos.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jtTopicos.setModel(null);
         jtTopicos.setAutoscrolls(true);
         jScrollPane2.setViewportView(jtTopicos);
 
-        btnNovo.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnNovo.setFont(new java.awt.Font("Times New Roman", 0, 11));
         btnNovo.setText("Novo Tópico");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -459,7 +252,7 @@ jtTopicos.addTreeSelectionListener(
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jButton4.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jButton4.setText("Remover");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -478,7 +271,7 @@ jtTopicos.addTreeSelectionListener(
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Copiar Tempos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
 
-        btnCapturarTempos.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        btnCapturarTempos.setFont(new java.awt.Font("Times New Roman", 0, 11));
         btnCapturarTempos.setText("Copiar ");
         btnCapturarTempos.setActionCommand("Copiar");
         btnCapturarTempos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -510,28 +303,28 @@ jtTopicos.addTreeSelectionListener(
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedades"));
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jLabel1.setText("Curso:");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jLabel2.setText("Aula:");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jLabel3.setText("Número da Aula:");
 
         jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
-        jLabel11.setText("Código do Disciplina");
+        jLabel11.setText("Código da Disciplina");
 
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jLabel12.setText("Disciplina:");
 
-        jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jLabel14.setText("Professor:");
 
-        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jLabel15.setText("Instituição");
 
-        jLabel18.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jLabel18.setText("Nome do Arquivo:");
 
         jTFDisciplina.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -554,11 +347,11 @@ jtTopicos.addTreeSelectionListener(
             }
         });
 
-        jTFIsntituição.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jTFIsntituicao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jTFNumAula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 11));
         jButton7.setText("Arquivo .flv");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -606,7 +399,7 @@ jtTopicos.addTreeSelectionListener(
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLNomeFlv, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(jTFIsntituição, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jTFIsntituicao, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                             .addComponent(jLabel1)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -625,7 +418,7 @@ jtTopicos.addTreeSelectionListener(
                     .addComponent(jTFCodDisc, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTFIsntituição, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTFIsntituicao, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15)
                     .addComponent(jLabel14)
                     .addComponent(jTFProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -643,6 +436,13 @@ jtTopicos.addTreeSelectionListener(
                     .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
+
+        jButton1.setText("Abrir Aula");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -662,12 +462,15 @@ jtTopicos.addTreeSelectionListener(
                                             .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(7, 7, 7))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap(325, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
@@ -692,14 +495,16 @@ jtTopicos.addTreeSelectionListener(
                         .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(9, 9, 9)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                        .addGap(121, 121, 121)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
                         .addComponent(btnNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(129, 129, 129)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(365, 365, 365)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -717,7 +522,7 @@ jtTopicos.addTreeSelectionListener(
         }
 
         //enquanto o tempo atual do getTimeVideo nao é atualizado
-         playerPanel.getTransportControlPanel().stop();
+        playerPanel.getTransportControlPanel().stop();
 
         slideList.dialogo(listModel, "00:" + playerPanel.getTransportControlPanel().getPositionLabel().getText());
         if (listModel.getSize() > 0) {
@@ -726,22 +531,22 @@ jtTopicos.addTreeSelectionListener(
     }//GEN-LAST:event_btnCapturarActionPerformed
 
     private void btnCapturarTemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarTemposActionPerformed
-        for (int i = 0; i <listModel.size(); i++){
-            
-             DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getModel().getRoot();
-        System.out.println("nodeSelect: " + nodeSelect);
-        if (nodeSelect != null) {
-     
-            DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(listModel.get(i).toString().substring(0, listModel.get(i).toString().lastIndexOf(".")));
-            jtreeModel.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
-            TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic);
-            TreePath treepath = new TreePath(nodes);
-            jtTopicos.scrollPathToVisible(treepath);
-            jtTopicos.setSelectionPath(treepath);
-            jtTopicos.startEditingAtPath(treepath);
-        } else {
-            gerarRoot();
-        }
+        for (int i = 0; i < listModel.size(); i++) {
+
+            DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getModel().getRoot();
+            System.out.println("nodeSelect: " + nodeSelect);
+            if (nodeSelect != null) {
+
+                DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(listModel.get(i).toString().substring(0, listModel.get(i).toString().lastIndexOf(".")));
+                jtreeModel.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
+                TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic);
+                TreePath treepath = new TreePath(nodes);
+                jtTopicos.scrollPathToVisible(treepath);
+                jtTopicos.setSelectionPath(treepath);
+                jtTopicos.startEditingAtPath(treepath);
+            } else {
+                gerarRoot();
+            }
 
 
         }
@@ -812,22 +617,22 @@ jtTopicos.addTreeSelectionListener(
 //            }
             alerta("Erro!", "O tópico raiz não pode ser removido!");
             return;
-        }else{
+        } else {
 
-        MutableTreeNode toBeSelNode = (MutableTreeNode) nodeSelected.getNextSibling();
+            MutableTreeNode toBeSelNode = (MutableTreeNode) nodeSelected.getNextSibling();
 
-        if (toBeSelNode == null) {
-            toBeSelNode = (MutableTreeNode) nodeSelected.getPreviousSibling();
+            if (toBeSelNode == null) {
+                toBeSelNode = (MutableTreeNode) nodeSelected.getPreviousSibling();
 
-        }
-        if (toBeSelNode == null) {
-            toBeSelNode = nodeSelected;
-        }
-        TreeNode[] nodes = jtreeModel.getPathToRoot(toBeSelNode);
-        TreePath path = new TreePath(nodes);
-        jtTopicos.scrollPathToVisible(path);
-        jtTopicos.setSelectionPath(path);
-        jtreeModel.removeNodeFromParent(nodeSelected);
+            }
+            if (toBeSelNode == null) {
+                toBeSelNode = nodeSelected;
+            }
+            TreeNode[] nodes = jtreeModel.getPathToRoot(toBeSelNode);
+            TreePath path = new TreePath(nodes);
+            jtTopicos.scrollPathToVisible(path);
+            jtTopicos.setSelectionPath(path);
+            jtreeModel.removeNodeFromParent(nodeSelected);
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
@@ -841,10 +646,10 @@ jtTopicos.addTreeSelectionListener(
             return;
         }
 
-     //   resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jlCurso.getText().trim(), jlAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jlNumAula.getText().trim()));
+        //   resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jlCurso.getText().trim(), jlAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jlNumAula.getText().trim()));
         resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.indexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
         //resp1 = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
-        resp1 = slides.gravarSlides(listModel,  dirFinal + nomeFLV.substring(0, nomeFLV.indexOf(".")));
+        resp1 = slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.indexOf(".")));
 
 
         configuracoes.getAulas().setBitrate("1100.0");
@@ -852,7 +657,7 @@ jtTopicos.addTreeSelectionListener(
         configuracoes.getAulas().setCoursecode(jTFCodDisc.getText().trim());
         configuracoes.getAulas().setDuration(playerPanel.getTransportControlPanel().getLengthLabel().getText().trim());
         configuracoes.getAulas().setGrad_program(jTFCurso.getText().trim());
-        configuracoes.getAulas().setSource(jTFIsntituição.getText().trim());
+        configuracoes.getAulas().setSource(jTFIsntituicao.getText().trim());
         configuracoes.getAulas().setObj_filename(nomeFLV);
         configuracoes.getAulas().setObj_filesize(Long.parseLong(sizeFlv));//(playerPanel.getFileSize());
         configuracoes.getAulas().setObj_title(jTFAula.getText().trim());
@@ -871,64 +676,6 @@ jtTopicos.addTreeSelectionListener(
             JOptionPane.showMessageDialog(this, "Arquivos gravados em: \n" + playerPanel.getDir(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         }
     }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jtfDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfDisciplinaActionPerformed
-        // TODO add your handling code here:
-}//GEN-LAST:event_jtfDisciplinaActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-        jTFDisciplina.setText(jtfCurso.getText());
-        jTFCodDisc.setText(jtfCodCurso.getText());
-        jTFCurso.setText(jtfDisciplina.getText());
-        jTFAula.setText(jtfAula.getText());
-        jTFProfessor.setText(jtfProfessor.getText());
-        jTFIsntituição.setText(jtfInstituic.getText());
-        jTFNumAula.setText(jtfNumAula.getText());
-        jLNomeFlv.setText(jlNomeFlv1.getText());
-        
-
-
-        jDialog1.setVisible(false);
-
-    }//GEN-LAST:event_jButton3ActionPerformed
-
-    private void jtfCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCursoActionPerformed
-
-    private void jtfCodCursoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfCodCursoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfCodCursoActionPerformed
-
-    private void jtfInstituicActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfInstituicActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfInstituicActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        jDialog1.setVisible(false);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jtfNumAulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtfNumAulaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jtfNumAulaActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-      System.setProperty("apple.awt.fileDialogForDirectories", "true");
-        file = new FileDialog(this, "Abrir Vídeo", FileDialog.LOAD);
-        file.setVisible(true);
-
-        if (file.getFile() != null) {
-            nomeFLV = file.getFile();
-            dirFinal = file.getDirectory();
-            System.out.println("dirFinal: " + dirFinal);
-            File flv = new File(file.getDirectory() + file.getFile());
-            jlNomeFlv1.setText(file.getFile());
-            jlTamanhoFlv.setText("" + flv.length());
-        }
-
-    }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jTFDisciplinaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFDisciplinaActionPerformed
         // TODO add your handling code here:
@@ -950,26 +697,26 @@ jtTopicos.addTreeSelectionListener(
 
 
         JFileChooser fileChooser = new JFileChooser();
-        fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo flv","flv"));
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo flv", "flv"));
         int result = fileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
             URI uri = fileChooser.getSelectedFile().toURI();
-           
+
             try {
                 URL url = uri.toURL();
-                 nomeFLV = fileChooser.getSelectedFile().getName();
-                 jLNomeFlv.setText(nomeFLV);
-                
-                  dirFinal = fileChooser.getCurrentDirectory().toString()+File.separator;
-                 System.out.println("url: "+ fileChooser.getCurrentDirectory());
-                 System.out.println("dir final: " +dirFinal);
+                nomeFLV = fileChooser.getSelectedFile().getName();
+                jLNomeFlv.setText(nomeFLV);
 
-                 File flv = fileChooser.getSelectedFile();
-                 
-                
-                 sizeFlv = ""+flv.length();
-                 System.out.println("nome flv: "+nomeFLV+" - "+sizeFlv);
+                dirFinal = fileChooser.getCurrentDirectory().toString() + File.separator;
+                System.out.println("url: " + fileChooser.getCurrentDirectory());
+                System.out.println("dir final: " + dirFinal);
+
+                File flv = fileChooser.getSelectedFile();
+
+
+                sizeFlv = "" + flv.length();
+                System.out.println("nome flv: " + nomeFLV + " - " + sizeFlv);
 
             } catch (MalformedURLException ex) {
                 System.out.println(ex);
@@ -985,6 +732,52 @@ jtTopicos.addTreeSelectionListener(
     private void jTFProfessorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTFProfessorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTFProfessorActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo xml", "xml"));
+        int result = fileChooser.showOpenDialog(null);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+
+            File file = fileChooser.getSelectedFile();
+
+            // Abindo a nota fiscal
+           // StringBuffer xml = new StringBuffer();
+            try {
+                FileInputStream in = new FileInputStream(file);
+                Xml2Obj xmlObj = new Xml2Obj(in);
+
+                jTFDisciplina.setText(xmlObj.getCourse());
+                jTFCodDisc.setText(xmlObj.getCoursecode());
+                jTFCurso.setText(xmlObj.getCourse());
+                jTFProfessor.setText(xmlObj.getProfessor());
+                jTFIsntituicao.setText(xmlObj.getSource());
+                jTFAula.setText(xmlObj.getObj_title());
+                //jTFNumAula.setText(xmlObj.get); é no index
+
+                Slides2Obj slides = new Slides2Obj("C:\\Documents and Settings\\alexandre\\Meus documentos\\dcc119_aula9.sync");
+
+
+
+
+
+                
+
+                
+
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+
+
+
+
+        }
+
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
 
@@ -1017,59 +810,34 @@ jtTopicos.addTreeSelectionListener(
     private javax.swing.JButton btnCapturarTempos;
     private javax.swing.JButton btnNovo;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
-    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLNomeFlv;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JList jListSlides;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTFAula;
     private javax.swing.JTextField jTFCodDisc;
     private javax.swing.JTextField jTFCurso;
     private javax.swing.JTextField jTFDisciplina;
-    private javax.swing.JTextField jTFIsntituição;
+    private javax.swing.JTextField jTFIsntituicao;
     private javax.swing.JTextField jTFNumAula;
     private javax.swing.JTextField jTFProfessor;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JLabel jlNomeFlv1;
-    private javax.swing.JLabel jlTamanhoFlv;
     private javax.swing.JTree jtTopicos;
-    private javax.swing.JTextField jtfAula;
-    private javax.swing.JFormattedTextField jtfCodCurso;
-    private javax.swing.JTextField jtfCurso;
-    private javax.swing.JTextField jtfDisciplina;
-    private javax.swing.JTextField jtfInstituic;
-    private javax.swing.JFormattedTextField jtfNumAula;
-    private javax.swing.JTextField jtfProfessor;
     // End of variables declaration//GEN-END:variables
-
-
-
 }
 
 
