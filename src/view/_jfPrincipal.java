@@ -26,6 +26,7 @@ import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -48,6 +49,8 @@ import jtree.WindowUtilities;
 import model.DAOIndex;
 import model.DAOSync;
 import model.DAOxml;
+import model.Index2Obj;
+import model.Rm_item;
 import model.Slide;
 import model.Slides2Obj;
 import model.Xml2Obj;
@@ -216,7 +219,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         jListSlides.setBackground(new java.awt.Color(240, 240, 240));
         jListSlides.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jListSlides.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jListSlides.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jListSlides.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -224,7 +227,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         });
         jScrollPane1.setViewportView(jListSlides);
 
-        btnCapturar.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         btnCapturar.setText("Nova transparência");
         btnCapturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -232,7 +235,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        btnRemover.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        btnRemover.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -240,12 +243,12 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jtTopicos.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jtTopicos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jtTopicos.setModel(null);
         jtTopicos.setAutoscrolls(true);
         jScrollPane2.setViewportView(jtTopicos);
 
-        btnNovo.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        btnNovo.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         btnNovo.setText("Novo Tópico");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,7 +256,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jButton4.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jButton4.setText("Remover");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,7 +264,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jButton5.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/fmj/ui/images/Save24.gif"))); // NOI18N
         jButton5.setText("Salvar Aula");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -272,7 +275,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Copiar Tempos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
 
-        btnCapturarTempos.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        btnCapturarTempos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         btnCapturarTempos.setText("Copiar ");
         btnCapturarTempos.setActionCommand("Copiar");
         btnCapturarTempos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -302,32 +305,33 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Propriedades"));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 11))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel1.setText("Curso:");
 
-        jLabel2.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel2.setText("Aula:");
 
-        jLabel3.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel3.setText("Número da Aula:");
 
-        jLabel11.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel11.setText("Código da Disciplina");
 
-        jLabel12.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jLabel12.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel12.setText("Disciplina:");
 
-        jLabel14.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jLabel14.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel14.setText("Professor:");
 
-        jLabel15.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jLabel15.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel15.setText("Instituição");
 
-        jLabel18.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jLabel18.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel18.setText("Nome do Arquivo:");
 
+        jTFDisciplina.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFDisciplina.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFDisciplina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -335,12 +339,16 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
+        jTFCodDisc.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFCodDisc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTFCurso.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFCurso.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTFAula.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFAula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTFProfessor.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFProfessor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFProfessor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -348,11 +356,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
+        jTFIsntituicao.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFIsntituicao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jTFNumAula.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFNumAula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jButton7.setFont(new java.awt.Font("Times New Roman", 0, 11));
+        jButton7.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jButton7.setText("Arquivo .flv");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -383,7 +393,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                         .addComponent(jButton7))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jTFProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(jLabel15))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jTFDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
@@ -438,6 +448,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 .addContainerGap())
         );
 
+        jButton1.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jButton1.setText("Abrir Aula");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -463,11 +474,11 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                                             .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                             .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(7, 7, 7))))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap(325, Short.MAX_VALUE)
+                                .addContainerGap(329, Short.MAX_VALUE)
                                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
@@ -498,14 +509,14 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(121, 121, 121)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 103, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                         .addComponent(btnNovo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(129, 129, 129)
                         .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(2, 2, 2))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(365, 365, 365)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -744,7 +755,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             File file = fileChooser.getSelectedFile();
 
             // Abindo a nota fiscal
-           // StringBuffer xml = new StringBuffer();
+            // StringBuffer xml = new StringBuffer();
             try {
                 FileInputStream in = new FileInputStream(file);
                 Xml2Obj xmlObj = new Xml2Obj(in);
@@ -757,15 +768,25 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 jTFAula.setText(xmlObj.getObj_title());
                 //jTFNumAula.setText(xmlObj.get); é no index
 
-                 xmlObj.getRm_item().get(2);
+                Rm_item rmItemIndex = xmlObj.getRm_item().get(0);
+                Rm_item rmItemSync = xmlObj.getRm_item().get(2);
 
-                Slides2Obj slides = new Slides2Obj("G:\\UFJF\\AULAS_PRONTAS\\dcc119_aula3\\dcc119_aula3.sync");
-                
-                for (int i = 0; i< slides.getSlide().size(); i++){
-                    Slide slide = slides.getSlide().get(i);
+                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
+                System.out.println("--->"+index.getMain_title());
+                Slides2Obj slides = new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename());
+                DecimalFormat df = new DecimalFormat("00");
+                listModel.removeAllElements();
+
+//                for (int i = 0; i < slides.getSlide().size(); i++) {
+//                    Slide slide = slides.getSlide().get(i);
+//                    Double tempo = Double.parseDouble(slide.getTime());
+//                    listModel.addElement("" + tempo.intValue() / 60 + ":" + df.format(tempo.intValue() % 60) + " - " + slide.getRelative_path());
+//
+//                }
+                for (Slide slide : slides.getSlide()) {
                     Double tempo = Double.parseDouble(slide.getTime());
-                    listModel.addElement(""+tempo.intValue() / 60+":"+tempo.intValue() % 60+" - "+slide.getRelative_path());
-                   // listModel.addElement(slide.getTime()+" - "+slide.getRelative_path());
+                    listModel.addElement("" + tempo.intValue() / 60 + ":" + df.format(tempo.intValue() % 60) + " - " + slide.getRelative_path());
+
                 }
 
 
@@ -774,9 +795,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
 
-                
 
-                
+
 
 
             } catch (FileNotFoundException e) {

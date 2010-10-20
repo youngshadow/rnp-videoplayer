@@ -65,7 +65,7 @@ class main_class {
     }
 }
 
-@XStreamAlias("ind_item")
+
 class Ind_item {
 
     private String time;

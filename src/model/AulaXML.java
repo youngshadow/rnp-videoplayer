@@ -129,6 +129,9 @@ public class AulaXML {
     public void setRm_item(Rm_item rm_item) {
         this.related_media .add(rm_item);
     }
+    public void setRm_item(ArrayList<Rm_item> rm_item) {
+        this.related_media = rm_item;
+    }
 
     /**
      * @return the resolution
@@ -204,23 +207,4 @@ class Resolution {
 //    }
 //}
 
-class Rm_item {
-    private String rm_filename;
-    private String rm_type;
 
-    public String getRm_filename() {
-        return rm_filename;
-    }
-
-    public void setRm_filename(String rm_filename) {
-        this.rm_filename = rm_filename;
-    }
-
-    public String getRm_type() {
-        return rm_type;
-    }
-
-    public void setRm_type(String rm_type) {
-        this.rm_type = rm_type;
-    }
-}

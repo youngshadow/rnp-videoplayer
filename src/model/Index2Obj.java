@@ -5,15 +5,9 @@
 package model;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.converters.Converter;
-import com.thoughtworks.xstream.converters.MarshallingContext;
-import com.thoughtworks.xstream.converters.UnmarshallingContext;
-import com.thoughtworks.xstream.io.HierarchicalStreamReader;
-import com.thoughtworks.xstream.io.HierarchicalStreamWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
+import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
+import com.thoughtworks.xstream.io.xml.XppDomDriver;
+import util.BacalhauIndex;
 
 /**
  *
@@ -21,22 +15,20 @@ import java.io.InputStream;
  */
 public class Index2Obj extends IndexXML {
 
-    public static void main(String args[]) {
-        XStream xstream = new XStream();
-        String url = "C:\\Documents and Settings\\alexandre\\Meus documentos\\dcc119_aula9.index";
-        File file = new File(url);
+     public Index2Obj(String url) {
 
-        try {
-            InputStream is = new FileInputStream(file);
-            IndexXML newXml = new IndexXML();
-            newXml.setInd_item(new Ind_item());
-            newXml.setMain(new main_class());
+        //criando o XML e formatando underline simples
+        XStream xstream = new XStream(new XppDomDriver(new XmlFriendlyReplacer("_-", "_")));
+       // setando o nome da tag principal
+        xstream.alias("index", IndexXML.class);
+        xstream.alias("ind_item", Ind_item.class);
 
+        //definindo o nome da tag
+        xstream.aliasField("class", IndexXML.class, "mainClass");
 
+        Object indexXml = (Object) xstream.fromXML(new BacalhauIndex(url).getXmlFinal());
+//        IndexXML indexXml = (IndexXML) xstream.fromXML(new BacalhauIndex(url).getXmlFinal());
 
-            newXml = (IndexXML) xstream.fromXML(is);
-
-        } catch (FileNotFoundException ex) {
-        }
+       
     }
 }
