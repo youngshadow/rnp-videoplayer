@@ -33,7 +33,9 @@ public class Xml2Obj extends AulaXML {
         setObj_type(aulaxml.getObj_type());
         setProfessor(aulaxml.getProfessor());
         // setResolution(aulaxml.getResolution());
-        // setRm_item(aulaxml.getRm_item());
+        for (int i =0; i < getObj_filesize();i++){
+         setRm_item(aulaxml.getRm_item().get(i));
+        }
         setSource(aulaxml.getSource());
 
 

@@ -30,8 +30,8 @@ public class Slides2Obj extends SlidesXML {
         xstream.useAttributeFor(Slide.class, "time");
 
         SlidesXML slidesXml = (SlidesXML) xstream.fromXML(new BacalhauSync(url).getXmlFinal());
-
-        setSlide();
+        setSlide(slidesXml.getSlide());
+        //setSlide();
     }
 
 }
