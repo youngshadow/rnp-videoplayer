@@ -46,7 +46,7 @@
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <EmptySpace pref="18" max="32767" attributes="0"/>
+                                      <EmptySpace pref="22" max="32767" attributes="0"/>
                                       <Component id="jButton5" min="-2" pref="128" max="-2" attributes="1"/>
                                       <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                                   </Group>
@@ -93,7 +93,7 @@
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="121" max="-2" attributes="0"/>
                       <Component id="jButton1" min="-2" pref="34" max="-2" attributes="0"/>
-                      <EmptySpace pref="106" max="32767" attributes="0"/>
+                      <EmptySpace pref="104" max="32767" attributes="0"/>
                       <Component id="btnNovo" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jButton4" min="-2" pref="23" max="-2" attributes="0"/>
@@ -101,7 +101,7 @@
                       <Component id="jButton5" min="-2" pref="33" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" pref="593" max="32767" attributes="1"/>
+                  <Component id="jScrollPane1" alignment="0" pref="596" max="32767" attributes="1"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="365" max="-2" attributes="0"/>
                       <Component id="jScrollPane2" min="-2" pref="225" max="-2" attributes="0"/>
@@ -131,7 +131,7 @@
               </Border>
             </Property>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.ListModel" editor="org.netbeans.modules.form.editors2.ListModelEditor">
               <StringArray count="5">
@@ -149,7 +149,7 @@
     <Component class="javax.swing.JButton" name="btnCapturar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="11" style="0"/>
+          <Font name="SansSerif" size="11" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Nova transpar&#xea;ncia"/>
       </Properties>
@@ -160,7 +160,7 @@
     <Component class="javax.swing.JButton" name="btnRemover">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="11" style="0"/>
+          <Font name="SansSerif" size="11" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Remover"/>
       </Properties>
@@ -178,7 +178,7 @@
         <Component class="javax.swing.JTree" name="jtTopicos">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="model" type="javax.swing.tree.TreeModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
               <Connection code="null" type="code"/>
@@ -191,7 +191,7 @@
     <Component class="javax.swing.JButton" name="btnNovo">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="11" style="0"/>
+          <Font name="SansSerif" size="11" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Novo T&#xf3;pico"/>
       </Properties>
@@ -202,7 +202,7 @@
     <Component class="javax.swing.JButton" name="jButton4">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="11" style="0"/>
+          <Font name="SansSerif" size="11" style="0"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Remover"/>
       </Properties>
@@ -213,7 +213,7 @@
     <Component class="javax.swing.JButton" name="jButton5">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Times New Roman" size="11" style="0"/>
+          <Font name="SansSerif" size="11" style="0"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/net/sf/fmj/ui/images/Save24.gif"/>
@@ -258,7 +258,7 @@
         <Component class="javax.swing.JButton" name="btnCapturarTempos">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Copiar "/>
             <Property name="actionCommand" type="java.lang.String" value="Copiar"/>
@@ -286,7 +286,9 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Propriedades"/>
+            <TitledBorder title="Informa&#xe7;&#xf5;es gerais">
+              <Font PropertyName="font" name="SansSerif" size="11" style="0"/>
+            </TitledBorder>
           </Border>
         </Property>
       </Properties>
@@ -313,7 +315,7 @@
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jTFProfessor" min="-2" pref="303" max="-2" attributes="1"/>
-                          <EmptySpace pref="32" max="32767" attributes="0"/>
+                          <EmptySpace pref="34" max="32767" attributes="0"/>
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
@@ -331,7 +333,7 @@
                           <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLNomeFlv" pref="145" max="32767" attributes="0"/>
+                          <Component id="jLNomeFlv" pref="141" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jTFIsntituicao" alignment="0" max="32767" attributes="1"/>
@@ -389,7 +391,7 @@
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Curso:"/>
           </Properties>
@@ -397,7 +399,7 @@
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Aula:"/>
           </Properties>
@@ -405,7 +407,7 @@
         <Component class="javax.swing.JLabel" name="jLabel3">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="N&#xfa;mero da Aula:"/>
           </Properties>
@@ -413,7 +415,7 @@
         <Component class="javax.swing.JLabel" name="jLabel11">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="C&#xf3;digo da Disciplina"/>
           </Properties>
@@ -421,7 +423,7 @@
         <Component class="javax.swing.JLabel" name="jLabel12">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Disciplina:"/>
           </Properties>
@@ -429,7 +431,7 @@
         <Component class="javax.swing.JLabel" name="jLabel14">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Professor:"/>
           </Properties>
@@ -437,7 +439,7 @@
         <Component class="javax.swing.JLabel" name="jLabel15">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Institui&#xe7;&#xe3;o"/>
           </Properties>
@@ -445,13 +447,16 @@
         <Component class="javax.swing.JLabel" name="jLabel18">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Nome do Arquivo:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="jTFDisciplina">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="11" style="0"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -464,6 +469,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTFCodDisc">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="11" style="0"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -473,6 +481,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTFCurso">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="11" style="0"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -482,6 +493,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTFAula">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="11" style="0"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -491,6 +505,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTFProfessor">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="11" style="0"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -503,6 +520,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTFIsntituicao">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="11" style="0"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -512,6 +532,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jTFNumAula">
           <Properties>
+            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="SansSerif" size="11" style="0"/>
+            </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                 <EtchetBorder/>
@@ -522,7 +545,7 @@
         <Component class="javax.swing.JButton" name="jButton7">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Times New Roman" size="11" style="0"/>
+              <Font name="SansSerif" size="11" style="0"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Arquivo .flv"/>
           </Properties>
@@ -539,6 +562,9 @@
     </Container>
     <Component class="javax.swing.JButton" name="jButton1">
       <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="SansSerif" size="11" style="0"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Abrir Aula"/>
       </Properties>
       <Events>
