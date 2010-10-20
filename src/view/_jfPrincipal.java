@@ -48,6 +48,7 @@ import jtree.WindowUtilities;
 import model.DAOIndex;
 import model.DAOSync;
 import model.DAOxml;
+import model.Slide;
 import model.Slides2Obj;
 import model.Xml2Obj;
 import videoplayer.ManipList;
@@ -756,7 +757,18 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 jTFAula.setText(xmlObj.getObj_title());
                 //jTFNumAula.setText(xmlObj.get); é no index
 
-                Slides2Obj slides = new Slides2Obj("C:\\Documents and Settings\\alexandre\\Meus documentos\\dcc119_aula9.sync");
+                 xmlObj.getRm_item().get(2);
+
+                Slides2Obj slides = new Slides2Obj("G:\\UFJF\\AULAS_PRONTAS\\dcc119_aula3\\dcc119_aula3.sync");
+                
+                for (int i = 0; i< slides.getSlide().size(); i++){
+                    Slide slide = slides.getSlide().get(i);
+                    Double tempo = Double.parseDouble(slide.getTime());
+                    listModel.addElement(""+tempo.intValue() / 60+":"+tempo.intValue() % 60+" - "+slide.getRelative_path());
+                   // listModel.addElement(slide.getTime()+" - "+slide.getRelative_path());
+                }
+
+
 
 
 
