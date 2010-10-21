@@ -4,6 +4,7 @@
  */
 package videoplayer;
 
+import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URL;
@@ -21,8 +22,9 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class ManipList {
 
-       private Vector urlAbsoluta;
+    private Vector urlAbsoluta;
     private Vector nomeArqivo;
+    private File ultimaURL;
     private static FileNameExtensionFilter extencoes = new FileNameExtensionFilter("Arquivo de Vídeo", "mpeg", "mpg");
 
     public ManipList() {
@@ -71,10 +73,13 @@ public class ManipList {
     public void dialogo(DefaultListModel model, String tempo) {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo swf","swf"));
+        fileChooser.setAcceptAllFileFilterUsed(false);
+        fileChooser.setCurrentDirectory(ultimaURL);
         int result = fileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
             URI uri = fileChooser.getSelectedFile().toURI();
+            ultimaURL = fileChooser.getCurrentDirectory();
             try {
                 URL url = uri.toURL();
                 String nomeFile = fileChooser.getSelectedFile().getName();
