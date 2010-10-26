@@ -786,6 +786,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 Rm_item rmItemIndex = xmlObj.getRm_item().get(0);
                 Rm_item rmItemSync = xmlObj.getRm_item().get(2);
 
+                new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos,jtreeModel);
+
 //                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
 //                System.out.println("--->"+index.getMain_title());
                 Slides2Obj slides = new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename());
