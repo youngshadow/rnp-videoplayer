@@ -31,7 +31,7 @@ public class Index2Obj extends IndexXML {
     DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Roteiro");
 
     public static void main(String args[]) {
-        new Index2Obj("G:\\UFJF\\AULAS_PRONTAS\\dcc119_aula3\\dcc119_aula3.index", new JTree(), new DefaultTreeModel(null));
+        new Index2Obj("G:\\UFJF\\AULAS_PRONTAS\\dcc119_aula1\\dcc119_aula1.index", new JTree(), new DefaultTreeModel(null));
     }
 
     public Index2Obj(String url, JTree jtTopicos, DefaultTreeModel jtreeModel) {
@@ -44,6 +44,10 @@ public class Index2Obj extends IndexXML {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
+       factory.setAttribute("http://xml.org/sax/features/validation", false);
+        factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+        factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
+
         DocumentBuilder builder = null;
         try {
             builder = factory.newDocumentBuilder();
@@ -64,7 +68,7 @@ public class Index2Obj extends IndexXML {
                 if (no.getNodeName().equalsIgnoreCase("ind_item")) {
                     System.out.println("== -> " + no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
 
-                    DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
+                    DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no.getChildNodes().item(1).getChildNodes().item(0).getNodeValue()))+" - "+no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
                     jtreeModel.insertNodeInto(newTopic, rootTopic, rootTopic.getChildCount());
                     TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic);
                     TreePath treepath = new TreePath(nodes);
@@ -85,14 +89,28 @@ public class Index2Obj extends IndexXML {
             Node no1 = no.getChildNodes().item(j);
             if (no1.getNodeName().equalsIgnoreCase("ind_item")) {
                 System.out.println("99 -> " + no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
-                 DefaultMutableTreeNode newTopic1 = new DefaultMutableTreeNode(no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
+                 DefaultMutableTreeNode newTopic1 = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no1.getChildNodes().item(1).getChildNodes().item(0).getNodeValue()))+" - "+no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
                     jtreeModel.insertNodeInto(newTopic1, newTopic, newTopic.getChildCount());
                     TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic1);
                     TreePath treepath = new TreePath(nodes);
                     jtTopicos.scrollPathToVisible(treepath);
-                varrerFilhos(no1,newTopic);
+                varrerFilhos(no1,newTopic1);
             }
         }
+    }
+
+
+     private static String secondsToString(Double seconds) {
+        final Integer minutes = seconds.intValue() / 60;
+        return "00:" + zeroPad((int) minutes, 2) + ":" + zeroPad((int) (seconds % 60), 2);
+    }
+     
+       private static String zeroPad(int i, int len) {
+        String result = Integer.toString(i);
+        while (result.length() < len) {
+            result = "0" + result;
+        }
+        return result;
     }
 
     public static Element getElemento(Element documento, String nomeElemento) {
