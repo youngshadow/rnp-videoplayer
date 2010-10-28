@@ -669,10 +669,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             return;
         }
 
-        //   resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jlCurso.getText().trim(), jlAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jlNumAula.getText().trim()));
-        resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
-        //resp1 = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
-        resp1 = slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
+          resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
+       // resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
+        resp1 = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
+       // resp1 = slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
 
 
         configuracoes.getAulas().setBitrate("1100.0");
@@ -682,7 +682,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         configuracoes.getAulas().setGrad_program(jTFCurso.getText().trim());
         configuracoes.getAulas().setSource(jTFIsntituicao.getText().trim());
         configuracoes.getAulas().setObj_filename(nomeFLV);
-        configuracoes.getAulas().setObj_filesize(Long.parseLong(sizeFlv));//(playerPanel.getFileSize());
+        configuracoes.getAulas().setObj_filesize(playerPanel.getFileSize());//  (Long.parseLong(sizeFlv));;
         configuracoes.getAulas().setObj_title(jTFAula.getText().trim());
         configuracoes.getAulas().setObj_type("h.264 FLV");
         configuracoes.getAulas().setProfessor(jTFProfessor.getText().trim());
@@ -692,8 +692,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         configuracoes.setRm_item_index(playerPanel.getFile().substring(0, playerPanel.getFile().lastIndexOf(".")) + ".index");
         configuracoes.setRm_item_video(playerPanel.getFile().substring(0, playerPanel.getFile().lastIndexOf(".")) + ".flv");
         configuracoes.setRm_itemsync(playerPanel.getFile().substring(0, playerPanel.getFile().lastIndexOf(".")) + ".sync");
-        //resp2 = configuracoes.gravarXML(playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
-        resp2 = configuracoes.gravarXML(dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
+        resp2 = configuracoes.gravarXML(playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
+        //resp2 = configuracoes.gravarXML(dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
 
         if (resp && resp1 && resp2) {
             //  JOptionPane.showMessageDialog(this, "Arquivos gravados em: \n" + playerPanel.getDir(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);

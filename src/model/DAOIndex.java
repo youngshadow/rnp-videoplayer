@@ -68,8 +68,8 @@ public class DAOIndex {
                 xstream.aliasField("class", IndexXML.class, "mainClass");
 
                 //omitindo a tag root Ind_item
-//                xstream.addImplicitCollection(IndexXML.class, "ind_item");
-//                xstream.addImplicitCollection(Ind_item.class, "ind_item");
+                xstream.addImplicitCollection(IndexXML.class, "ind_item");
+                xstream.addImplicitCollection(Ind_item.class, "ind_item");
 
                 String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
 
