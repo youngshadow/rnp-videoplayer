@@ -5,6 +5,7 @@
 package model;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTree;
@@ -19,6 +20,14 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.CharBuffer;
+import java.nio.channels.FileChannel;
+import java.nio.charset.Charset;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -31,8 +40,44 @@ public class Index2Obj extends IndexXML {
     DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Roteiro");
 
     public static void main(String args[]) {
-        new Index2Obj("G:\\UFJF\\AULAS_PRONTAS\\dcc119_aula1\\dcc119_aula1.index", new JTree(), new DefaultTreeModel(null));
+        //new Index2Obj("G:\\UFJF\\AULAS_PRONTAS\\dcc119_aula1\\dcc119_aula1.index", new JTree(), new DefaultTreeModel(null));
+
+
+        // Create matcher on file
+        String value = "Fabio Quintana á !@#$%¨&*()_+{[}]A^^AÂ<>;:?/-+§¬¢£³²¹°ºêîôû";
+        String host = "";
+
+        //* \s -- whitespace (espaço em branco)
+        //* \S -- non-whitespace (não seja espaço em branco)
+        //* \w -- word character [a-zA-Z0-9] (caractere de palavra)
+        //* \W -- non-word character (não caractere de palavra)
+        //* \p{Punct} -- punctuation (pontuação)
+        //* \p{Lower} -- lowercase [a-z] (minúsculas)
+        //* \p{Upper} -- uppercase [A-Z] (maiúsculas)
+
+        /* aqui você defini qual o tipo de avaliação */
+        Pattern pattern = Pattern.compile("\\W");
+        /* passa a String a ser avaliada */
+        Matcher matcher = pattern.matcher(value);
+        System.out.println("");
+
+//        if(matcher.find()){
+//            System.out.println("t " +matcher.group());
+//        }
+        // Find all matches
+        while (matcher.find()) {
+            // imprimi o retorno tratado
+            System.out.println("- ");
+            host += matcher.group();
+
+        }
+        System.out.println(host);
     }
+
+
+
+
+
 
     public Index2Obj(String url, JTree jtTopicos, DefaultTreeModel jtreeModel) {
 
@@ -44,7 +89,7 @@ public class Index2Obj extends IndexXML {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
-       factory.setAttribute("http://xml.org/sax/features/validation", false);
+        factory.setAttribute("http://xml.org/sax/features/validation", false);
         factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
         factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
@@ -68,13 +113,13 @@ public class Index2Obj extends IndexXML {
                 if (no.getNodeName().equalsIgnoreCase("ind_item")) {
                     System.out.println("== -> " + no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
 
-                    DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no.getChildNodes().item(1).getChildNodes().item(0).getNodeValue()))+" - "+no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
+                    DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no.getChildNodes().item(1).getChildNodes().item(0).getNodeValue())) + " - " + no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
                     jtreeModel.insertNodeInto(newTopic, rootTopic, rootTopic.getChildCount());
                     TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic);
                     TreePath treepath = new TreePath(nodes);
                     jtTopicos.scrollPathToVisible(treepath);
 
-                    varrerFilhos(no,newTopic);
+                    varrerFilhos(no, newTopic);
                 }
 
             }
@@ -84,28 +129,27 @@ public class Index2Obj extends IndexXML {
         }
     }
 
-    protected void varrerFilhos(Node no,DefaultMutableTreeNode newTopic) throws DOMException {
+    protected void varrerFilhos(Node no, DefaultMutableTreeNode newTopic) throws DOMException {
         for (int j = 0; j < no.getChildNodes().getLength(); j++) {
             Node no1 = no.getChildNodes().item(j);
             if (no1.getNodeName().equalsIgnoreCase("ind_item")) {
                 System.out.println("99 -> " + no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
-                 DefaultMutableTreeNode newTopic1 = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no1.getChildNodes().item(1).getChildNodes().item(0).getNodeValue()))+" - "+no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
-                    jtreeModel.insertNodeInto(newTopic1, newTopic, newTopic.getChildCount());
-                    TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic1);
-                    TreePath treepath = new TreePath(nodes);
-                    jtTopicos.scrollPathToVisible(treepath);
-                varrerFilhos(no1,newTopic1);
+                DefaultMutableTreeNode newTopic1 = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no1.getChildNodes().item(1).getChildNodes().item(0).getNodeValue())) + " - " + no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
+                jtreeModel.insertNodeInto(newTopic1, newTopic, newTopic.getChildCount());
+                TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic1);
+                TreePath treepath = new TreePath(nodes);
+                jtTopicos.scrollPathToVisible(treepath);
+                varrerFilhos(no1, newTopic1);
             }
         }
     }
 
-
-     private static String secondsToString(Double seconds) {
+    private static String secondsToString(Double seconds) {
         final Integer minutes = seconds.intValue() / 60;
         return "00:" + zeroPad((int) minutes, 2) + ":" + zeroPad((int) (seconds % 60), 2);
     }
-     
-       private static String zeroPad(int i, int len) {
+
+    private static String zeroPad(int i, int len) {
         String result = Integer.toString(i);
         while (result.length() < len) {
             result = "0" + result;

@@ -31,6 +31,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JToolBar;
 import javax.swing.SwingUtilities;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import net.sf.fmj.ui.control.TransportControlPanel;
 import net.sf.fmj.ui.dialogs.RTPReceivePanel;
@@ -393,6 +394,8 @@ public class PlayerPanel extends JPanel {
 
     public void onOpenFile() {
         final JFileChooser chooser = new JFileChooser();
+        chooser.setFileFilter(new FileNameExtensionFilter("Arquivo flv", "flv"));
+        chooser.setAcceptAllFileFilterUsed(false);
         if (chooser.showOpenDialog(PlayerPanel.this) == JFileChooser.APPROVE_OPTION) {
             final String urlStr = URLUtils.createUrlStr(chooser.getSelectedFile());
 

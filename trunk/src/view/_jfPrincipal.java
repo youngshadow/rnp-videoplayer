@@ -68,18 +68,17 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         JOptionPane.showMessageDialog(this, msg, titulo, JOptionPane.ERROR_MESSAGE);
         return;
     }
-
-    public abstract void abrirArquivo(String arquivo);
-    Dimension dimension;
+    //public abstract void abrirArquivo(String arquivo);
+    //Dimension dimension;
     //videoJMF video;
-    boolean isPlay = false;
+    // boolean isPlay = false;
     public static URL url = null;
     ManipList slideList = new ManipList();
     DefaultListModel listModel;
-    FileDialog file = null;
+    // FileDialog file = null;
     private final DefaultTreeModel jtreeModel;
-    VideoController video;
-    String nomeFLV;
+    // VideoController video;
+//    String nomeFLV;
     String dirFinal;
     String sizeFlv;
     private PlayerPanel playerPanel;
@@ -190,12 +189,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         btnNovo = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        btnCapturarTempos = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -207,10 +203,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jTFAula = new javax.swing.JTextField();
         jTFProfessor = new javax.swing.JTextField();
         jTFIsntituicao = new javax.swing.JTextField();
-        jTFNumAula = new javax.swing.JTextField();
-        jButton7 = new javax.swing.JButton();
         jLNomeFlv = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        btnCapturarTempos = new javax.swing.JButton();
+        jButton7 = new javax.swing.JButton();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -266,55 +262,19 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         jButton5.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/fmj/ui/images/Save24.gif"))); // NOI18N
-        jButton5.setText("Salvar Aula");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Copiar Tempos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 11))); // NOI18N
-
-        btnCapturarTempos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
-        btnCapturarTempos.setText("<<< Copiar ");
-        btnCapturarTempos.setActionCommand("Copiar");
-        btnCapturarTempos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnCapturarTempos.setMargin(new java.awt.Insets(0, 0, 0, 0));
-        btnCapturarTempos.setMaximumSize(new java.awt.Dimension(53, 19));
-        btnCapturarTempos.setMinimumSize(new java.awt.Dimension(53, 19));
-        btnCapturarTempos.setPreferredSize(new java.awt.Dimension(53, 19));
-        btnCapturarTempos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCapturarTemposActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnCapturarTempos, javax.swing.GroupLayout.DEFAULT_SIZE, 118, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(btnCapturarTempos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 11))); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel1.setText("Curso:");
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel2.setText("Aula:");
-
-        jLabel3.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jLabel3.setText("Número da Aula:");
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel11.setText("Código da Disciplina");
@@ -325,13 +285,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jLabel14.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel14.setText("Professor:");
 
-        jLabel15.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel15.setText("Instituição");
 
         jLabel18.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jLabel18.setText("Arquivo:");
 
-        jTFDisciplina.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFDisciplina.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFDisciplina.setAutoscrolls(false);
         jTFDisciplina.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFDisciplina.setHighlighter(null);
@@ -341,22 +301,22 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jTFCodDisc.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFCodDisc.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFCodDisc.setAutoscrolls(false);
         jTFCodDisc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFCodDisc.setHighlighter(null);
 
-        jTFCurso.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFCurso.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFCurso.setAutoscrolls(false);
         jTFCurso.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFCurso.setHighlighter(null);
 
-        jTFAula.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFAula.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFAula.setAutoscrolls(false);
         jTFAula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFAula.setHighlighter(null);
 
-        jTFProfessor.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFProfessor.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFProfessor.setAutoscrolls(false);
         jTFProfessor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFProfessor.setHighlighter(null);
@@ -366,23 +326,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jTFIsntituicao.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFIsntituicao.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFIsntituicao.setAutoscrolls(false);
         jTFIsntituicao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFIsntituicao.setHighlighter(null);
-
-        jTFNumAula.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jTFNumAula.setAutoscrolls(false);
-        jTFNumAula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jTFNumAula.setHighlighter(null);
-
-        jButton7.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
-        jButton7.setText("Arquivo .flv");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
-            }
-        });
 
         jLNomeFlv.setText(" ");
 
@@ -398,39 +345,28 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTFIsntituicao, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFNumAula, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTFDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                        .addComponent(jTFDisciplina, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel11)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFCodDisc, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTFCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTFIsntituicao, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel11)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFCodDisc, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(8, 8, 8)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(2, 2, 2)
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLNomeFlv, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jTFCurso))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTFProfessor, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLNomeFlv, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jTFProfessor, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFAula, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)))
+                        .addComponent(jTFAula, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -452,23 +388,40 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(jTFNumAula, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTFIsntituicao, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel15))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLNomeFlv)
-                        .addComponent(jLabel18)
-                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel15)
+                        .addComponent(jLabel18))
+                    .addComponent(jLNomeFlv))
                 .addContainerGap())
         );
 
         jButton1.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/fmj/ui/images/Open24.gif"))); // NOI18N
-        jButton1.setText("Abrir Aula");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
+            }
+        });
+
+        btnCapturarTempos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        btnCapturarTempos.setText("<<< Copiar ");
+        btnCapturarTempos.setActionCommand("Copiar");
+        btnCapturarTempos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCapturarTempos.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        btnCapturarTempos.setMaximumSize(new java.awt.Dimension(53, 19));
+        btnCapturarTempos.setMinimumSize(new java.awt.Dimension(53, 19));
+        btnCapturarTempos.setPreferredSize(new java.awt.Dimension(53, 19));
+        btnCapturarTempos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCapturarTemposActionPerformed(evt);
+            }
+        });
+
+        jButton7.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jButton7.setText("Arquivo .flv");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
             }
         });
 
@@ -476,61 +429,70 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(5, 5, 5))
+                                .addGap(6, 6, 6)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(19, 19, 19))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 326, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                                .addGap(11, 11, 11)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
+                                        .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 39, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnCapturarTempos, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(14, 14, 14))))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(btnNovo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jButton4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(322, 322, 322)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-                            .addComponent(btnCapturar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap()
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnCapturar, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(333, 333, 333)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 167, Short.MAX_VALUE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(2, 2, 2)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnCapturar, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(205, 205, 205)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(19, 19, 19))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(383, 383, 383)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnNovo)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(25, 25, 25)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 583, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRemover, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCapturar, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCapturarTempos, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnNovo))
                 .addContainerGap())
         );
 
@@ -554,8 +516,15 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_btnCapturarActionPerformed
 
     private void btnCapturarTemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarTemposActionPerformed
-        for (int i = 0; i < listModel.size(); i++) {
+        
+        if(!listModel.isEmpty()){
+//        if(!listModel.isEmpty()){
+             Object[] options = {"Sim", "Não"};
+             JOptionPane.showOptionDialog(null, "O arquivo " + " já existe. \n Deseja substituí-lo?", "Saída", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+            return;
+        }
 
+        for (int i = 0; i < listModel.size(); i++) {
             DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getModel().getRoot();
             System.out.println("nodeSelect: " + nodeSelect);
             if (nodeSelect != null) {
@@ -669,10 +638,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             return;
         }
 
-          resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
-       // resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
+        resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), 1);
+        // resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
         resp1 = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
-       // resp1 = slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
+        // resp1 = slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
 
 
         configuracoes.getAulas().setBitrate("1100.0");
@@ -681,7 +650,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         configuracoes.getAulas().setDuration(playerPanel.getTransportControlPanel().getLengthLabel().getText().trim());
         configuracoes.getAulas().setGrad_program(jTFCurso.getText().trim());
         configuracoes.getAulas().setSource(jTFIsntituicao.getText().trim());
-        configuracoes.getAulas().setObj_filename(nomeFLV);
+        configuracoes.getAulas().setObj_filename(playerPanel.getFile());
         configuracoes.getAulas().setObj_filesize(playerPanel.getFileSize());//  (Long.parseLong(sizeFlv));;
         configuracoes.getAulas().setObj_title(jTFAula.getText().trim());
         configuracoes.getAulas().setObj_type("h.264 FLV");
@@ -730,8 +699,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
             try {
                 URL url = uri.toURL();
-                nomeFLV = fileChooser.getSelectedFile().getName();
-                jLNomeFlv.setText(nomeFLV);
+//                nomeFLV = fileChooser.getSelectedFile().getName();
+//                jLNomeFlv.setText(nomeFLV);
 
                 dirFinal = fileChooser.getCurrentDirectory().toString() + File.separator;
                 System.out.println("url: " + fileChooser.getCurrentDirectory());
@@ -741,7 +710,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
                 sizeFlv = "" + flv.length();
-                System.out.println("nome flv: " + nomeFLV + " - " + sizeFlv);
+
 
             } catch (MalformedURLException ex) {
                 System.out.println(ex);
@@ -786,7 +755,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 Rm_item rmItemIndex = xmlObj.getRm_item().get(0);
                 Rm_item rmItemSync = xmlObj.getRm_item().get(2);
 
-                new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos,jtreeModel);
+                new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModel);
 
 //                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
 //                System.out.println("--->"+index.getMain_title());
@@ -821,11 +790,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             public void run() {
                 new _jfPrincipal() {
 
-                    @Override
-                    public void abrirArquivo(String arquivo) {
-                        throw new UnsupportedOperationException("Not supported yet.");
-                    }
-
+//                    @Override
+//                    public void abrirArquivo(String arquivo) {
+//                        throw new UnsupportedOperationException("Not supported yet.");
+//                    }
                     public void valueChanged(TreeSelectionEvent e) {
                         if (e != null) {
                             System.out.println("Listener");
@@ -856,9 +824,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JList jListSlides;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -867,7 +833,6 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     private javax.swing.JTextField jTFCurso;
     private javax.swing.JTextField jTFDisciplina;
     private javax.swing.JTextField jTFIsntituicao;
-    private javax.swing.JTextField jTFNumAula;
     private javax.swing.JTextField jTFProfessor;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JTree jtTopicos;
