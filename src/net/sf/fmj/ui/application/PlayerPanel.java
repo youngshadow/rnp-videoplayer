@@ -275,7 +275,7 @@ public class PlayerPanel extends JPanel {
 
         this.setLayout(new BorderLayout());
         //this.setSize(new Dimension(363, 218));
-        this.add(getPlayerToolBar(), BorderLayout.NORTH);//barra superior (btn abrir)
+       // this.add(getPlayerToolBar(), BorderLayout.NORTH);//barra superior (btn abrir)
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BorderLayout());
@@ -385,14 +385,14 @@ public class PlayerPanel extends JPanel {
             openButton.addActionListener(new ActionListener() {
 
                 public void actionPerformed(ActionEvent arg0) {
-                    onOpenFile();
+                    //onOpenFile();
                 }
             });
         }
         return openButton;
     }
 
-    public void onOpenFile() {
+    public void onOpenFile(JLabel nomeFlv) {
         final JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("Arquivo flv", "flv"));
         chooser.setAcceptAllFileFilterUsed(false);
@@ -402,7 +402,7 @@ public class PlayerPanel extends JPanel {
             dir = chooser.getCurrentDirectory().toString()+java.io.File.separator;
             
             file =  chooser.getSelectedFile().getName();
-
+            nomeFlv.setText(file);
             fileSize = chooser.getSelectedFile().length();
             addMediaLocatorAndLoad(urlStr);
         }

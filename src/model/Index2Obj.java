@@ -4,8 +4,8 @@
  */
 package model;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTree;
@@ -20,12 +20,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.charset.Charset;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -89,13 +83,14 @@ public class Index2Obj extends IndexXML {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
-        factory.setAttribute("http://xml.org/sax/features/validation", false);
-        factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+//        factory.setAttribute("http://xml.org/sax/features/validation", false);
+//        factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
         factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
         DocumentBuilder builder = null;
         try {
             builder = factory.newDocumentBuilder();
+//            builder =factory.newDocumentBuilder().parse(new ByteArrayInputStream(strXmlRetorno.trim().getBytes("UTF8")));
             Document docs = null;
             docs = builder.parse(new File(url));
             Element elem = docs.getDocumentElement();
