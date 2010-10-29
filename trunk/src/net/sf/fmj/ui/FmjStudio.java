@@ -92,7 +92,7 @@ public class FmjStudio {
 			menuItemOpenFile.addActionListener(
 					new ActionListener() {
 						public void actionPerformed(ActionEvent e) {
-							playerPanel.onOpenFile();
+							//playerPanel.onOpenFile();
 						}
 					}
 				);
