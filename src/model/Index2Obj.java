@@ -83,8 +83,8 @@ public class Index2Obj extends IndexXML {
 
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
-//        factory.setAttribute("http://xml.org/sax/features/validation", false);
-//        factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
+        factory.setAttribute("http://xml.org/sax/features/validation", false);
+        factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-dtd-grammar", false);
         factory.setAttribute("http://apache.org/xml/features/nonvalidating/load-external-dtd", false);
 
         DocumentBuilder builder = null;

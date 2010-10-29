@@ -42,6 +42,7 @@ import net.sf.fmj.ui.wizards.TranscodeWizard;
 import net.sf.fmj.utility.LoggerSingleton;
 import net.sf.fmj.utility.PathUtils;
 import net.sf.fmj.utility.URLUtils;
+import util.VerificaCaractere;
 
 /**
  * 
@@ -63,7 +64,7 @@ public class PlayerPanel extends JPanel {
     private JPanel addressPanel = null;
     private JLabel locationLabel = null;
     private ContainerPlayer containerPlayer = null;  //  @jve:decl-index=0:visual-constraint="557,162"
-    private String file,dir;
+    private String file, dir;
     private long fileSize;
 
     public void addMediaLocatorAndLoad(String url) {
@@ -94,7 +95,7 @@ public class PlayerPanel extends JPanel {
         if (videoPanel == null) {
             videoPanel = new JPanel();
             videoPanel.setLayout(new BorderLayout());
-           
+
 //            videoPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 //            //TitledBorder
 //            TitledBorder mediaBorder = new TitledBorder(BorderConstants.etchedBorder, "Media");
@@ -156,7 +157,6 @@ public class PlayerPanel extends JPanel {
 //        }
 //        return loadButton;
 //    }
-
     private void onLoadButtonClick() {
 
         String location = (String) getAddressComboBox().getSelectedItem();
@@ -237,7 +237,7 @@ public class PlayerPanel extends JPanel {
     public ContainerPlayer getContainerPlayer() {
         if (containerPlayer == null) {
             containerPlayer = new ContainerPlayer(getVideoPanel());
-           // containerPlayer.setAutoLoop(prefs.autoLoop);
+            // containerPlayer.setAutoLoop(prefs.autoLoop);
             containerPlayer.setContainerPlayerStatusListener(new ContainerPlayerStatusListener() {
 
                 public void onStatusChange(final String newStatus) {
@@ -275,7 +275,7 @@ public class PlayerPanel extends JPanel {
 
         this.setLayout(new BorderLayout());
         //this.setSize(new Dimension(363, 218));
-       // this.add(getPlayerToolBar(), BorderLayout.NORTH);//barra superior (btn abrir)
+        // this.add(getPlayerToolBar(), BorderLayout.NORTH);//barra superior (btn abrir)
 
         JPanel southPanel = new JPanel();
         southPanel.setLayout(new BorderLayout());
@@ -304,7 +304,7 @@ public class PlayerPanel extends JPanel {
             prefs.load(reader);
         } catch (Exception e) {
             logger.warning("Problem loading FMJStudio prefs: " + e + ".  Using defaults.");
-           setDefaultPrefs();
+            setDefaultPrefs();
         }
     }
 
@@ -393,15 +393,26 @@ public class PlayerPanel extends JPanel {
     }
 
     public void onOpenFile(JLabel nomeFlv) {
+        String regEx;
         final JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("Arquivo flv", "flv"));
         chooser.setAcceptAllFileFilterUsed(false);
         if (chooser.showOpenDialog(PlayerPanel.this) == JFileChooser.APPROVE_OPTION) {
             final String urlStr = URLUtils.createUrlStr(chooser.getSelectedFile());
 
-            dir = chooser.getCurrentDirectory().toString()+java.io.File.separator;
-            
-            file =  chooser.getSelectedFile().getName();
+            dir = chooser.getCurrentDirectory().toString() + java.io.File.separator;
+            file = chooser.getSelectedFile().getName();
+            regEx = VerificaCaractere.Verifica(file);
+            regEx = regEx.substring(0, regEx.lastIndexOf("."));
+            if (regEx.length() > 0) {
+                
+                System.out.println("--->"+regEx+"<--"+regEx.length());
+                if (!regEx.contains("_")) {
+                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n"+regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
             nomeFlv.setText(file);
             fileSize = chooser.getSelectedFile().length();
             addMediaLocatorAndLoad(urlStr);
@@ -424,7 +435,6 @@ public class PlayerPanel extends JPanel {
 //        }
 //        return openCaptureDeviceButton;
 //    }
-
     public void onOpenCaptureDevice() {
         MediaLocator locator = CaptureDeviceBrowser.run(getParentFrame());
         if (locator != null) {
@@ -540,7 +550,6 @@ public class PlayerPanel extends JPanel {
     public long getFileSize() {
         return fileSize;
     }
-
 //    private JLabel getStatusBar() {
 //        if (statusBar == null) {
 //            statusBar = new JLabel();
