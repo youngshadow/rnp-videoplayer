@@ -2,8 +2,10 @@ package util;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import javax.swing.JOptionPane;
 import org.jdom.Parent;
 
@@ -23,7 +25,8 @@ public class GravarArquivo {
 
         if (gravar) {
             try {
-                BufferedWriter saida = new BufferedWriter(new FileWriter(destino));
+//                BufferedWriter saida = new BufferedWriter(new FileWriter(destino));
+                BufferedWriter saida = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(destino),"UTF-8"));
                 saida.write(new String(conteudo));
                 // saida.newLine();
                 // saida.write(new String("texto linha 2"));
