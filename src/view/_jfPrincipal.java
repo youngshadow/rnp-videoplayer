@@ -44,6 +44,7 @@ import model.Slides2Obj;
 import model.Xml2Obj;
 import videoplayer.ManipList;
 import net.sf.fmj.ui.application.PlayerPanel;
+import util.GravarArquivo;
 
 /**
  *
@@ -82,7 +83,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
 
-        this.setTitle(" RIOComposer - V 0.72");
+        this.setTitle(" RIOComposer - V 0.74");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
         listModel = new DefaultListModel();
@@ -194,9 +195,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         btnCapturarTempos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         jToggleButton1.setText("jToggleButton1");
@@ -206,7 +207,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         jListSlides.setBackground(new java.awt.Color(240, 240, 240));
         jListSlides.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jListSlides.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jListSlides.setFont(new java.awt.Font("SansSerif", 0, 11));
         jListSlides.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
@@ -214,7 +215,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         });
         jScrollPane1.setViewportView(jListSlides);
 
-        btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11));
         btnCapturar.setText("Nova transparência");
         btnCapturar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -222,7 +223,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        btnRemover.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        btnRemover.setFont(new java.awt.Font("SansSerif", 0, 11));
         btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,12 +231,12 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jtTopicos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jtTopicos.setFont(new java.awt.Font("SansSerif", 0, 11));
         jtTopicos.setModel(null);
         jtTopicos.setAutoscrolls(true);
         jScrollPane2.setViewportView(jtTopicos);
 
-        btnNovo.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        btnNovo.setFont(new java.awt.Font("SansSerif", 0, 11));
         btnNovo.setText("Novo Tópico");
         btnNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,7 +244,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jButton4.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jButton4.setFont(new java.awt.Font("SansSerif", 0, 11));
         jButton4.setText("Remover");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -251,7 +252,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jButton5.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jButton5.setFont(new java.awt.Font("SansSerif", 0, 11));
         jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/net/sf/fmj/ui/images/Save24.gif"))); // NOI18N
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,13 +262,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 11))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel1.setText("Curso:");
 
-        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel2.setText("Aula:");
 
-        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel11.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel11.setText("Código da Disciplina");
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 11));
@@ -276,13 +277,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jLabel14.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel14.setText("Professor:");
 
-        jLabel15.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel15.setText("Instituição");
 
-        jLabel18.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jLabel18.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel18.setText("Arquivo:");
 
-        jTFDisciplina.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFDisciplina.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFDisciplina.setAutoscrolls(false);
         jTFDisciplina.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFDisciplina.setHighlighter(null);
@@ -292,22 +293,22 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jTFCodDisc.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFCodDisc.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFCodDisc.setAutoscrolls(false);
         jTFCodDisc.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFCodDisc.setHighlighter(null);
 
-        jTFCurso.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFCurso.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFCurso.setAutoscrolls(false);
         jTFCurso.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFCurso.setHighlighter(null);
 
-        jTFAula.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFAula.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFAula.setAutoscrolls(false);
         jTFAula.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFAula.setHighlighter(null);
 
-        jTFProfessor.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFProfessor.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFProfessor.setAutoscrolls(false);
         jTFProfessor.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFProfessor.setHighlighter(null);
@@ -317,7 +318,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jTFIsntituicao.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jTFIsntituicao.setFont(new java.awt.Font("SansSerif", 0, 11));
         jTFIsntituicao.setAutoscrolls(false);
         jTFIsntituicao.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFIsntituicao.setHighlighter(null);
@@ -388,7 +389,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 .addContainerGap())
         );
 
-        btnCapturarTempos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        btnCapturarTempos.setFont(new java.awt.Font("SansSerif", 0, 11));
         btnCapturarTempos.setText("<<< Copiar ");
         btnCapturarTempos.setActionCommand("Copiar");
         btnCapturarTempos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -402,7 +403,17 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
+        jMenu1.setMnemonic('a');
         jMenu1.setText("Arquivo");
+
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setText("Abrir Vídeo");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
 
         jMenuItem1.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_A, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem1.setText("Abrir Aula");
@@ -421,14 +432,6 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
         jMenu1.add(jMenuItem2);
-
-        jMenuItem3.setText("Abrir Vídeo");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
-            }
-        });
-        jMenu1.add(jMenuItem3);
 
         jMenuBar1.add(jMenu1);
 
@@ -458,9 +461,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(67, 67, 67)
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 46, Short.MAX_VALUE))
+                                .addGap(18, 50, Short.MAX_VALUE))
                             .addGroup(layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnCapturarTempos, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -520,22 +522,22 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_btnCapturarActionPerformed
 
     private void btnCapturarTemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarTemposActionPerformed
-        TreeNode treeNode =  (TreeNode) jtTopicos.getModel().getRoot();
+        TreeNode treeNode = (TreeNode) jtTopicos.getModel().getRoot();
         System.out.println(treeNode.getChildCount());
-        if(!listModel.isEmpty()){
-        if(treeNode.getChildCount() > 0){
-             Object[] options = {"Não","Sim"};
-            if (JOptionPane.showOptionDialog(null, "Esta ação irá apagar todos os tópicos do roteiro. \n Deseja Continuar?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0])==0)
-
-            return;
-        }
+        if (!listModel.isEmpty()) {
+            if (treeNode.getChildCount() > 0) {
+                Object[] options = {"Não", "Sim"};
+                if (JOptionPane.showOptionDialog(null, "Esta ação irá apagar todos os tópicos do roteiro. \n Deseja Continuar?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]) == 0) {
+                    return;
+                }
+            }
         }
         gerarRoot();
         for (int i = 0; i < listModel.size(); i++) {
             DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getModel().getRoot();
             System.out.println("nodeSelect: " + nodeSelect);
             if (nodeSelect != null) {
-                 
+
                 DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(listModel.get(i).toString().substring(0, listModel.get(i).toString().lastIndexOf(".")));
                 jtreeModel.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
                 TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic);
@@ -686,7 +688,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_jTFProfessorActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-               JFileChooser fileChooser = new JFileChooser();
+        JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo xml", "xml"));
         fileChooser.setAcceptAllFileFilterUsed(false);
 
@@ -740,18 +742,25 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-           DAOIndex topicos = new DAOIndex();
+        DAOIndex topicos = new DAOIndex();
         DAOSync slides = new DAOSync();
         DAOxml configuracoes = new DAOxml();
-        boolean resp, resp1, resp2;
+        boolean respTopicos, respSlides, resp2 = false;
         if (playerPanel.getContainerPlayer().getControll() == null || jtreeModel.getRoot() == null) {
             alerta("Erro!", "não foi possível gravar a aula. \n Verifique as configurações.");
             return;
         }
 
-        resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), 1);
+        respTopicos = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModel.getRoot().toString(), 1);
+//        if (respTopicos) {
+//            GravarArquivo.salvarArquivo(topicos.getXml(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")) + ".index");
+//        }
         // resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
-        resp1 = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
+
+        respSlides = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
+//        if (respSlides) {
+//            GravarArquivo.salvarArquivo(slides.getXml(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")) + ".sync");
+//        }
         // resp1 = slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
 
 
@@ -772,17 +781,30 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         configuracoes.setRm_item_index(playerPanel.getFile().substring(0, playerPanel.getFile().lastIndexOf(".")) + ".index");
         configuracoes.setRm_item_video(playerPanel.getFile().substring(0, playerPanel.getFile().lastIndexOf(".")) + ".flv");
         configuracoes.setRm_itemsync(playerPanel.getFile().substring(0, playerPanel.getFile().lastIndexOf(".")) + ".sync");
-        resp2 = configuracoes.gravarXML(playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
-        //resp2 = configuracoes.gravarXML(dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
 
-        if (resp && resp1 && resp2) {
+        if (respTopicos && respSlides) {
+            GravarArquivo.salvarArquivo(topicos.getXml(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")) + ".index");
+            GravarArquivo.salvarArquivo(slides.getXml(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")) + ".sync");
+            resp2 = configuracoes.gravarXML(playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
+            //resp2 = configuracoes.gravarXML(dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
+        }
+
+        if (respTopicos && respSlides && resp2) {
             //  JOptionPane.showMessageDialog(this, "Arquivos gravados em: \n" + playerPanel.getDir(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
             JOptionPane.showMessageDialog(this, "Arquivos gravados em: \n" + playerPanel.getDir(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         }
+        if (!respTopicos) {
+            alerta("Erro!", "não foi possível gravar a aula. \n Tópico com tempo fora do intervalo, verifique.");
+        }
+        if (!respSlides) {
+            alerta("Erro!", "não foi possível gravar a aula. \n Slide com tempo fora do intervalo, verifique.");
+        }
+
+
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-       playerPanel.onOpenFile(jLNomeFlv);
+        playerPanel.onOpenFile(jLNomeFlv);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public static void main(String args[]) {

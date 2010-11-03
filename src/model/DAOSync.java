@@ -17,16 +17,17 @@ import util.GravarArquivo;
 public class DAOSync {
 
     SlidesXML slides = new SlidesXML();
-
-
+    boolean flag = true;
+    private int aux;
+    private String xml;
 
     public boolean gravarSlides(DefaultListModel listModel, String destino) {
-       
-      
-        for (int i = 0; i < listModel.getSize(); i++) {           
+
+
+        for (int i = 0; i < listModel.getSize(); i++) {
             Slide slide = new Slide();
-            slide.setRelative_path(listModel.getElementAt(i).toString().substring(listModel.getElementAt(i).toString().indexOf("-")+1).trim());
-            slide.setTime(formatarTempo(listModel.getElementAt(i).toString().substring(0,listModel.getElementAt(i).toString().indexOf("-")).trim()));
+            slide.setRelative_path(listModel.getElementAt(i).toString().substring(listModel.getElementAt(i).toString().indexOf("-") + 1).trim());
+            slide.setTime(formatarTempo(listModel.getElementAt(i).toString().substring(0, listModel.getElementAt(i).toString().indexOf("-")).trim()));
             slides.setSlide(slide);
         }
 
@@ -39,14 +40,29 @@ public class DAOSync {
         xstream.useAttributeFor(Slide.class, "relative_path");
         xstream.useAttributeFor(Slide.class, "time");
 
-        String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xstream.toXML(slides);
+         xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xstream.toXML(slides);
 
-      return GravarArquivo.salvarArquivo(xml, destino+".sync");
+//        if (flag != false) {
+//            flag = GravarArquivo.salvarArquivo(getXml(), destino + ".sync");
+//        }
+        return flag;
     }
 
-     public String formatarTempo(String tempo) {
+    public String formatarTempo(String tempo) {
         int minutos = Integer.parseInt(tempo.substring(3, 5));
         minutos = (minutos * 60) + Integer.parseInt(tempo.substring(6));
+
+        if (minutos < aux) {
+            flag = false;
+        }
+        aux = minutos;
         return minutos + "";
+    }
+
+    /**
+     * @return the xml
+     */
+    public String getXml() {
+        return xml;
     }
 }
