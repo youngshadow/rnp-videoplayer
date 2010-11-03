@@ -23,7 +23,10 @@ public class DAOIndex {
     private String titulo;
     private String subTitulo;
     private String destino;
-     boolean resp;
+    boolean resp;
+    boolean flag = true;
+    int aux = 0;
+    private String xml;
 
     public boolean gravarTopicos(TreeNode treeNode1, String titulo, String subTitulo, String destino, String textoRoot, int NumeroAula) {
         this.treeNode = treeNode1;
@@ -31,8 +34,9 @@ public class DAOIndex {
 
         if (!treeNode.toString().equals(textoRoot)) {
             Ind_item item = new Ind_item();
-            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
 
+
+            item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
             item.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
 
             if (treeNode.getChildCount() > 0) {
@@ -66,18 +70,19 @@ public class DAOIndex {
 
                 //definindo o nome da tag
                 xstream.aliasField("class", IndexXML.class, "mainClass");
-
                 //omitindo a tag root Ind_item
                 xstream.addImplicitCollection(IndexXML.class, "ind_item");
                 xstream.addImplicitCollection(Ind_item.class, "ind_item");
 
-                String xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
+                 xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
 
-               resp = GravarArquivo.salvarArquivo(xml, this.destino + ".index");
+//                if (flag != false) {
+//                    flag = GravarArquivo.salvarArquivo(getXml(), this.destino + ".index");
+//                }
 
             }
         }
-        return resp;
+        return flag;
     }
 
 // método recursivo para tratar os filhos
@@ -119,6 +124,18 @@ public class DAOIndex {
 
         int minutos = Integer.parseInt(tempo.substring(3, 5));
         minutos = (minutos * 60) + Integer.parseInt(tempo.substring(6));
+
+        if (minutos < aux) {
+            flag = false;
+        }
+        aux = minutos;
         return minutos + "";
+    }
+
+    /**
+     * @return the xml
+     */
+    public String getXml() {
+        return xml;
     }
 }
