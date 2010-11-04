@@ -6,6 +6,7 @@ import com.thoughtworks.xstream.io.xml.XppDomDriver;
 import java.util.Enumeration;
 import javax.swing.tree.TreeNode;
 import util.GravarArquivo;
+import util.ValidaItem;
 
 /*
  * To change this template, choose Tools | Templates
@@ -34,8 +35,11 @@ public class DAOIndex {
 
         if (!treeNode.toString().equals(textoRoot)) {
             Ind_item item = new Ind_item();
-
-
+//                verifica formacao do item
+                if(!ValidaItem.validar(treeNode.toString())){
+                     flag = false;
+                     return false;
+                }
             item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
             item.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
 
@@ -88,6 +92,10 @@ public class DAOIndex {
 // método recursivo para tratar os filhos
     private void buscarFilho(TreeNode treeNode, Ind_item item) {
         for (int i = 0; i < treeNode.getChildCount(); i++) {
+            if(!ValidaItem.validar(treeNode.toString())){
+                     flag = false;
+                     return;
+                }
             TreeNode filho = treeNode.getChildAt(i);
             Ind_item item1 = new Ind_item();
             item1.setText(filho.toString().substring(filho.toString().indexOf("-") + 1).trim());
