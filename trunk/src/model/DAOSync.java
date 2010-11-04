@@ -9,6 +9,7 @@ import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDomDriver;
 import javax.swing.DefaultListModel;
 import util.GravarArquivo;
+import util.ValidaItem;
 
 /**
  *
@@ -26,6 +27,11 @@ public class DAOSync {
 
         for (int i = 0; i < listModel.getSize(); i++) {
             Slide slide = new Slide();
+
+            if(!ValidaItem.validar(listModel.getElementAt(i).toString())){
+                flag = false;
+            }
+
             slide.setRelative_path(listModel.getElementAt(i).toString().substring(listModel.getElementAt(i).toString().indexOf("-") + 1).trim());
             slide.setTime(formatarTempo(listModel.getElementAt(i).toString().substring(0, listModel.getElementAt(i).toString().indexOf("-")).trim()));
             slides.setSlide(slide);
