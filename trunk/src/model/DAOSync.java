@@ -7,8 +7,9 @@ package model;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDomDriver;
+import java.util.Enumeration;
 import javax.swing.DefaultListModel;
-import util.GravarArquivo;
+import javax.swing.tree.TreeNode;
 import util.ValidaItem;
 
 /**
@@ -21,6 +22,37 @@ public class DAOSync {
     boolean flag = true;
     private int aux;
     private String xml;
+    private TreeNode treeNode;
+
+    public boolean gravarSlides(TreeNode tree) {
+        treeNode = tree;
+       
+        Enumeration filho = treeNode.children();
+       
+        while (filho.hasMoreElements()) {
+          Slide slide = new Slide();
+            treeNode = (TreeNode) filho.nextElement();
+            if (!ValidaItem.validar(treeNode.toString())) {
+                flag = false;
+                return false;
+            }
+            slide.setRelative_path(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
+            slide.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
+            slides.setSlide(slide);
+            System.out.println("treeSlide -> " + treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim() + " ||| " + formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
+        }
+
+        XStream xstream = new XStream(new XppDomDriver(new XmlFriendlyReplacer("_-", "_")));
+        xstream.alias("slides", SlidesXML.class);
+        xstream.alias("slide", Slide.class);
+        xstream.addImplicitCollection(SlidesXML.class, "slide");
+        // xstream.addImplicitCollection(SlidesXML.class, "teste");
+        xstream.useAttributeFor(Slide.class, "relative_path");
+        xstream.useAttributeFor(Slide.class, "time");
+
+        xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xstream.toXML(slides);
+        return flag;
+    }
 
     public boolean gravarSlides(DefaultListModel listModel, String destino) {
 
@@ -28,7 +60,7 @@ public class DAOSync {
         for (int i = 0; i < listModel.getSize(); i++) {
             Slide slide = new Slide();
 
-            if(!ValidaItem.validar(listModel.getElementAt(i).toString())){
+            if (!ValidaItem.validar(listModel.getElementAt(i).toString())) {
                 flag = false;
             }
 
@@ -46,7 +78,7 @@ public class DAOSync {
         xstream.useAttributeFor(Slide.class, "relative_path");
         xstream.useAttributeFor(Slide.class, "time");
 
-         xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xstream.toXML(slides);
+        xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" + xstream.toXML(slides);
 
 //        if (flag != false) {
 //            flag = GravarArquivo.salvarArquivo(getXml(), destino + ".sync");
