@@ -11,6 +11,7 @@
 package view;
 
 import java.awt.Container;
+import java.awt.Desktop;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -20,12 +21,12 @@ import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.DecimalFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 import javax.swing.DefaultListModel;
@@ -50,6 +51,7 @@ import model.Slides2Obj;
 import model.Xml2Obj;
 import videoplayer.ManipList;
 import net.sf.fmj.ui.application.PlayerPanel;
+import net.sf.fmj.utility.URLUtils;
 import util.GravarArquivo;
 
 /**
@@ -122,7 +124,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
 
-        this.setTitle(" RIOComposer - V 0.74");
+        this.setTitle(" RIOComposer - V 0.75");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
         listModel = new DefaultListModel();
@@ -137,11 +139,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Slides");
         jTSlides.setModel(jtreeModelSlides);
         jtreeModelSlides.setRoot(rootTopic);
-        TreeNode[] nodes = jtreeModelSlides.getPathToRoot(rootTopic);
-        TreePath treepath = new TreePath(nodes);
-        jTSlides.scrollPathToVisible(treepath);
-        jTSlides.setSelectionPath(treepath);
-        jTSlides.startEditingAtPath(treepath);
+       
 
 
         // jtTopicos.setModel(new javax.swing.tree.DefaultTreeModel(null));
@@ -249,6 +247,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
 
         jToggleButton1.setText("jToggleButton1");
 
@@ -499,6 +499,23 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Ajuda");
+
+        jMenuItem6.setText("Manual ");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem6);
+
+        jMenuItem5.setText("Sobre ");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem5);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -765,16 +782,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo xml", "xml"));
         fileChooser.setAcceptAllFileFilterUsed(false);
-
         int result = fileChooser.showOpenDialog(null);
-
         if (result == JFileChooser.APPROVE_OPTION) {
 
             File file = fileChooser.getSelectedFile();
 
-            // Abindo a nota fiscal
-            // StringBuffer xml = new StringBuffer();
             try {
+
                 FileInputStream in = new FileInputStream(file);
                 Xml2Obj xmlObj = new Xml2Obj(in);
 
@@ -788,6 +802,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
                 Rm_item rmItemIndex = xmlObj.getRm_item().get(0);
                 Rm_item rmItemSync = xmlObj.getRm_item().get(2);
+
+                //abrindo vídeo
+               System.out.println("video -> "+fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
+                // playerPanel.addMediaLocatorAndLoad(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
+                 File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
+                 playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
+
 
                 new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModelTopicos);
 
@@ -826,8 +847,6 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                         jTSlides.startEditingAtPath(treepath);
 
                     }
-
-
                 }
 
             } catch (FileNotFoundException e) {
@@ -913,6 +932,40 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         Runtime.getRuntime().exit(0);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        _jfSobre ajuda = new _jfSobre();
+        ajuda.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+          Desktop desktop = null;
+        //Primeiro verificamos se é possível a integração com o desktop
+        if (!Desktop.isDesktopSupported()) {
+            throw new IllegalStateException("Acesso ao browser negado!");
+        }
+
+        desktop = Desktop.getDesktop();
+        //Agora vemos se é possível disparar o browser default.
+        if (!desktop.isSupported(Desktop.Action.BROWSE)) {
+            throw new IllegalStateException("Browser padrão não encontrado!");
+        }
+
+        //Pega a URI de um componente de texto.
+        URI uri = null;
+        try {
+            uri = new URI("http://sites.google.com/a/ice.ufjf.br/se-edad/download-1/Manual_FS_SE-EDAD.pdf");
+        } catch (URISyntaxException e1) {
+            e1.printStackTrace();
+        }
+
+        //Dispara o browser default, que pode ser o Explorer, Firefox ou outro.
+        try {
+            desktop.browse(uri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
     public static void main(String args[]) {
 
 
@@ -960,6 +1013,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

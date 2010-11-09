@@ -393,6 +393,7 @@ public class PlayerPanel extends JPanel {
     }
 
     public void onOpenFile(JLabel nomeFlv) {
+
         String regEx;
         final JFileChooser chooser = new JFileChooser();
         chooser.setFileFilter(new FileNameExtensionFilter("Arquivo flv", "flv"));
@@ -416,6 +417,7 @@ public class PlayerPanel extends JPanel {
             nomeFlv.setText(file);
             fileSize = chooser.getSelectedFile().length();
             addMediaLocatorAndLoad(urlStr);
+            
         }
     }
 
