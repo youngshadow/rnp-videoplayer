@@ -22,6 +22,8 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+import view._jfPrincipal;
 
 /**
  *
@@ -68,19 +70,16 @@ public class Index2Obj extends IndexXML {
         System.out.println(host);
     }
 
-
-
-
-
-
     public Index2Obj(String url, JTree jtTopicos, DefaultTreeModel jtreeModel) {
 
         this.jtTopicos = jtTopicos;
         this.jtreeModel = jtreeModel;
         gerarRoot();
 
-
-
+        if (!new File(url).exists()) {
+            JOptionPane.showMessageDialog(null, "O Arquivo \n " + url + "\n não foi encontrado", "Alerta", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setNamespaceAware(true);
         factory.setAttribute("http://xml.org/sax/features/validation", false);
