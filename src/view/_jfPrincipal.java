@@ -18,15 +18,22 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 import javax.swing.DefaultListModel;
@@ -39,6 +46,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import model.DAOIndex;
@@ -52,7 +60,9 @@ import model.Xml2Obj;
 import videoplayer.ManipList;
 import net.sf.fmj.ui.application.PlayerPanel;
 import net.sf.fmj.utility.URLUtils;
+import util.CloneObj;
 import util.GravarArquivo;
+import util.VerificaCaractere;
 
 /**
  *
@@ -103,8 +113,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     ManipList slideList = new ManipList();
     DefaultListModel listModel;
     // FileDialog file = null;
-    private final DefaultTreeModel jtreeModelTopicos;
-    private final DefaultTreeModel jtreeModelSlides;
+    private DefaultTreeModel jtreeModelTopicos;
+    private DefaultTreeModel jtreeModelSlides;
     // private final DefaultTreeModel jtreeModelSlides;
     // VideoController video;
 //    String nomeFLV;
@@ -115,7 +125,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
     /** Creates new form _jfPrincipal */
     public _jfPrincipal() {
-        initComponents();        
+        initComponents();
         Container contentPane = getContentPane();
         playerPanel = new PlayerPanel();
         playerPanel.setSize(330, 360);
@@ -128,7 +138,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
         listModel = new DefaultListModel();
-       // jListSlides.setModel(listModel);
+        // jListSlides.setModel(listModel);
 
         jtreeModelTopicos = new DefaultTreeModel(null);
         jtreeModelSlides = new DefaultTreeModel(null);
@@ -139,7 +149,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Slides");
         jTSlides.setModel(jtreeModelSlides);
         jtreeModelSlides.setRoot(rootTopic);
-       
+
 
 
         // jtTopicos.setModel(new javax.swing.tree.DefaultTreeModel(null));
@@ -611,6 +621,19 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         if (result == JFileChooser.APPROVE_OPTION) {
             URI uri = fileChooser.getSelectedFile().toURI();
             ultimaURL = fileChooser.getCurrentDirectory();
+            String regEx;
+            regEx = VerificaCaractere.Verifica(fileChooser.getSelectedFile().getName());
+            regEx = regEx.substring(0, regEx.lastIndexOf("."));
+            if (regEx.length() > 0) {
+
+                if (!regEx.contains("_")) {
+                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            }
+
+
+
             try {
                 URL url = uri.toURL();
                 nomeFile = fileChooser.getSelectedFile().getName();
@@ -648,7 +671,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     private void btnCapturarTemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarTemposActionPerformed
         TreeNode treeNode = (TreeNode) jtTopicos.getModel().getRoot();
         System.out.println(treeNode.getChildCount());
-        if (!listModel.isEmpty()) {
+        if (!jtreeModelTopicos.asksAllowsChildren()) {
             if (treeNode.getChildCount() > 0) {
                 Object[] options = {"Não", "Sim"};
                 if (JOptionPane.showOptionDialog(null, "Esta ação irá apagar todos os tópicos do roteiro. \n Deseja Continuar?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]) == 0) {
@@ -656,32 +679,43 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 }
             }
         }
-        gerarRoot();
-        for (int i = 0; i < listModel.size(); i++) {
-            DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getModel().getRoot();
-            System.out.println("nodeSelect: " + nodeSelect);
-            if (nodeSelect != null) {
-
-                DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(listModel.get(i).toString().substring(0, listModel.get(i).toString().lastIndexOf(".")));
-                jtreeModelTopicos.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
-                TreeNode[] nodes = jtreeModelTopicos.getPathToRoot(newTopic);
-                TreePath treepath = new TreePath(nodes);
-                jtTopicos.scrollPathToVisible(treepath);
-                jtTopicos.setSelectionPath(treepath);
-                jtTopicos.startEditingAtPath(treepath);
-            } else {
-                gerarRoot();
-            }
-
-
+        try {
+            jtreeModelTopicos = (DefaultTreeModel) CloneObj.getClone((Serializable) jTSlides.getModel());
+        } catch (IOException ex) {
+            Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
+        jtTopicos.setModel(jtreeModelTopicos);
+
+//        for (int i = 0; i < listModel.size(); i++) {
+//            DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getModel().getRoot();
+//            System.out.println("nodeSelect: " + nodeSelect);
+////            if (nodeSelect != null) {
+////
+////                DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(listModel.get(i).toString().substring(0, listModel.get(i).toString().lastIndexOf(".")));
+////
+//////                jtreeModelTopicos.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
+////                TreeNode[] nodes = jtreeModelTopicos.getPathToRoot(newTopic);
+////                TreePath treepath = new TreePath(nodes);
+////                jtTopicos.scrollPathToVisible(treepath);
+////                jtTopicos.setSelectionPath(treepath);
+////                jtTopicos.startEditingAtPath(treepath);
+////            } else {
+////                gerarRoot();
+////            }
+//
+//
+//        }
     }//GEN-LAST:event_btnCapturarTemposActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
 //
 
-        if (ExcluirJtree(jTSlides, jtreeModelSlides)) return;
+        if (ExcluirJtree(jTSlides, jtreeModelSlides)) {
+            return;
+        }
     }//GEN-LAST:event_btnRemoverActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
@@ -725,7 +759,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
 
-        if (ExcluirJtree(jtTopicos, jtreeModelTopicos)) return;
+        if (ExcluirJtree(jtTopicos, jtreeModelTopicos)) {
+            return;
+        }
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
@@ -804,10 +840,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 Rm_item rmItemSync = xmlObj.getRm_item().get(2);
 
                 //abrindo vídeo
-               System.out.println("video -> "+fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
+                System.out.println("video -> " + fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
                 // playerPanel.addMediaLocatorAndLoad(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
-                 File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
-                 playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
+                File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
+                playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
 
 
                 new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModelTopicos);
@@ -938,7 +974,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-          Desktop desktop = null;
+        Desktop desktop = null;
         //Primeiro verificamos se é possível a integração com o desktop
         if (!Desktop.isDesktopSupported()) {
             throw new IllegalStateException("Acesso ao browser negado!");

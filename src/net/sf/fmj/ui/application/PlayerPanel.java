@@ -405,9 +405,8 @@ public class PlayerPanel extends JPanel {
             file = chooser.getSelectedFile().getName();
             regEx = VerificaCaractere.Verifica(file);
             regEx = regEx.substring(0, regEx.lastIndexOf("."));
-            if (regEx.length() > 0) {
-                
-                System.out.println("--->"+regEx+"<--"+regEx.length());
+            if (regEx.length() > 0) {        
+               
                 if (!regEx.contains("_")) {
                     JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n"+regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
                     return;
