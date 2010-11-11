@@ -40,6 +40,12 @@ public class DAOIndex {
                      flag = false;
                      return false;
                 }
+
+
+            
+
+
+
             item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
             item.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
 

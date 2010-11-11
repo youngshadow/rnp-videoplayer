@@ -134,7 +134,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
 
-        this.setTitle(" RIOComposer - V 0.75");
+        this.setTitle(" RIOComposer - V 0.751");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
         listModel = new DefaultListModel();
@@ -815,12 +815,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_jTFProfessorActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo xml", "xml"));
         fileChooser.setAcceptAllFileFilterUsed(false);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
-
+            playerPanel.getTransportControlPanel().stop();
             File file = fileChooser.getSelectedFile();
 
             try {
@@ -841,9 +842,18 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
                 //abrindo vídeo
                 System.out.println("video -> " + fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
+//                setando dir e file
+                playerPanel.setDir(fileChooser.getCurrentDirectory().toString() + File.separator);
+                playerPanel.setFile(xmlObj.getObj_filename());
+                jLNomeFlv.setText(xmlObj.getObj_filename());
                 // playerPanel.addMediaLocatorAndLoad(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
                 File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
-                playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
+                if (video.exists()) {
+                    playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
+
+                } else {
+                    alerta("erro", "Vídeo não encontrado");
+                }
 
 
                 new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModelTopicos);
@@ -900,7 +910,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             alerta("Erro!", "não foi possível gravar a aula. \n Verifique as configurações.");
             return;
         }
-
+        playerPanel.getTransportControlPanel().stop();
         respTopicos = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModelTopicos.getRoot().toString(), 1);
 //        if (respTopicos) {
 //            GravarArquivo.salvarArquivo(topicos.getXml(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")) + ".index");
@@ -955,6 +965,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        playerPanel.getTransportControlPanel().stop();
         playerPanel.onOpenFile(jLNomeFlv);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 

@@ -13,8 +13,17 @@ import java.util.regex.Pattern;
  */
 public class VerificaCaractere {
 
+    public static void main(String args[]) {
+
+        Pattern pattern = Pattern.compile("\\S\\W");
+//         Pattern pattern = Pattern.compile("\\d{2}\\:\\d{2}\\:\\d{2}[\\s]?\\-\\W");
+        Matcher matcher = pattern.matcher("dcc119_aula3_2");
+
+        System.out.println("|" + matcher.find() + "|");
+    }
 
     public static String Verifica(String url) {
+
         // Create matcher on file
 //        String value = "Fabio Quintana á !@#$%¨&*()_+{[}]A^^AÂ<>;:?/-+§¬¢£³²¹°ºêîôû";
         String host = "";
@@ -36,7 +45,7 @@ public class VerificaCaractere {
         while (matcher.find()) {
             // imprimi o retorno tratado
             host += matcher.group();
-        }        
+        }
         return host;
     }
 }

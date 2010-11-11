@@ -8,7 +8,10 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDomDriver;
 import java.util.Enumeration;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.tree.TreeNode;
 import util.ValidaItem;
 
@@ -26,16 +29,29 @@ public class DAOSync {
 
     public boolean gravarSlides(TreeNode tree) {
         treeNode = tree;
-       
+
         Enumeration filho = treeNode.children();
-       
+
         while (filho.hasMoreElements()) {
-          Slide slide = new Slide();
+            Slide slide = new Slide();
             treeNode = (TreeNode) filho.nextElement();
             if (!ValidaItem.validar(treeNode.toString())) {
                 flag = false;
                 return false;
             }
+
+
+            Pattern pattern = Pattern.compile("\\S\\W");
+//         Pattern pattern = Pattern.compile("\\d{2}\\:\\d{2}\\:\\d{2}[\\s]?\\-\\W");
+            Matcher matcher = pattern.matcher(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1,treeNode.toString().indexOf(".")).trim());
+            if(matcher.find()){
+                JOptionPane.showMessageDialog(null, "Caracteres inválidos em: \n" + treeNode.toString().substring(treeNode.toString().indexOf("-") + 1,treeNode.toString().indexOf(".")).trim(), "Erro!", JOptionPane.ERROR_MESSAGE);
+               
+                 flag = false;
+                return false;
+            }
+
+
             slide.setRelative_path(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
             slide.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
             slides.setSlide(slide);
