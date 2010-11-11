@@ -401,22 +401,22 @@ public class PlayerPanel extends JPanel {
         if (chooser.showOpenDialog(PlayerPanel.this) == JFileChooser.APPROVE_OPTION) {
             final String urlStr = URLUtils.createUrlStr(chooser.getSelectedFile());
 
-            dir = chooser.getCurrentDirectory().toString() + java.io.File.separator;
-            file = chooser.getSelectedFile().getName();
-            regEx = VerificaCaractere.Verifica(file);
+            setDir(chooser.getCurrentDirectory().toString() + java.io.File.separator);
+            setFile(chooser.getSelectedFile().getName());
+            regEx = VerificaCaractere.Verifica(getFile());
             regEx = regEx.substring(0, regEx.lastIndexOf("."));
-            if (regEx.length() > 0) {        
-               
+            if (regEx.length() > 0) {
+
                 if (!regEx.contains("_")) {
-                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n"+regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
             }
 
-            nomeFlv.setText(file);
+            nomeFlv.setText(getFile());
             fileSize = chooser.getSelectedFile().length();
             addMediaLocatorAndLoad(urlStr);
-            
+
         }
     }
 
@@ -538,16 +538,18 @@ public class PlayerPanel extends JPanel {
         return file;
     }
 
-    /**
-     * @return the dir
-     */
+    public void setFile(String file) {
+        this.file = file;
+    }
+
     public String getDir() {
         return dir;
     }
 
-    /**
-     * @return the fileSize
-     */
+    public void setDir(String dir) {
+        this.dir = dir;
+    }
+
     public long getFileSize() {
         return fileSize;
     }
