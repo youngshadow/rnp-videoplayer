@@ -15,9 +15,9 @@ public class VerificaCaractere {
 
     public static void main(String args[]) {
 
-        Pattern pattern = Pattern.compile("\\S\\W");
+        Pattern pattern = Pattern.compile("\\S[^a-zA-Z0-9_-]");
 //         Pattern pattern = Pattern.compile("\\d{2}\\:\\d{2}\\:\\d{2}[\\s]?\\-\\W");
-        Matcher matcher = pattern.matcher("dcc119_aula3_2");
+        Matcher matcher = pattern.matcher("dcc119_au-la3_2");
 
         System.out.println("|" + matcher.find() + "|");
     }
@@ -37,7 +37,7 @@ public class VerificaCaractere {
         //* \p{Upper} -- uppercase [A-Z] (maiúsculas)
 
         /* aqui você defini qual o tipo de avaliação */
-        Pattern pattern = Pattern.compile("\\W");
+        Pattern pattern = Pattern.compile("\\S[^a-zA-Z0-9_-]");
         /* passa a String a ser avaliada */
         Matcher matcher = pattern.matcher(url);
 

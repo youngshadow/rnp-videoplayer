@@ -41,7 +41,7 @@ public class DAOSync {
             }
 
 
-            Pattern pattern = Pattern.compile("\\S\\W");
+            Pattern pattern = Pattern.compile("\\S[^a-zA-Z0-9_-]");
 //         Pattern pattern = Pattern.compile("\\d{2}\\:\\d{2}\\:\\d{2}[\\s]?\\-\\W");
             Matcher matcher = pattern.matcher(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1,treeNode.toString().indexOf(".")).trim());
             if(matcher.find()){

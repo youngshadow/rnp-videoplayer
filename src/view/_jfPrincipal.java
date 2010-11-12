@@ -18,14 +18,10 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.net.URI;
@@ -37,6 +33,7 @@ import java.util.logging.Logger;
 
 
 import javax.swing.DefaultListModel;
+import javax.swing.DropMode;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
@@ -46,7 +43,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
-import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import model.DAOIndex;
@@ -144,7 +140,20 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jtreeModelSlides = new DefaultTreeModel(null);
         jtTopicos.setEditable(true);
         jtTopicos.setSelectionRow(0);
-        //WindowUtilities.setMotifLookAndFeel();
+
+        // configurando drag and drop
+        jtTopicos.setDropMode(DropMode.ON_OR_INSERT);
+        jtTopicos.setTransferHandler(new TreeTransferHandler());
+        jtTopicos.getSelectionModel().setSelectionMode(2);
+
+        jTSlides.setDropMode(DropMode.INSERT);
+        jTSlides.setTransferHandler(new TreeTransferHandler());
+        jTSlides.getSelectionModel().setSelectionMode(2);
+
+
+
+        
+//        WindowUtilities.setMotifLookAndFeel();
         gerarRoot();
         DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Slides");
         jTSlides.setModel(jtreeModelSlides);
