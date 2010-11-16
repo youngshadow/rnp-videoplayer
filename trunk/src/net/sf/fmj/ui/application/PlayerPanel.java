@@ -169,6 +169,7 @@ public class PlayerPanel extends JPanel {
         setCursor(new Cursor(Cursor.WAIT_CURSOR));
 
         try {
+            
             getContainerPlayer().setMediaLocation(location, prefs.autoPlay);
         } catch (Throwable e) {
             logger.log(Level.WARNING, "" + e, e);

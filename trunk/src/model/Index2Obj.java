@@ -151,60 +151,8 @@ public class Index2Obj extends IndexXML {
         return result;
     }
 
-    public static Element getElemento(Element documento, String nomeElemento) {
-
-        Element tagTransp = null;
-
-        NodeList transp = documento.getElementsByTagName(nomeElemento);
 
 
-        if (transp.getLength() > 0) {
-            tagTransp = (Element) transp.item(0);
-
-
-        }
-
-        return tagTransp;
-
-
-    }
-
-    private static String getChildTagValue(Element elem, String tagName) throws Exception {
-
-        String resposta = "";
-
-
-        if (elem != null) {
-            if (elem.getElementsByTagName(tagName) == null) {
-                return null;
-
-
-            }
-            NodeList children = elem.getElementsByTagName(tagName);
-
-
-            if (children == null) {
-                return null;
-
-
-            }
-
-            Element child = (Element) children.item(0);
-
-
-
-            if (child == null || child.getFirstChild() == null) {
-                return null;
-
-
-            }
-            resposta = child.getFirstChild().getNodeValue();
-
-
-        }
-        return resposta;
-
-    }
 
     protected void gerarRoot() {
 

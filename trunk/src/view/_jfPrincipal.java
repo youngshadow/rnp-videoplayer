@@ -30,6 +30,8 @@ import java.net.URL;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.media.NoDataSourceException;
+import javax.media.NoPlayerException;
 
 
 import javax.swing.DefaultListModel;
@@ -106,14 +108,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     //videoJMF video;
     // boolean isPlay = false;
     public static URL url = null;
-    ManipList slideList = new ManipList();
-    DefaultListModel listModel;
+  
     // FileDialog file = null;
     private DefaultTreeModel jtreeModelTopicos;
     private DefaultTreeModel jtreeModelSlides;
-    // private final DefaultTreeModel jtreeModelSlides;
-    // VideoController video;
-//    String nomeFLV;
     String dirFinal;
     String sizeFlv;
     File ultimaURL = null;
@@ -133,13 +131,15 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         this.setTitle(" RIOComposer - V 0.752");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
-        listModel = new DefaultListModel();
+       
         // jListSlides.setModel(listModel);
 
         jtreeModelTopicos = new DefaultTreeModel(null);
         jtreeModelSlides = new DefaultTreeModel(null);
         jtTopicos.setEditable(true);
         jtTopicos.setSelectionRow(0);
+        jTSlides.setEditable(true);
+        jTSlides.setSelectionRow(0);
 
         // configurando drag and drop
         jtTopicos.setDropMode(DropMode.ON_OR_INSERT);
@@ -149,67 +149,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jTSlides.setDropMode(DropMode.INSERT);
         jTSlides.setTransferHandler(new TreeTransferHandler());
         jTSlides.getSelectionModel().setSelectionMode(2);
-
-
-
         
 //        WindowUtilities.setMotifLookAndFeel();
         gerarRoot();
-        DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Slides");
-        jTSlides.setModel(jtreeModelSlides);
-        jtreeModelSlides.setRoot(rootTopic);
-
-
-
-        // jtTopicos.setModel(new javax.swing.tree.DefaultTreeModel(null));
-
-        MouseListener ml = new MouseAdapter() {
-
-            public void mousePressed(MouseEvent e) {
-                //     System.out.println("Mouse Evento "+ jtTopicos.getInvokesStopCellEditing());
-                if (jtTopicos.isEditing()) {
-                    System.out.println("sair");
-                }
-                int selRow = jtTopicos.getRowForLocation(e.getX(), e.getY());
-                TreePath selPath = jtTopicos.getPathForLocation(e.getX(), e.getY());
-                if (selRow != -1) {
-                }
-            }
-        };
-        jtTopicos.addMouseListener(ml);
-
-        KeyListener key = new KeyListener() {
-
-            public void keyTyped(KeyEvent e) {
-                System.out.println("keyTyped " + e);
-                System.out.println("Mouse Evento " + jtTopicos.getInvokesStopCellEditing());
-            }
-
-            public void keyPressed(KeyEvent e) {
-                System.out.println("keyPressed " + e);
-                System.out.println("Mouse Evento " + jtTopicos.getInvokesStopCellEditing());
-            }
-
-            public void keyReleased(KeyEvent e) {
-                System.out.println("KeyEvent " + e);
-                System.out.println("Mouse Evento " + jtTopicos.getInvokesStopCellEditing());
-            }
-        };
-
-        //jtTopicos.addKeyListener(key);
-
-        jtTopicos.addTreeSelectionListener(
-                new javax.swing.event.TreeSelectionListener() {
-
-                    public void valueChanged(TreeSelectionEvent e) {
-                        System.out.println("no selecyt " + e);
-                    }
-                });
-
-
-
-
-
+        gerarRoot1();
 
     }
 
@@ -222,6 +165,16 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jtTopicos.scrollPathToVisible(treepath);
         jtTopicos.setSelectionPath(treepath);
         jtTopicos.startEditingAtPath(treepath);
+    }
+    protected void gerarRoot1() {
+        DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Roteiro");
+        jTSlides.setModel(jtreeModelSlides);
+        jtreeModelSlides.setRoot(rootTopic);
+        TreeNode[] nodes = jtreeModelSlides.getPathToRoot(rootTopic);
+        TreePath treepath = new TreePath(nodes);
+        jTSlides.scrollPathToVisible(treepath);
+        jTSlides.setSelectionPath(treepath);
+        jTSlides.startEditingAtPath(treepath);
     }
 
     /** This method is called from within the constructor to
@@ -663,14 +616,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 jTSlides.setSelectionPath(treepath);
                 jTSlides.startEditingAtPath(treepath);
             } else {
-                DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Slides");
-                jTSlides.setModel(jtreeModelSlides);
-                jtreeModelSlides.setRoot(rootTopic);
-                TreeNode[] nodes = jtreeModelSlides.getPathToRoot(rootTopic);
-                TreePath treepath = new TreePath(nodes);
-                jTSlides.scrollPathToVisible(treepath);
-                jTSlides.setSelectionPath(treepath);
-                jTSlides.startEditingAtPath(treepath);
+                gerarRoot1();
             }
         }
     }//GEN-LAST:event_btnCapturarActionPerformed
@@ -783,7 +729,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModelTopicos.getRoot().toString(), 1);
         // resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
-        resp1 = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
+        resp1 = true;//slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
         // resp1 = slides.gravarSlides(listModel, dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")));
 
 
@@ -854,52 +800,33 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 playerPanel.setFile(xmlObj.getObj_filename());
                 jLNomeFlv.setText(xmlObj.getObj_filename());
                 // playerPanel.addMediaLocatorAndLoad(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
-                File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
+               
+
+                new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModelTopicos);
+                new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename(),jTSlides, jtreeModelSlides);
+//                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
+//                System.out.println("--->"+index.getMain_title());
+
+
+
+
+                 File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
                 if (video.exists()) {
-                    playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
+                    playerPanel.getTransportControlPanel().stop();
+                    try {
+                        playerPanel.getContainerPlayer().setMediaLocation("file:///C:/Documents%20and%20Settings/alexandre/Meus%20documentos/dcc119_aula1.flv", false);
+                        // playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
+                    } catch (NoDataSourceException ex) {
+                        Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (NoPlayerException ex) {
+                        Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (IOException ex) {
+                        Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    System.out.println("");
 
                 } else {
                     alerta("erro", "Vídeo não encontrado");
-                }
-
-
-                new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModelTopicos);
-
-//                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
-//                System.out.println("--->"+index.getMain_title());
-                Slides2Obj slides = new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename());
-                DecimalFormat df = new DecimalFormat("00");
-              //  listModel.removeAllElements();
-
-//                for (int i = 0; i < slides.getSlide().size(); i++) {
-//                    Slide slide = slides.getSlide().get(i);
-//                    Double tempo = Double.parseDouble(slide.getTime());
-//                    listModel.addElement("" + tempo.intValue() / 60 + ":" + df.format(tempo.intValue() % 60) + " - " + slide.getRelative_path());
-//
-//                }
-
-                DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Slides");
-                jtreeModelSlides.setRoot(rootTopic);
-                jTSlides.setModel(jtreeModelSlides);                
-                DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jTSlides.getModel().getRoot();
-
-                for (Slide slide : slides.getSlide()) {
-                    Double tempo = Double.parseDouble(slide.getTime());
-                    //listModel.addElement("00:" + df.format(tempo.intValue() / 60) + ":" + df.format(tempo.intValue() % 60) + " - " + slide.getRelative_path());
-
-
-
-                    if (nodeSelect != null) {
-
-                        DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode("00:" + df.format(tempo.intValue() / 60) + ":" + df.format(tempo.intValue() % 60) + " - " + slide.getRelative_path());
-                        jtreeModelSlides.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
-                        TreeNode[] nodes = jtreeModelSlides.getPathToRoot(newTopic);
-                        TreePath treepath = new TreePath(nodes);
-                        jTSlides.scrollPathToVisible(treepath);
-                        jTSlides.setSelectionPath(treepath);
-                        jTSlides.startEditingAtPath(treepath);
-
-                    }
                 }
 
             } catch (FileNotFoundException e) {
