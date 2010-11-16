@@ -185,7 +185,7 @@ public class ContainerPlayer implements TransportControl, SourcedTimerListener, 
     }
 
     public void setMediaLocation(String mediaLocation, boolean startAutomatically) throws NoDataSourceException, NoPlayerException, IOException {
-
+        System.out.println("--------------------------------- "+mediaLocation+"   "+startAutomatically);
         logger.fine("setMediaLocation: " + mediaLocation + " startAutomatically=" + startAutomatically);
 
         try {
@@ -322,6 +322,7 @@ public class ContainerPlayer implements TransportControl, SourcedTimerListener, 
                 }
             }
         }
+        
         player = javax.media.Manager.createPlayer(source);
 
 
