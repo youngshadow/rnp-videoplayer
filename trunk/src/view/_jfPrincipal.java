@@ -130,7 +130,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
 
-        this.setTitle(" RIOComposer - V 0.751");
+        this.setTitle(" RIOComposer - V 0.752");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
         listModel = new DefaultListModel();
@@ -612,9 +612,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         playerPanel.getTransportControlPanel().stop();
 
         //  slideList.dialogo(listModel, "00:" + playerPanel.getTransportControlPanel().getPositionLabel().getText());
-        if (listModel.getSize() > 0) {
-            url = slideList.ultimaURL(listModel.getSize() - 1);
-        }
+       
 
 
         //passando para jtree
@@ -633,13 +631,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             String regEx;
             regEx = VerificaCaractere.Verifica(fileChooser.getSelectedFile().getName());
             regEx = regEx.substring(0, regEx.lastIndexOf("."));
-            if (regEx.length() > 0) {
-
-                if (!regEx.contains("_")) {
-                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            }
+//            if (regEx.length() > 0) {
+//
+//                if (!regEx.contains("_")) {
+//                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
+//                    return;
+//                }
+//            }
 
 
 
@@ -871,7 +869,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 //                System.out.println("--->"+index.getMain_title());
                 Slides2Obj slides = new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename());
                 DecimalFormat df = new DecimalFormat("00");
-                listModel.removeAllElements();
+              //  listModel.removeAllElements();
 
 //                for (int i = 0; i < slides.getSlide().size(); i++) {
 //                    Slide slide = slides.getSlide().get(i);
@@ -881,8 +879,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 //                }
 
                 DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Slides");
-                jTSlides.setModel(jtreeModelSlides);
                 jtreeModelSlides.setRoot(rootTopic);
+                jTSlides.setModel(jtreeModelSlides);                
                 DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jTSlides.getModel().getRoot();
 
                 for (Slide slide : slides.getSlide()) {
