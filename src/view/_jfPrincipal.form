@@ -299,7 +299,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="jLabel18" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jLNomeFlv" pref="295" max="32767" attributes="0"/>
+                          <Component id="jLNomeFlv" pref="299" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="1">
                           <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
@@ -308,12 +308,12 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTFCurso" pref="134" max="32767" attributes="1"/>
+                          <Component id="jTFCurso" pref="138" max="32767" attributes="1"/>
                       </Group>
                       <Group type="102" attributes="0">
                           <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jTFIsntituicao" pref="290" max="32767" attributes="1"/>
+                          <Component id="jTFIsntituicao" pref="294" max="32767" attributes="1"/>
                       </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
