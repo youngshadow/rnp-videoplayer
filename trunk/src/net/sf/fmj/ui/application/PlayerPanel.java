@@ -403,16 +403,15 @@ public class PlayerPanel extends JPanel {
             final String urlStr = URLUtils.createUrlStr(chooser.getSelectedFile());
 
             setDir(chooser.getCurrentDirectory().toString() + java.io.File.separator);
-            setFile(chooser.getSelectedFile().getName());
-            regEx = VerificaCaractere.Verifica(getFile());
-            regEx = regEx.substring(0, regEx.lastIndexOf("."));
-            if (regEx.length() > 0) {
+            setFile(chooser.getSelectedFile().getName());         
+           
+            
 
-                if (!regEx.contains("_")) {
-                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
+                if (VerificaCaractere.Verifica(chooser.getSelectedFile().getName())) {
+                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + chooser.getSelectedFile().getName(), "Erro!", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-            }
+            
 
             nomeFlv.setText(getFile());
             fileSize = chooser.getSelectedFile().length();
