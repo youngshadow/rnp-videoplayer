@@ -28,6 +28,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.media.NoDataSourceException;
@@ -108,7 +109,6 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     //videoJMF video;
     // boolean isPlay = false;
     public static URL url = null;
-  
     // FileDialog file = null;
     private DefaultTreeModel jtreeModelTopicos;
     private DefaultTreeModel jtreeModelSlides;
@@ -131,7 +131,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         this.setTitle(" RIOComposer - V 0.752");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
-       
+
         // jListSlides.setModel(listModel);
 
         jtreeModelTopicos = new DefaultTreeModel(null);
@@ -149,7 +149,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jTSlides.setDropMode(DropMode.INSERT);
         jTSlides.setTransferHandler(new TreeTransferHandler());
         jTSlides.getSelectionModel().setSelectionMode(2);
-        
+
 //        WindowUtilities.setMotifLookAndFeel();
         gerarRoot();
         gerarRoot1();
@@ -166,6 +166,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jtTopicos.setSelectionPath(treepath);
         jtTopicos.startEditingAtPath(treepath);
     }
+
     protected void gerarRoot1() {
         DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Roteiro");
         jTSlides.setModel(jtreeModelSlides);
@@ -173,8 +174,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         TreeNode[] nodes = jtreeModelSlides.getPathToRoot(rootTopic);
         TreePath treepath = new TreePath(nodes);
         jTSlides.scrollPathToVisible(treepath);
-        jTSlides.setSelectionPath(treepath);
-        jTSlides.startEditingAtPath(treepath);
+//        jTSlides.setSelectionPath(treepath);
+//        jTSlides.startEditingAtPath(treepath);
     }
 
     /** This method is called from within the constructor to
@@ -565,7 +566,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         playerPanel.getTransportControlPanel().stop();
 
         //  slideList.dialogo(listModel, "00:" + playerPanel.getTransportControlPanel().getPositionLabel().getText());
-       
+
 
 
         //passando para jtree
@@ -581,16 +582,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         if (result == JFileChooser.APPROVE_OPTION) {
             URI uri = fileChooser.getSelectedFile().toURI();
             ultimaURL = fileChooser.getCurrentDirectory();
-            String regEx;
-            regEx = VerificaCaractere.Verifica(fileChooser.getSelectedFile().getName());
-            regEx = regEx.substring(0, regEx.lastIndexOf("."));
-//            if (regEx.length() > 0) {
-//
-//                if (!regEx.contains("_")) {
-//                    JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + regEx, "Erro!", JOptionPane.ERROR_MESSAGE);
-//                    return;
-//                }
-//            }
+
+
+            if (VerificaCaractere.Verifica(fileChooser.getSelectedFile().getName().substring(0, fileChooser.getSelectedFile().getName().lastIndexOf(".")))) {
+                JOptionPane.showMessageDialog(this, "Caracteres inválidos no nome do arquivo \n" + fileChooser.getSelectedFile().getName(), "Erro!", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
 
 
 
@@ -800,32 +798,48 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 playerPanel.setFile(xmlObj.getObj_filename());
                 jLNomeFlv.setText(xmlObj.getObj_filename());
                 // playerPanel.addMediaLocatorAndLoad(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
-               
+
 
                 new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModelTopicos);
-                new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename(),jTSlides, jtreeModelSlides);
-//                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
+
+                Slides2Obj slides = new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename(), jTSlides, jtreeModelSlides);
+                if (slides.getFilesNotFound().size() > 0) {
+                    String msg = "";
+                    String msgfinal = "";
+                    int j = 0;
+//                        msg.replaceAll("(\n|\r)+", " ")
+                    for (int i = 0; i < slides.getFilesNotFound().size(); i++) {
+                        msg += slides.getFilesNotFound().get(i)+",  ";
+                        if (j >= 4) {
+                            msgfinal += msg.replaceAll("(\n|\r)+", " ")+"\n";
+                            msg = "";
+                            j = -1;
+                        }
+                        j++;
+                    }
+
+                    JOptionPane.showMessageDialog(this, "O(s) Arquivo(s) \n " +msgfinal+ msg.replaceAll("(\n|\r)+", " ")+"\n" + "\n não foi (ram) encontrado(s)", "Alerta", JOptionPane.ERROR_MESSAGE);
+                }
+                //                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
 //                System.out.println("--->"+index.getMain_title());
 
 
 
 
-                 File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
+                File video = new File(fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
                 if (video.exists()) {
                     playerPanel.getTransportControlPanel().stop();
-                    try {
-                        playerPanel.getContainerPlayer().setMediaLocation("file:///C:/Documents%20and%20Settings/alexandre/Meus%20documentos/dcc119_aula1.flv", false);
-                        // playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
-                    } catch (NoDataSourceException ex) {
-                        Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (NoPlayerException ex) {
-                        Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    System.out.println("");
+                    playerPanel.addMediaLocatorAndLoad(URLUtils.createUrlStr(video));
 
                 } else {
+                    // playerPanel.getComponent(0).remove(playerPanel.getTransportControlPanel().getComponent(0));
+
+
+                    // getContentPane().remove(playerPanel.getTransportControlPanel());
+//                    Container contentPane = getContentPane();
+//                    playerPanel.setSize(330, 360);
+//                    playerPanel.setBounds(35, 101, 330, 320);
+//                    contentPane.add(playerPanel);
                     alerta("erro", "Vídeo não encontrado");
                 }
 

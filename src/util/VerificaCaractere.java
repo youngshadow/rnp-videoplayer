@@ -15,14 +15,14 @@ public class VerificaCaractere {
 
     public static void main(String args[]) {
 
-        Pattern pattern = Pattern.compile("\\S[^a-zA-Z0-9_-]");
+        Pattern pattern = Pattern.compile("\\S[^\\.a-zA-Z0-9_-]");
 //         Pattern pattern = Pattern.compile("\\d{2}\\:\\d{2}\\:\\d{2}[\\s]?\\-\\W");
-        Matcher matcher = pattern.matcher("dcc119_au-la3_2");
+        Matcher matcher = pattern.matcher("copia-......de.flv");
 
         System.out.println("|" + matcher.find() + "|");
     }
 
-    public static String Verifica(String url) {
+    public static boolean Verifica(String url) {
 
         // Create matcher on file
 //        String value = "Fabio Quintana á !@#$%¨&*()_+{[}]A^^AÂ<>;:?/-+§¬¢£³²¹°ºêîôû";
@@ -37,15 +37,15 @@ public class VerificaCaractere {
         //* \p{Upper} -- uppercase [A-Z] (maiúsculas)
 
         /* aqui você defini qual o tipo de avaliação */
-        Pattern pattern = Pattern.compile("\\S[^a-zA-Z0-9_-]");
+        Pattern pattern = Pattern.compile("\\S[^\\.a-zA-Z0-9_-]");
         /* passa a String a ser avaliada */
         Matcher matcher = pattern.matcher(url);
 
         // Find all matches
-        while (matcher.find()) {
-            // imprimi o retorno tratado
-            host += matcher.group();
-        }
-        return host;
+//        while (matcher.find()) {
+//            // imprimi o retorno tratado
+//            host += matcher.group();
+//        }
+        return matcher.find();
     }
 }

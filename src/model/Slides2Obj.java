@@ -4,11 +4,13 @@
  */
 package model;
 
+import MyException.FileNotFound;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDomDriver;
 import java.io.File;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -25,9 +27,11 @@ public class Slides2Obj extends SlidesXML {
 
     private DefaultTreeModel jtreeModel1;
     private JTree jtSlides1;
+    private ArrayList<String>  filesNotFound = new ArrayList<String>();
     DefaultMutableTreeNode rootTopic = new DefaultMutableTreeNode("Roteiro");
 
     public Slides2Obj(String url, JTree jtSlides, DefaultTreeModel jtreeModel) {
+       
         this.jtSlides1 = jtSlides;
         this.jtreeModel1 = jtreeModel;
 
@@ -54,8 +58,18 @@ public class Slides2Obj extends SlidesXML {
 
 
         for (Slide slide : slidesXml.getSlide()) {
-            Double tempo = Double.parseDouble(slide.getTime());
+            Double tempo = Double.parseDouble(slide.getTime());    
+
+
             if (nodeSelect != null) {
+                //verificando se slide existe no diretório
+                if (!new File(url.substring(0,url.lastIndexOf(File.separator))+File.separator+slide.getRelative_path()).exists()) {
+                   filesNotFound.add(slide.getRelative_path()+"\n");
+            
+            
+        }
+
+                System.out.println("Nome do Arrquivo: "+url.substring(0,url.lastIndexOf(File.separator))+File.separator+slide.getRelative_path());
                 DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode("00:" + df.format(tempo.intValue() / 60) + ":" + df.format(tempo.intValue() % 60) + " - " + slide.getRelative_path());
                 jtreeModel1.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
                 TreeNode[] nodes = jtreeModel1.getPathToRoot(newTopic);
@@ -73,7 +87,14 @@ public class Slides2Obj extends SlidesXML {
         TreeNode[] nodes = jtreeModel1.getPathToRoot(rootTopic);
         TreePath treepath = new TreePath(nodes);
         jtSlides1.scrollPathToVisible(treepath);
-        jtSlides1.setSelectionPath(treepath);
-        jtSlides1.startEditingAtPath(treepath);
+//        jtSlides1.setSelectionPath(treepath);
+//        jtSlides1.startEditingAtPath(treepath);
+    }
+
+    /**
+     * @return the filesNotFound
+     */
+    public ArrayList<String> getFilesNotFound() {
+        return filesNotFound;
     }
 }
