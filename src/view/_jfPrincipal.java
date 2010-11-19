@@ -13,11 +13,6 @@ package view;
 import java.awt.Container;
 import java.awt.Desktop;
 import java.awt.HeadlessException;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -27,15 +22,9 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.NoDataSourceException;
-import javax.media.NoPlayerException;
-
-
-import javax.swing.DefaultListModel;
 import javax.swing.DropMode;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -48,15 +37,14 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.MutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 import model.DAOIndex;
 import model.DAOSync;
 import model.DAOxml;
 import model.Index2Obj;
 import model.Rm_item;
-import model.Slide;
 import model.Slides2Obj;
 import model.Xml2Obj;
-import videoplayer.ManipList;
 import net.sf.fmj.ui.application.PlayerPanel;
 import net.sf.fmj.utility.URLUtils;
 import util.CloneObj;
@@ -71,6 +59,23 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
     public boolean ExcluirJtree(JTree jtree, DefaultTreeModel treeModel) throws HeadlessException {
         DefaultMutableTreeNode nodeSelected = (DefaultMutableTreeNode) jtree.getLastSelectedPathComponent();
+
+        TreeNode treeNode = (TreeNode) jtree.getModel().getRoot();
+
+        Enumeration filho = treeNode.children();
+
+        while (filho.hasMoreElements()) {
+
+            treeNode = (TreeNode) filho.nextElement();
+            System.out.println("---->>>>" + treeNode.toString());
+
+        }
+
+
+
+
+
+
         if (nodeSelected == null) {
             JOptionPane.showMessageDialog(this, "Nenhum ítem Selecionado", "Erro!", JOptionPane.ERROR_MESSAGE);
             return true;
@@ -84,18 +89,22 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             alerta("Erro!", "O ítem raiz não pode ser removido!");
             return true;
         } else {
-            MutableTreeNode toBeSelNode = (MutableTreeNode) nodeSelected.getNextSibling();
-            if (toBeSelNode == null) {
-                toBeSelNode = (MutableTreeNode) nodeSelected.getPreviousSibling();
+            while (filho.hasMoreElements()) {
+                treeNode = (TreeNode) filho.nextElement();
+
+                MutableTreeNode toBeSelNode = (MutableTreeNode) nodeSelected.getNextSibling();
+                if (toBeSelNode == null) {
+                    toBeSelNode = (MutableTreeNode) nodeSelected.getPreviousSibling();
+                }
+                if (toBeSelNode == null) {
+                    toBeSelNode = nodeSelected;
+                }
+                TreeNode[] nodes = treeModel.getPathToRoot(toBeSelNode);
+                TreePath path = new TreePath(nodes);
+                jtree.scrollPathToVisible(path);
+                jtree.setSelectionPath(path);
+                treeModel.removeNodeFromParent(nodeSelected);
             }
-            if (toBeSelNode == null) {
-                toBeSelNode = nodeSelected;
-            }
-            TreeNode[] nodes = treeModel.getPathToRoot(toBeSelNode);
-            TreePath path = new TreePath(nodes);
-            jtree.scrollPathToVisible(path);
-            jtree.setSelectionPath(path);
-            treeModel.removeNodeFromParent(nodeSelected);
         }
         return false;
     }
@@ -141,6 +150,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jTSlides.setEditable(true);
         jTSlides.setSelectionRow(0);
 
+        //configurando multiselect
+//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
+//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         // configurando drag and drop
         jtTopicos.setDropMode(DropMode.ON_OR_INSERT);
         jtTopicos.setTransferHandler(new TreeTransferHandler());
@@ -163,8 +176,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         TreeNode[] nodes = jtreeModelTopicos.getPathToRoot(rootTopic);
         TreePath treepath = new TreePath(nodes);
         jtTopicos.scrollPathToVisible(treepath);
+        jtTopicos.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         jtTopicos.setSelectionPath(treepath);
-        jtTopicos.startEditingAtPath(treepath);
+//        jtTopicos.startEditingAtPath(treepath);
     }
 
     protected void gerarRoot1() {
@@ -174,8 +188,14 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         TreeNode[] nodes = jtreeModelSlides.getPathToRoot(rootTopic);
         TreePath treepath = new TreePath(nodes);
         jTSlides.scrollPathToVisible(treepath);
+        //configurando multiselect
+//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
+        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
+
 //        jTSlides.setSelectionPath(treepath);
 //        jTSlides.startEditingAtPath(treepath);
+
     }
 
     /** This method is called from within the constructor to
@@ -213,6 +233,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         btnCapturarTempos = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTSlides = new javax.swing.JTree();
+        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
+        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
+        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -360,7 +383,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLNomeFlv, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
+                        .addComponent(jLNomeFlv, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -368,11 +391,11 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
+                        .addComponent(jTFCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFIsntituicao, javax.swing.GroupLayout.DEFAULT_SIZE, 290, Short.MAX_VALUE)))
+                        .addComponent(jTFIsntituicao, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -417,11 +440,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jTSlides.setDragEnabled(true);
-        jTSlides.setEditable(true);
-        jTSlides.setInvokesStopCellEditing(true);
+        jTSlides.setAutoscrolls(true);
+        jTSlides.setCellEditor(null);
         jTSlides.setMinimumSize(new java.awt.Dimension(53, 48));
-        jTSlides.setRequestFocusEnabled(false);
         jTSlides.setRootVisible(false);
         jScrollPane3.setViewportView(jTSlides);
 
@@ -506,7 +527,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                                 .addComponent(btnNovo, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                                 .addComponent(btnCapturarTempos, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(398, 398, 398)
@@ -809,16 +830,16 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                     int j = 0;
 //                        msg.replaceAll("(\n|\r)+", " ")
                     for (int i = 0; i < slides.getFilesNotFound().size(); i++) {
-                        msg += slides.getFilesNotFound().get(i)+",  ";
+                        msg += slides.getFilesNotFound().get(i) + ",  ";
                         if (j >= 4) {
-                            msgfinal += msg.replaceAll("(\n|\r)+", " ")+"\n";
+                            msgfinal += msg.replaceAll("(\n|\r)+", " ") + "\n";
                             msg = "";
                             j = -1;
                         }
                         j++;
                     }
 
-                    JOptionPane.showMessageDialog(this, "O(s) Arquivo(s) \n " +msgfinal+ msg.replaceAll("(\n|\r)+", " ")+"\n" + "\n não foi (ram) encontrado(s)", "Alerta", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "O(s) Arquivo(s) \n " + msgfinal + msg.replaceAll("(\n|\r)+", " ") + "\n" + "\n não foi (ram) encontrado(s)", "Alerta", JOptionPane.ERROR_MESSAGE);
                 }
                 //                Index2Obj index = new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename());
 //                System.out.println("--->"+index.getMain_title());
