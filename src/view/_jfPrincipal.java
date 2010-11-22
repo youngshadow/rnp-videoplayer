@@ -57,56 +57,26 @@ import util.VerificaCaractere;
  */
 public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSelectionListener {
 
-    public boolean ExcluirJtree(JTree jtree, DefaultTreeModel treeModel) throws HeadlessException {
-        DefaultMutableTreeNode nodeSelected = (DefaultMutableTreeNode) jtree.getLastSelectedPathComponent();
+    public boolean ExcluirJtree(JTree jtree, DefaultTreeModel treeModel) {
 
-        TreeNode treeNode = (TreeNode) jtree.getModel().getRoot();
+        TreePath path[] = jtree.getSelectionPaths();
+        DefaultTreeModel model = (DefaultTreeModel) jtree.getModel();
 
-        Enumeration filho = treeNode.children();
-
-        while (filho.hasMoreElements()) {
-
-            treeNode = (TreeNode) filho.nextElement();
-            System.out.println("---->>>>" + treeNode.toString());
-
-        }
-
-
-
-
-
-
-        if (nodeSelected == null) {
+        if (jtree.getSelectionCount() < 1) {
             JOptionPane.showMessageDialog(this, "Nenhum ítem Selecionado", "Erro!", JOptionPane.ERROR_MESSAGE);
-            return true;
-        }
-        MutableTreeNode nodeParent = (MutableTreeNode) nodeSelected.getParent();
-        if (nodeParent == null) {
-            //            if (JOptionPane.showConfirmDialog(this, "Gostaria de excluir o tópico raiz?", "Atenção!", 0) == 0) {
-            //               jtreeModel.setRoot(null);
-            //                return;
-            //            }
-            alerta("Erro!", "O ítem raiz não pode ser removido!");
-            return true;
+            return false;
         } else {
-            while (filho.hasMoreElements()) {
-                treeNode = (TreeNode) filho.nextElement();
+            for (int i = 0; i < path.length; i++) {
+                MutableTreeNode noSelect = (MutableTreeNode) path[i].getLastPathComponent();
 
-                MutableTreeNode toBeSelNode = (MutableTreeNode) nodeSelected.getNextSibling();
-                if (toBeSelNode == null) {
-                    toBeSelNode = (MutableTreeNode) nodeSelected.getPreviousSibling();
+                if (noSelect.getParent() == null) {
+                    alerta("Erro!", "O ítem raiz não pode ser removido!");
+                    return false;
                 }
-                if (toBeSelNode == null) {
-                    toBeSelNode = nodeSelected;
-                }
-                TreeNode[] nodes = treeModel.getPathToRoot(toBeSelNode);
-                TreePath path = new TreePath(nodes);
-                jtree.scrollPathToVisible(path);
-                jtree.setSelectionPath(path);
-                treeModel.removeNodeFromParent(nodeSelected);
+                model.removeNodeFromParent(noSelect);
             }
         }
-        return false;
+        return true;
     }
 
     public void alerta(String titulo, String msg) {
@@ -682,8 +652,6 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_btnCapturarTemposActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
-        // TODO add your handling code here:
-//
 
         if (ExcluirJtree(jTSlides, jtreeModelSlides)) {
             return;
