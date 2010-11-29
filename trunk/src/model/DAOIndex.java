@@ -28,26 +28,28 @@ public class DAOIndex {
     boolean flag = true;
     int aux = 0;
     private String xml;
+    private static String msgn = "";
+    private String topicoAux= "";
 
     public boolean gravarTopicos(TreeNode treeNode1, String titulo, String subTitulo, String destino, String textoRoot, int NumeroAula) {
         this.treeNode = treeNode1;
         this.destino = destino;
+        ;
 
         if (!treeNode.toString().equals(textoRoot)) {
             Ind_item item = new Ind_item();
 //                verifica formacao do item
-                if(!ValidaItem.validar(treeNode.toString())){
-                     flag = false;
-                     return false;
-                }
-
-
-            
+            if (!ValidaItem.validar(treeNode.toString())) {
+                msgn += treeNode.toString();
+                flag = false;
+                return false;
+            }
 
 
 
             item.setText(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
             item.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
+            topicoAux =treeNode.toString();
 
             if (treeNode.getChildCount() > 0) {
                 buscarFilho(treeNode, item);
@@ -84,7 +86,7 @@ public class DAOIndex {
                 xstream.addImplicitCollection(IndexXML.class, "ind_item");
                 xstream.addImplicitCollection(Ind_item.class, "ind_item");
 
-                 xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
+                xml = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<!DOCTYPE index SYSTEM \"index.dtd\">\n" + xstream.toXML(index);
 
 //                if (flag != false) {
 //                    flag = GravarArquivo.salvarArquivo(getXml(), this.destino + ".index");
@@ -98,14 +100,17 @@ public class DAOIndex {
 // método recursivo para tratar os filhos
     private void buscarFilho(TreeNode treeNode, Ind_item item) {
         for (int i = 0; i < treeNode.getChildCount(); i++) {
-            if(!ValidaItem.validar(treeNode.toString())){
-                     flag = false;
-                     return;
-                }
+            if (!ValidaItem.validar(treeNode.toString())) {
+                msgn += treeNode.toString();
+                flag = false;
+                return;
+            }
             TreeNode filho = treeNode.getChildAt(i);
             Ind_item item1 = new Ind_item();
             item1.setText(filho.toString().substring(filho.toString().indexOf("-") + 1).trim());
             item1.setTime(formatarTempo(filho.toString().substring(0, filho.toString().indexOf("-")).trim()));
+//           guardando o valor do nó para a msg, se houver erro
+            topicoAux =filho.toString();
             item.setInd_item(item1);
 
             if (filho.getChildCount() > 0) {
@@ -140,6 +145,7 @@ public class DAOIndex {
         minutos = (minutos * 60) + Integer.parseInt(tempo.substring(6));
 
         if (minutos < aux) {
+             msgn +=topicoAux+"\n";
             flag = false;
         }
         aux = minutos;
@@ -151,5 +157,19 @@ public class DAOIndex {
      */
     public String getXml() {
         return xml;
+    }
+
+    /**
+     * @return the msgn
+     */
+    public static String getMsgn() {
+        return msgn;
+    }
+
+    /**
+     * @param msgn the msgn to set
+     */
+    public static void setMsgn(String msgn) {
+        DAOIndex.msgn = msgn;
     }
 }

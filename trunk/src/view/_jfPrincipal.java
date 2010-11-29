@@ -58,7 +58,6 @@ import util.VerificaCaractere;
 public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSelectionListener {
 
     public boolean ExcluirJtree(JTree jtree, DefaultTreeModel treeModel) {
-
         TreePath path[] = jtree.getSelectionPaths();
         DefaultTreeModel model = (DefaultTreeModel) jtree.getModel();
 
@@ -105,7 +104,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         playerPanel.setBounds(35, 101, 330, 320);
         contentPane.add(playerPanel);
 
-
+        
 
         this.setTitle(" RIOComposer - V 0.752");
         //define o tamanho do video
@@ -120,11 +119,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jTSlides.setEditable(true);
         jTSlides.setSelectionRow(0);
 
-        //configurando multiselect
-//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.SINGLE_TREE_SELECTION);
-//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.CONTIGUOUS_TREE_SELECTION);
-//        jTSlides.getSelectionModel().setSelectionMode(TreeSelectionModel.DISCONTIGUOUS_TREE_SELECTION);
-        // configurando drag and drop
+       // configurando drag and drop
         jtTopicos.setDropMode(DropMode.ON_OR_INSERT);
         jtTopicos.setTransferHandler(new TreeTransferHandler());
         jtTopicos.getSelectionModel().setSelectionMode(2);
@@ -237,8 +232,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jtTopicos.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jtTopicos.setModel(null);
+        jtTopicos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jtTopicos.setAutoscrolls(true);
         jtTopicos.setDragEnabled(true);
         jScrollPane2.setViewportView(jtTopicos);
@@ -411,7 +405,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         });
 
         jTSlides.setAutoscrolls(true);
-        jTSlides.setCellEditor(null);
+        jTSlides.setDragEnabled(true);
         jTSlides.setMinimumSize(new java.awt.Dimension(53, 48));
         jTSlides.setRootVisible(false);
         jScrollPane3.setViewportView(jTSlides);
@@ -557,8 +551,6 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         playerPanel.getTransportControlPanel().stop();
 
         //  slideList.dialogo(listModel, "00:" + playerPanel.getTransportControlPanel().getPositionLabel().getText());
-
-
 
         //passando para jtree
 
@@ -848,6 +840,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             return;
         }
         playerPanel.getTransportControlPanel().stop();
+        DAOIndex.setMsgn("");
         respTopicos = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModelTopicos.getRoot().toString(), 1);
 //        if (respTopicos) {
 //            GravarArquivo.salvarArquivo(topicos.getXml(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")) + ".index");
@@ -855,6 +848,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         // resp = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), dirFinal + nomeFLV.substring(0, nomeFLV.lastIndexOf(".")), jtreeModel.getRoot().toString(), Integer.parseInt(jTFNumAula.getText().trim()));
 
         //  respSlides = slides.gravarSlides(listModel, playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")));
+        DAOSync.setMsgn("");
         respSlides = slides.gravarSlides((TreeNode) jTSlides.getModel().getRoot());
 //        if (respSlides) {
 //            GravarArquivo.salvarArquivo(slides.getXml(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")) + ".sync");
@@ -892,10 +886,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             JOptionPane.showMessageDialog(this, "Arquivos gravados em: \n" + playerPanel.getDir(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         }
         if (!respTopicos) {
-            alerta("Erro!", "não foi possível gravar a aula. \n Tópico com tempo fora do intervalo, verifique.");
+            alerta("Erro!", "não foi possível gravar a aula. \n Tópico com tempo fora do intervalo, verifique.\n"+DAOIndex.getMsgn());
         }
         if (!respSlides) {
-            alerta("Erro!", "não foi possível gravar a aula. \n Slide com tempo fora do intervalo, verifique.");
+            alerta("Erro!", "não foi possível gravar a aula. \n Slide com tempo fora do intervalo, verifique.\n"+DAOSync.getMsgn());
         }
 
 

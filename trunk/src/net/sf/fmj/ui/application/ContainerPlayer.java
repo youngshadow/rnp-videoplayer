@@ -79,7 +79,7 @@ public class ContainerPlayer implements TransportControl, SourcedTimerListener, 
 
             logger.fine("Got controller event: " + event);
 
-            Player player = (Player) event.getSourceController();
+           Player  player = (Player) event.getSourceController();
 
             if (player != ContainerPlayer.this.player) {
                 return;		// ignore messages from old players.
