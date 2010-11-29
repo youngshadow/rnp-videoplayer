@@ -26,6 +26,8 @@ public class DAOSync {
     private int aux;
     private String xml;
     private TreeNode treeNode;
+    private static String msgn = "";
+    private String slideAux= "";
 
     public boolean gravarSlides(TreeNode tree) {
         treeNode = tree;
@@ -53,6 +55,7 @@ public class DAOSync {
 
 
             slide.setRelative_path(treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim());
+            slideAux = treeNode.toString();
             slide.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
             slides.setSlide(slide);
             System.out.println("treeSlide -> " + treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim() + " ||| " + formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
@@ -76,11 +79,12 @@ public class DAOSync {
         for (int i = 0; i < listModel.getSize(); i++) {
             Slide slide = new Slide();
 
-            if (!ValidaItem.validar(listModel.getElementAt(i).toString())) {
+            if (!ValidaItem.validar(listModel.getElementAt(i).toString())) {                
                 flag = false;
             }
 
             slide.setRelative_path(listModel.getElementAt(i).toString().substring(listModel.getElementAt(i).toString().indexOf("-") + 1).trim());
+
             slide.setTime(formatarTempo(listModel.getElementAt(i).toString().substring(0, listModel.getElementAt(i).toString().indexOf("-")).trim()));
             slides.setSlide(slide);
         }
@@ -107,6 +111,7 @@ public class DAOSync {
         minutos = (minutos * 60) + Integer.parseInt(tempo.substring(6));
 
         if (minutos < aux) {
+            msgn += slideAux+"\n";
             flag = false;
         }
         aux = minutos;
@@ -118,5 +123,16 @@ public class DAOSync {
      */
     public String getXml() {
         return xml;
+    }
+
+      public static String getMsgn() {
+        return msgn;
+    }
+
+    /**
+     * @param msgn the msgn to set
+     */
+    public static void setMsgn(String msgn) {
+        DAOSync.msgn = msgn;
     }
 }
