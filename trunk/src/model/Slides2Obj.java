@@ -4,7 +4,6 @@
  */
 package model;
 
-import MyException.FileNotFound;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.XmlFriendlyReplacer;
 import com.thoughtworks.xstream.io.xml.XppDomDriver;
@@ -69,7 +68,7 @@ public class Slides2Obj extends SlidesXML {
             
         }
 
-                System.out.println("Nome do Arrquivo: "+url.substring(0,url.lastIndexOf(File.separator))+File.separator+slide.getRelative_path());
+//                System.out.println("Nome do Arrquivo: "+url.substring(0,url.lastIndexOf(File.separator))+File.separator+slide.getRelative_path());
                 DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode("00:" + df.format(tempo.intValue() / 60) + ":" + df.format(tempo.intValue() % 60) + " - " + slide.getRelative_path());
                 jtreeModel1.insertNodeInto(newTopic, nodeSelect, nodeSelect.getChildCount());
                 TreeNode[] nodes = jtreeModel1.getPathToRoot(newTopic);
