@@ -55,7 +55,7 @@ public class Index2Obj extends IndexXML {
         Pattern pattern = Pattern.compile("\\W");
         /* passa a String a ser avaliada */
         Matcher matcher = pattern.matcher(value);
-        System.out.println("");
+        
 
 //        if(matcher.find()){
 //            System.out.println("t " +matcher.group());
@@ -63,11 +63,11 @@ public class Index2Obj extends IndexXML {
         // Find all matches
         while (matcher.find()) {
             // imprimi o retorno tratado
-            System.out.println("- ");
+           
             host += matcher.group();
 
         }
-        System.out.println(host);
+       
     }
 
     public Index2Obj(String url, JTree jtTopicos, DefaultTreeModel jtreeModel) {
@@ -105,7 +105,7 @@ public class Index2Obj extends IndexXML {
             for (int i = 0; i < elem.getChildNodes().getLength(); i++) {
                 Node no = elem.getChildNodes().item(i);
                 if (no.getNodeName().equalsIgnoreCase("ind_item")) {
-                    System.out.println("== -> " + no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
+                  
 
                     DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no.getChildNodes().item(1).getChildNodes().item(0).getNodeValue())) + " - " + no.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
                     jtreeModel.insertNodeInto(newTopic, rootTopic, rootTopic.getChildCount());
@@ -127,7 +127,7 @@ public class Index2Obj extends IndexXML {
         for (int j = 0; j < no.getChildNodes().getLength(); j++) {
             Node no1 = no.getChildNodes().item(j);
             if (no1.getNodeName().equalsIgnoreCase("ind_item")) {
-                System.out.println("99 -> " + no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
+                
                 DefaultMutableTreeNode newTopic1 = new DefaultMutableTreeNode(secondsToString(Double.parseDouble(no1.getChildNodes().item(1).getChildNodes().item(0).getNodeValue())) + " - " + no1.getChildNodes().item(3).getChildNodes().item(0).getNodeValue());
                 jtreeModel.insertNodeInto(newTopic1, newTopic, newTopic.getChildCount());
                 TreeNode[] nodes = jtreeModel.getPathToRoot(newTopic1);

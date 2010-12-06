@@ -58,7 +58,7 @@ public class DAOSync {
             slideAux = treeNode.toString();
             slide.setTime(formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
             slides.setSlide(slide);
-            System.out.println("treeSlide -> " + treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim() + " ||| " + formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
+//            System.out.println("treeSlide -> " + treeNode.toString().substring(treeNode.toString().indexOf("-") + 1).trim() + " ||| " + formatarTempo(treeNode.toString().substring(0, treeNode.toString().indexOf("-")).trim()));
         }
 
         XStream xstream = new XStream(new XppDomDriver(new XmlFriendlyReplacer("_-", "_")));

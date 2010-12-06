@@ -104,7 +104,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         playerPanel.setBounds(35, 101, 330, 320);
         contentPane.add(playerPanel);
 
-        
+
 
         this.setTitle(" RIOComposer - V 0.752");
         //define o tamanho do video
@@ -119,7 +119,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jTSlides.setEditable(true);
         jTSlides.setSelectionRow(0);
 
-       // configurando drag and drop
+        // configurando drag and drop
         jtTopicos.setDropMode(DropMode.ON_OR_INSERT);
         jtTopicos.setTransferHandler(new TreeTransferHandler());
         jtTopicos.getSelectionModel().setSelectionMode(2);
@@ -215,6 +215,11 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11));
         btnCapturar.setText("Nova transparência");
@@ -232,7 +237,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        jtTopicos.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        jtTopicos.setFont(new java.awt.Font("SansSerif", 0, 11));
         jtTopicos.setAutoscrolls(true);
         jtTopicos.setDragEnabled(true);
         jScrollPane2.setViewportView(jtTopicos);
@@ -262,35 +267,45 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Informações gerais", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("SansSerif", 0, 11))); // NOI18N
+        jPanel2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jPanel2KeyTyped(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jLabel1.setText("Curso:");
+        jLabel1.setText("Curso");
 
         jLabel2.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jLabel2.setText("Aula:");
+        jLabel2.setText("Aula");
 
         jLabel11.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel11.setText("Código da Disciplina");
 
         jLabel12.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jLabel12.setText("Disciplina:");
+        jLabel12.setText("Disciplina");
 
         jLabel14.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jLabel14.setText("Professor:");
+        jLabel14.setText("Professor");
 
         jLabel15.setFont(new java.awt.Font("SansSerif", 0, 11));
         jLabel15.setText("Instituição");
 
         jLabel18.setFont(new java.awt.Font("SansSerif", 0, 11));
-        jLabel18.setText("Arquivo:");
+        jLabel18.setText("Arquivo");
 
-        jTFDisciplina.setFont(new java.awt.Font("SansSerif", 0, 11));
+        jTFDisciplina.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         jTFDisciplina.setAutoscrolls(false);
         jTFDisciplina.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jTFDisciplina.setHighlighter(null);
         jTFDisciplina.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jTFDisciplinaActionPerformed(evt);
+            }
+        });
+        jTFDisciplina.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jTFDisciplinaKeyTyped(evt);
             }
         });
 
@@ -347,7 +362,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel18)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLNomeFlv, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE))
+                        .addComponent(jLNomeFlv, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel11)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -355,11 +370,11 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE))
+                        .addComponent(jTFCurso, javax.swing.GroupLayout.DEFAULT_SIZE, 148, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTFIsntituicao, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))
+                        .addComponent(jTFIsntituicao, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -427,7 +442,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_V, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem3.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_I, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem3.setText("Abrir Vídeo");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -604,7 +619,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
     private void btnCapturarTemposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapturarTemposActionPerformed
         TreeNode treeNode = (TreeNode) jtTopicos.getModel().getRoot();
-        System.out.println(treeNode.getChildCount());
+       
         if (!jtreeModelTopicos.asksAllowsChildren()) {
             if (treeNode.getChildCount() > 0) {
                 Object[] options = {"Não", "Sim"};
@@ -668,7 +683,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
 
         DefaultMutableTreeNode nodeSelect = (DefaultMutableTreeNode) jtTopicos.getLastSelectedPathComponent();
-        System.out.println("nodeSelect: " + nodeSelect);
+        
         if (nodeSelect != null) {
 
             DefaultMutableTreeNode newTopic = new DefaultMutableTreeNode("00:" + playerPanel.getTransportControlPanel().getPositionLabel().getText() + " - " + "novo tópico");
@@ -747,13 +762,18 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }//GEN-LAST:event_jTFProfessorActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
+        String rm_index = null;
+        String rm_video = null;
+        String rm_synk = null;
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setFileFilter(new FileNameExtensionFilter("Arquivo xml", "xml"));
         fileChooser.setAcceptAllFileFilterUsed(false);
         int result = fileChooser.showOpenDialog(null);
         if (result == JFileChooser.APPROVE_OPTION) {
             playerPanel.getTransportControlPanel().stop();
+            playerPanel.getTransportControlPanel().onDurationChange(0);
+            playerPanel.getTransportControlPanel().onProgressChange(0);
+
             File file = fileChooser.getSelectedFile();
 
             try {
@@ -767,23 +787,31 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                 jTFProfessor.setText(xmlObj.getProfessor());
                 jTFIsntituicao.setText(xmlObj.getSource());
                 jTFAula.setText(xmlObj.getObj_title());
-                //jTFNumAula.setText(xmlObj.get); é no index
 
-                Rm_item rmItemIndex = xmlObj.getRm_item().get(0);
-                Rm_item rmItemSync = xmlObj.getRm_item().get(2);
+
+                for (Rm_item rm_item : xmlObj.getRm_item()) {
+                    if (rm_item.getRm_type().equals("index")) {
+                        rm_index = rm_item.getRm_filename();
+                    }
+                    if (rm_item.getRm_type().equals("video")) {
+                        rm_video = rm_item.getRm_filename();
+                    }
+                    if (rm_item.getRm_type().equals("sync")) {
+                        rm_synk = rm_item.getRm_filename();
+                    }
+                }
 
                 //abrindo vídeo
-                System.out.println("video -> " + fileChooser.getCurrentDirectory().toString() + File.separator + xmlObj.getObj_filename());
-//                setando dir e file
+//               setando dir e file
                 playerPanel.setDir(fileChooser.getCurrentDirectory().toString() + File.separator);
-                playerPanel.setFile(xmlObj.getObj_filename());
+                playerPanel.setFile(rm_video);
                 jLNomeFlv.setText(xmlObj.getObj_filename());
                 // playerPanel.addMediaLocatorAndLoad(fileChooser.getCurrentDirectory().toString() + File.separator +xmlObj.getObj_filename());
 
 
-                new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemIndex.getRm_filename(), jtTopicos, jtreeModelTopicos);
+                new Index2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rm_index, jtTopicos, jtreeModelTopicos);
 
-                Slides2Obj slides = new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rmItemSync.getRm_filename(), jTSlides, jtreeModelSlides);
+                Slides2Obj slides = new Slides2Obj(fileChooser.getCurrentDirectory().toString() + File.separator + rm_synk, jTSlides, jtreeModelSlides);
                 if (slides.getFilesNotFound().size() > 0) {
                     String msg = "";
                     String msgfinal = "";
@@ -886,10 +914,10 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             JOptionPane.showMessageDialog(this, "Arquivos gravados em: \n" + playerPanel.getDir(), "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
         }
         if (!respTopicos) {
-            alerta("Erro!", "não foi possível gravar a aula. \n Tópico com tempo fora do intervalo, verifique.\n"+DAOIndex.getMsgn());
+            alerta("Erro!", "não foi possível gravar a aula. \n Tópico com tempo fora do intervalo, verifique.\n" + DAOIndex.getMsgn());
         }
         if (!respSlides) {
-            alerta("Erro!", "não foi possível gravar a aula. \n Slide com tempo fora do intervalo, verifique.\n"+DAOSync.getMsgn());
+            alerta("Erro!", "não foi possível gravar a aula. \n Slide com tempo fora do intervalo, verifique.\n" + DAOSync.getMsgn());
         }
 
 
@@ -897,6 +925,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         playerPanel.getTransportControlPanel().stop();
+        playerPanel.getTransportControlPanel().onDurationChange(0);
+        playerPanel.getTransportControlPanel().onProgressChange(0);
+
         playerPanel.onOpenFile(jLNomeFlv);
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
@@ -943,6 +974,19 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             e.printStackTrace();
         }
     }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jTFDisciplinaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTFDisciplinaKeyTyped
+        System.out.println("key typed");        // TODO add your handling code here:
+    }//GEN-LAST:event_jTFDisciplinaKeyTyped
+
+    private void jPanel2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel2KeyTyped
+        System.out.println("todo");        // TODO add your handling code here:
+    }//GEN-LAST:event_jPanel2KeyTyped
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+        System.out.println("teste");
+    }//GEN-LAST:event_formKeyTyped
 
     public static void main(String args[]) {
 

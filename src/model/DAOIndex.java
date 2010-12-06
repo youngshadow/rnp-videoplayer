@@ -34,7 +34,7 @@ public class DAOIndex {
     public boolean gravarTopicos(TreeNode treeNode1, String titulo, String subTitulo, String destino, String textoRoot, int NumeroAula) {
         this.treeNode = treeNode1;
         this.destino = destino;
-        ;
+        
 
         if (!treeNode.toString().equals(textoRoot)) {
             Ind_item item = new Ind_item();
