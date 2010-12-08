@@ -20,6 +20,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.KeyStroke;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane.MaximizeAction;
 
 public class TesteSwing extends JFrame {
 
@@ -27,6 +28,12 @@ public class TesteSwing extends JFrame {
         Action okAction = new MessageAction("OK", "Ação OK");
         Action cancelAction = new MessageAction("Cancelar", "Ação Cancelar");
         Action helpAction = new MessageAction("Ajuda", "Ação Ajuda");
+        Action teclap = new AbstractAction(null) {
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("p");
+                
+            }
+        };
 
         JButton okButton = new JButton(okAction);
 
@@ -39,13 +46,16 @@ public class TesteSwing extends JFrame {
         getRootPane().setDefaultButton(okButton);
 
         getRootPane().getActionMap().put("ok", okAction);
-        getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), "ok");
+        getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_T, 0), "ok");
 
         getRootPane().getActionMap().put("cancel", cancelAction);
         getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "cancel");
 
         getRootPane().getActionMap().put("help", helpAction);
         getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0), "help");
+
+        getRootPane().getActionMap().put("123",teclap);
+        getRootPane().getInputMap().put(KeyStroke.getKeyStroke(KeyEvent.VK_P, 0),"1234");
 
         setSize(640, 480);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

@@ -1,6 +1,5 @@
 package net.sf.fmj.ui.application;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -8,7 +7,6 @@ import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.media.Control;
 
 import javax.media.Controller;
 import javax.media.ControllerClosedEvent;
@@ -28,12 +26,14 @@ import javax.media.RestartingEvent;
 import javax.media.StartEvent;
 import javax.media.StopEvent;
 import javax.media.Time;
+import javax.media.TimeBase;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
 
 import net.sf.fmj.ejmf.toolkit.util.SourcedTimer;
 import net.sf.fmj.ejmf.toolkit.util.SourcedTimerEvent;
 import net.sf.fmj.ejmf.toolkit.util.SourcedTimerListener;
+import net.sf.fmj.ejmf.toolkit.util.StateWaiter;
 import net.sf.fmj.ejmf.toolkit.util.TimeSource;
 import net.sf.fmj.ui.control.TransportControl;
 import net.sf.fmj.ui.control.TransportControlListener;
@@ -239,17 +239,17 @@ public class ContainerPlayer implements TransportControl, SourcedTimerListener, 
         if (player != null) {
             shouldStartOnRealize = false;
             player.start();
-//			// copied from EJMF StandardStartControl
-//		    final int state = player.getState();
-//
-//		    if (state == Controller.Started) 
-//		    	return;
-//
-//		    if (state < Controller.Prefetched) {
-//				StateWaiter w = new StateWaiter(player);
-//				w.blockingPrefetch();
-//		    }
-//
+			// copied from EJMF StandardStartControl
+		    final int state = player.getState();
+
+		    if (state == Controller.Started) 
+		    	return;
+
+		    if (state < Controller.Prefetched) {
+				StateWaiter w = new StateWaiter(player);
+				w.blockingPrefetch();
+		    }
+
 //		    final TimeBase tb = player.getTimeBase();
 //		    player.syncStart(tb.getTime());
         } else {
