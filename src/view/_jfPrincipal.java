@@ -154,7 +154,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         };
         jtTopicos.addKeyListener(key);
         jTSlides.addKeyListener(key);
-          
+
 
     }
 
@@ -200,7 +200,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
                     return true;
                 }
             }
-        }else{
+        } else {
             return true;
         }
         return false;
