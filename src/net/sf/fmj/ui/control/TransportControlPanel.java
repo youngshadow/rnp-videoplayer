@@ -81,7 +81,7 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
        // setAudioControlEnabled(true);
     }
 
-    private void start() {
+    public void start() {
         if (player != null) {
             player.start();
             isplay = true;
@@ -94,7 +94,14 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
             player.stop();
             isplay = false;
             playButton.setIcon(Images.get(Images.MEDIA_PLAY));
-            //player.setPosition(0);
+            player.setPosition(0);
+        }
+    }
+    public void pause() {
+        if (player != null) {
+            player.stop();
+            isplay = false;
+            playButton.setIcon(Images.get(Images.MEDIA_PLAY));
         }
     }
 
@@ -128,12 +135,14 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
             //playButton.setText("play");
             playButton.setOpaque(false);
             playButton.setIcon(Images.get(Images.MEDIA_PAUSE));
+            playButton.setMnemonic('p');
+            playButton.setToolTipText("Alt p");
             playButton.addActionListener(new java.awt.event.ActionListener() {
 
                 public void actionPerformed(java.awt.event.ActionEvent e) {
                     setRate(1.0f);
                     if(isplay){
-                    stop();
+                    pause();
                     }else{
                    start();
                     }
@@ -153,7 +162,7 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
     private JButton getStopButton() {
         if (stopButton == null) {
             stopButton = new JButton();
-            //stopButton.setText("stop");
+            //stopButton.setText("pause");
             stopButton.setOpaque(false);
             stopButton.setIcon(Images.get(Images.MEDIA_PAUSE));
             stopButton.addActionListener(new java.awt.event.ActionListener() {
@@ -266,7 +275,7 @@ public class TransportControlPanel extends JPanel implements TransportControlLis
      * This method initializes positionSlider
      * @return javax.swing.JSlider
      */
-    private JSlider getPositionSlider() {
+    public JSlider getPositionSlider() {
         if (positionSlider == null) {
             positionSlider = new FmjSlider();
             positionSlider.setOpaque(false);
