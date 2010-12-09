@@ -638,7 +638,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         String nomeFile = null;
         //enquanto o tempo atual do getTimeVideo nao é atualizado
-        playerPanel.getTransportControlPanel().stop();
+        playerPanel.getTransportControlPanel().pause();
 
         //  slideList.dialogo(listModel, "00:" + playerPanel.getTransportControlPanel().getPositionLabel().getText());
 
@@ -650,6 +650,8 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         fileChooser.setAcceptAllFileFilterUsed(false);
 
         fileChooser.setCurrentDirectory(ultimaURL);
+//        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORY_CHANGED_PROPERTY);
+        fileChooser.getComponent(0).setVisible(false);
         int result = fileChooser.showOpenDialog(null);
 
         if (result == JFileChooser.APPROVE_OPTION) {
@@ -748,7 +750,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         }
 
         //enquanto o tempo atual do getTimeVideo nao é atualizado
-        playerPanel.getTransportControlPanel().stop();
+        playerPanel.getTransportControlPanel().pause();
 //        try {
 //            Thread.sleep(300);
 //        } catch (InterruptedException ex) {
@@ -959,7 +961,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             alerta("Erro!", "não foi possível gravar a aula. \n Verifique as configurações.");
             return false;
         }
-        playerPanel.getTransportControlPanel().stop();
+//        playerPanel.getTransportControlPanel().stop();
         DAOIndex.setMsgn("");
         respTopicos = topicos.gravarTopicos((TreeNode) jtTopicos.getModel().getRoot(), jTFDisciplina.getText().trim(), jTFAula.getText().trim(), playerPanel.getDir() + playerPanel.getFile().substring(0, playerPanel.getFile().indexOf(".")), jtreeModelTopicos.getRoot().toString(), 1);
         //        if (respTopicos) {

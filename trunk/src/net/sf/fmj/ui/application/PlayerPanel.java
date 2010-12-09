@@ -400,6 +400,8 @@ public class PlayerPanel extends JPanel {
         chooser.setFileFilter(new FileNameExtensionFilter("Arquivo flv", "flv"));
         chooser.setAcceptAllFileFilterUsed(false);
         if (chooser.showOpenDialog(PlayerPanel.this) == JFileChooser.APPROVE_OPTION) {
+            transportControlPanel.stop();
+
             final String urlStr = URLUtils.createUrlStr(chooser.getSelectedFile());
 
             setDir(chooser.getCurrentDirectory().toString() + java.io.File.separator);
