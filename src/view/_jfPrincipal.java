@@ -26,6 +26,7 @@ import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.media.Time;
 import javax.swing.DropMode;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -94,17 +95,15 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     String dirFinal;
     String sizeFlv;
     File ultimaURL = null;
+    File urlVideo = null;
     private PlayerPanel playerPanel;
     private boolean aulaModificada = false;
 
     /** Creates new form _jfPrincipal */
     public _jfPrincipal() {
         initComponents();
-        Container contentPane = getContentPane();
-        playerPanel = new PlayerPanel();
-        playerPanel.setSize(330, 360);
-        playerPanel.setBounds(35, 101, 330, 320);
-        contentPane.add(playerPanel);
+      
+        criarPlayer();
 
 
 
@@ -156,6 +155,28 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jTSlides.addKeyListener(key);
 
 
+    }
+
+    private void criarPlayer() {
+        Container contentPane = getContentPane();
+
+        System.out.println("contentPane.getComponentCount() " + contentPane.getComponentCount());
+          playerPanel = new PlayerPanel();
+        playerPanel.setSize(330, 360);
+        playerPanel.setBounds(35, 101, 330, 320);
+
+
+        Thread thread = new Thread();
+        try {
+            thread.sleep(3000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+
+        contentPane.add(playerPanel);
+        System.out.println("contentPane.getComponentCount() " + contentPane.getComponentCount());
     }
 
     protected void gerarRoot() {
@@ -249,6 +270,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -264,7 +286,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11));
+        btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         btnCapturar.setMnemonic('n');
         btnCapturar.setText("Nova transparência");
         btnCapturar.addActionListener(new java.awt.event.ActionListener() {
@@ -273,7 +295,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        btnRemover.setFont(new java.awt.Font("SansSerif", 0, 11));
+        btnRemover.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
         btnRemover.setMnemonic('e');
         btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -534,6 +556,15 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         });
         jMenu1.add(jMenuItem2);
 
+        jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
+        jMenuItem7.setText("Fechar Aula");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem7);
+
         jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.ALT_MASK));
         jMenuItem4.setText("Fechar");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
@@ -650,6 +681,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         fileChooser.setAcceptAllFileFilterUsed(false);
 
         fileChooser.setCurrentDirectory(ultimaURL);
+        fileChooser.setCurrentDirectory(urlVideo);
 //        fileChooser.setFileSelectionMode(JFileChooser.DIRECTORY_CHANGED_PROPERTY);
         fileChooser.getComponent(0).setVisible(false);
         int result = fileChooser.showOpenDialog(null);
@@ -852,10 +884,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             fileChooser.setAcceptAllFileFilterUsed(false);
             int result = fileChooser.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
+                Container contentPane = getContentPane();
+                contentPane.remove(playerPanel);
+                criarPlayer();
 //            playerPanel.getTransportControlPanel().pause();
 //            playerPanel.getTransportControlPanel().onDurationChange(0);
 //            playerPanel.getTransportControlPanel().onProgressChange(0);
-
+                urlVideo = fileChooser.getCurrentDirectory();
                 File file = fileChooser.getSelectedFile();
 
                 try {
@@ -1018,6 +1053,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
 //        playerPanel.getTransportControlPanel().pause();
+
 //        playerPanel.getTransportControlPanel().onDurationChange(0);
 //        playerPanel.getTransportControlPanel().onProgressChange(0);
 //        playerPanel.getContainerPlayer().close();
@@ -1028,6 +1064,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         playerPanel.onOpenFile(jLNomeFlv);
         playerPanel.getTransportControlPanel().start();
+        urlVideo = playerPanel.getUrlVideo();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
@@ -1086,6 +1123,19 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         }
     }//GEN-LAST:event_formWindowClosing
 
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+
+        if (VerificaAulaModificada()) {
+            gerarRoot();
+            gerarRoot1();
+           
+            Container contentPane = getContentPane();
+            contentPane.remove(playerPanel);
+            criarPlayer();
+
+        }
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
     public static void main(String args[]) {
 
 
@@ -1135,6 +1185,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;

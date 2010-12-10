@@ -66,7 +66,7 @@ public class PlayerPanel extends JPanel {
     private ContainerPlayer containerPlayer = null;  //  @jve:decl-index=0:visual-constraint="557,162"
     private String file, dir;
     private long fileSize;
-
+    private File urlVideo;
     public void addMediaLocatorAndLoad(String url) {
         boolean alreadyThere = false;
         for (int i = 0; i < getAddressComboBox().getItemCount(); ++i) {
@@ -417,6 +417,7 @@ public class PlayerPanel extends JPanel {
 
             nomeFlv.setText(getFile());
             fileSize = chooser.getSelectedFile().length();
+            urlVideo = chooser.getCurrentDirectory();
             addMediaLocatorAndLoad(urlStr);
 
         }
@@ -554,6 +555,13 @@ public class PlayerPanel extends JPanel {
 
     public long getFileSize() {
         return fileSize;
+    }
+
+    /**
+     * @return the urlVideo
+     */
+    public File getUrlVideo() {
+        return urlVideo;
     }
 //    private JLabel getStatusBar() {
 //        if (statusBar == null) {
