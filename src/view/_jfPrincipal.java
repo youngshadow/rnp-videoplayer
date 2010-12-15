@@ -98,16 +98,21 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     File urlVideo = null;
     private PlayerPanel playerPanel;
     private boolean aulaModificada = false;
+    Container contentPane;
 
     /** Creates new form _jfPrincipal */
     public _jfPrincipal() {
         initComponents();
-      
-        criarPlayer();
+
+        contentPane = getContentPane();
+        playerPanel = new PlayerPanel();
+        playerPanel.setSize(330, 360);
+        playerPanel.setBounds(35, 101, 330, 320);
+        contentPane.add(playerPanel);
 
 
 
-        this.setTitle(" RIOComposer - V 0.752");
+        this.setTitle(" RIOComposer - V 0.76");
         //define o tamanho do video
         //dimension = new Dimension(jpContainerVideo.getWidth(), jpContainerVideo.getHeight());
 
@@ -158,24 +163,13 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     }
 
     private void criarPlayer() {
-        Container contentPane = getContentPane();
+        contentPane = getContentPane();
 
-        System.out.println("contentPane.getComponentCount() " + contentPane.getComponentCount());
-          playerPanel = new PlayerPanel();
-        playerPanel.setSize(330, 360);
-        playerPanel.setBounds(35, 101, 330, 320);
-
-
-        Thread thread = new Thread();
-        try {
-            thread.sleep(3000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(_jfPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
+//        playerPanel.setSize(330, 360);
+//        playerPanel.setBounds(35, 101, 330, 320);
 
         contentPane.add(playerPanel);
+
         System.out.println("contentPane.getComponentCount() " + contentPane.getComponentCount());
     }
 
@@ -286,7 +280,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        btnCapturar.setFont(new java.awt.Font("SansSerif", 0, 11));
         btnCapturar.setMnemonic('n');
         btnCapturar.setText("Nova transparência");
         btnCapturar.addActionListener(new java.awt.event.ActionListener() {
@@ -295,7 +289,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             }
         });
 
-        btnRemover.setFont(new java.awt.Font("SansSerif", 0, 11)); // NOI18N
+        btnRemover.setFont(new java.awt.Font("SansSerif", 0, 11));
         btnRemover.setMnemonic('e');
         btnRemover.setText("Remover");
         btnRemover.addActionListener(new java.awt.event.ActionListener() {
@@ -558,6 +552,7 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
 
         jMenuItem7.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, java.awt.event.InputEvent.CTRL_MASK));
         jMenuItem7.setText("Fechar Aula");
+        jMenuItem7.setEnabled(false);
         jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
@@ -873,8 +868,6 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
 
         if (VerificaAulaModificada()) {
-
-
 //        VerificaAulaModificada();
             String rm_index = null;
             String rm_video = null;
@@ -884,9 +877,9 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
             fileChooser.setAcceptAllFileFilterUsed(false);
             int result = fileChooser.showOpenDialog(null);
             if (result == JFileChooser.APPROVE_OPTION) {
-                Container contentPane = getContentPane();
-                contentPane.remove(playerPanel);
-                criarPlayer();
+//                Container contentPane = getContentPane();
+//                contentPane.remove(playerPanel);
+                // criarPlayer();
 //            playerPanel.getTransportControlPanel().pause();
 //            playerPanel.getTransportControlPanel().onDurationChange(0);
 //            playerPanel.getTransportControlPanel().onProgressChange(0);
@@ -1128,16 +1121,25 @@ public abstract class _jfPrincipal extends javax.swing.JFrame implements TreeSel
         if (VerificaAulaModificada()) {
             gerarRoot();
             gerarRoot1();
-           
-            Container contentPane = getContentPane();
-            contentPane.remove(playerPanel);
-            criarPlayer();
+            contentPane = getContentPane();
+//            contentPane.remove(playerPanel);
+            jTFAula.setText("");
+            jTFCodDisc.setText("");
+            jTFCurso.setText("");
+            jTFDisciplina.setText("");
+            jTFIsntituicao.setText("");
+            jTFProfessor.setText("");
+            jLNomeFlv.setText("");
+            //criarPlayer();
+
+            playerPanel.getTransportControlPanel().setPlayer(null);
+
+            aulaModificada = false;
 
         }
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     public static void main(String args[]) {
-
 
         java.awt.EventQueue.invokeLater(new Runnable() {
 
